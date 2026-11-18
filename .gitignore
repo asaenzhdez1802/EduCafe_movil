@@ -1,0 +1,30 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+# Configuración local de Android Studio
+/.idea/
+
+# Caché de Kotlin y carpetas de compilación
+.kotlin/
+**/build/
+
+# Instaladores generados
+*.apk
+*.aab
+
+# Claves y configuración de firma
+*.jks
+*.keystore
+keystore.properties
