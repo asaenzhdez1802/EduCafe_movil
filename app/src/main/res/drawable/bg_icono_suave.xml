@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cuadro redondeado durazno detrás de los íconos de Información (horario, ubicación, contacto, correo) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="@color/ic_durazno" />
+    <corners android:radius="12dp" />
+</shape>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="productos_en_pedido">Productos en tu pedido: %1$d</string>
+    <string name="atras">Regresar</string>
+    <string name="disminuir_cantidad">Disminuir cantidad</string>
+    <string name="aumentar_cantidad">Aumentar cantidad</string>
+    <string name="foto_producto">Foto del producto</string>
+</resources>
