@@ -4,6 +4,8 @@ import com.example.educafe.Modelo.RespuestaApi
 import com.example.educafe.Modelo.clsLoginSolicitud
 import com.example.educafe.Modelo.clsUsuarioSesion
 import com.example.educafe.Modelo.dataCategorias
+import com.example.educafe.Modelo.dataPedidoRegistrado
+import com.example.educafe.Modelo.dataSolicitudPedido
 import kotlinx.serialization.json.JsonObject
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -27,4 +29,9 @@ interface ApiService {
     suspend fun cerrarSesion(
         @Body solicitud: JsonObject
     ): RespuestaApi<JsonObject>
+    //Pedidos del cliente
+    @POST("registrar_pedido.php")
+    suspend fun registrarPedido(
+        @Body solicitud: dataSolicitudPedido
+    ): RespuestaApi<dataPedidoRegistrado>
 }

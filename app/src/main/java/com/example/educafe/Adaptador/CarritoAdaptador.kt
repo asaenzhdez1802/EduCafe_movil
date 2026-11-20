@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.educafe.Modelo.clsCarrito
+import com.example.educafe.Modelo.RetrofitClient
 import com.example.educafe.Modelo.clsFormato
 import com.example.educafe.Modelo.dataArticuloCarrito
 import com.example.educafe.R
@@ -37,19 +37,18 @@ class CarritoAdaptador(
 
         holder.txtNombreArticulo.text = articulo.nombre
         holder.txtCantidad.text = articulo.cantidad.toString()
-        if (articulo.cantidad > 1) {
-            holder.txtPrecioArticulo.text =
-                "${clsFormato.dinero(articulo.precio, false)} c/u · ${clsFormato.dinero(articulo.subtotal())}"
-        } else {
-            holder.txtPrecioArticulo.text = clsFormato.dinero(articulo.precio)
-        }
+        // Precio unitario, como en el mockup: "$45.00 MXN"
+        holder.txtPrecioArticulo.text = clsFormato.dinero(articulo.precio)
 
-        holder.imgArticulo.setImageDrawable(null)
-
-
-        val limite = minOf(clsCarrito.MAXIMO_POR_PRODUCTO, articulo.disponibles)
-        val puedeAumentar = articulo.cantidad < limite
-        holder.btnMas.alpha = if (puedeAumentar) 1f else 0.4f
+        // Imagen: URL base + ruta que manda la API (img/productos/capuchino.jpg)
+        val urlImagen = if (articulo.imagen.isNullOrEmpty()) null else RetrofitClient.BASE_URL + articulo.imagen
+        val radio = (12 * holder.itemView.resources.displayMetrics.density).toInt()
+        Glinde.with(holder.itemView.context)
+            .load(urlImagen)
+            .transform(CenterCrop(), RoundedCorners(radio))
+            .placeholder(R.drawable.bg_crema_12)
+            .error(R.drawable.bg_crema_12)
+            .into(holder.imgArticulo)
 
         holder.btnMas.setOnClickListener(
             object : View.OnClickListener {
