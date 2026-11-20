@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tarjeta de pedido (Figma 50:315). La usan C5 (activos) y C6 (historial). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/bg_tarjeta"
+    android:elevation="1dp"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Encabezado: folio + insignias -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtTituloPedido"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/cafe_marron"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            tools:text="Pedido PED-0042" />
+
+        <TextView
+            android:id="@+id/txtInsigniaPago"
+            style="@style/EduCafe.Insignia"
+            android:layout_marginStart="4dp"
+            tools:backgroundTint="@color/insignia_por_cobrar_fondo"
+            tools:text="Por cobrar"
+            tools:textColor="@color/insignia_por_cobrar_texto" />
+
+        <TextView
+            android:id="@+id/txtInsigniaEstado"
+            style="@style/EduCafe.Insignia"
+            android:layout_marginStart="4dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textSize="13sp"
+            tools:backgroundTint="@color/cafe_verde_claro"
+            tools:text="Listo"
+            tools:textColor="@color/cafe_verde" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtLineaFecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/cafe_texto_secundario"
+        android:textSize="14sp"
+        tools:text="Hoy · 10:31 a. m. · Código A7K-93F" />
+
+    <TextView
+        android:id="@+id/txtLineaTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/cafe_texto_gris"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        tools:text="Total: $115.00 · paga antes de las 11:31" />
+
+</LinearLayout>

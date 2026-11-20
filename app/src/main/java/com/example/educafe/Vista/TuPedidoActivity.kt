@@ -8,7 +8,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -23,18 +22,18 @@ import com.example.educafe.R
 class TuPedidoActivity : AppCompatActivity() {
 
     companion object {
+        // P2 lo envía en true al tocar + para mostrar la etiqueta "Agregado"
         const val PRODUCTO_AGREGADO = "PRODUCTO_AGREGADO"
     }
 
     private lateinit var txtNumProductos: TextView
-    private lateinit var lblAgregado: TextView
+    private lateinit var lblAgregado: LinearLayout
     private lateinit var rvArticulos: RecyclerView
-    private lateinit var layoutVacio: LinearLayout
-    private lateinit var btnSeguirComprando: TextView
     private lateinit var txtSubtotal: TextView
     private lateinit var txtServicio: TextView
     private lateinit var txtTotal: TextView
     private lateinit var btnContinuar: Button
+    private lateinit var btnSeguirComprando: Button
     private lateinit var btnCancelarPedido: Button
     private lateinit var presentador: clsTuPedidoPresentador
     private lateinit var adaptador: CarritoAdaptador
@@ -52,11 +51,11 @@ class TuPedidoActivity : AppCompatActivity() {
         txtNumProductos = findViewById(R.id.txtNumProductos)
         lblAgregado = findViewById(R.id.lblAgregado)
         rvArticulos = findViewById(R.id.rvArticulos)
-        btnSeguirComprando = findViewById(R.id.btnSeguirComprando)
         txtSubtotal = findViewById(R.id.txtSubtotal)
         txtServicio = findViewById(R.id.txtServicio)
         txtTotal = findViewById(R.id.txtTotal)
         btnContinuar = findViewById(R.id.btnContinuar)
+        btnSeguirComprando = findViewById(R.id.btnSeguirComprando)
         btnCancelarPedido = findViewById(R.id.btnCancelarPedido)
 
         presentador = clsTuPedidoPresentador(this)
@@ -67,8 +66,8 @@ class TuPedidoActivity : AppCompatActivity() {
         mostrarEtiquetaAgregado(intent)
 
         btnContinuar.setOnClickListener { presentador.continuar() }
-        btnCancelarPedido.setOnClickListener { confirmarCancelacion() }
-        btnSeguirComprando.setOnClickListener { seguirComprando() }
+        btnSeguirComprando.setOnClickListener { presentador.seguirComprando() }
+        btnCancelarPedido.setOnClickListener { presentador.cancelarCarrito() }
 
         NavegacionCliente.configurarBarra(this, NavegacionCliente.MENU)
     }
@@ -84,25 +83,17 @@ class TuPedidoActivity : AppCompatActivity() {
     }
 
     fun mostrarArticulos(articulos: List<dataArticuloCarrito>, piezas: Int, subtotal: Double) {
-        rvArticulos.visibility = View.VISIBLE
-        layoutVacio.visibility = View.GONE
         adaptador.actualizarArticulos(articulos)
         txtNumProductos.text = getString(R.string.productos_en_pedido, piezas)
         mostrarTotales(subtotal)
-        btnContinuar.isEnabled = true
-        btnCancelarPedido.isEnabled = true
     }
+
 
     fun mostrarVacio() {
         adaptador.actualizarArticulos(emptyList())
-        rvArticulos.visibility = View.GONE
-        layoutVacio.visibility = View.VISIBLE
         lblAgregado.visibility = View.GONE
         txtNumProductos.text = getString(R.string.productos_en_pedido, 0)
         mostrarTotales(0.0)
-        // No se permite continuar con el carrito vacío
-        btnContinuar.isEnabled = false
-        btnCancelarPedido.isEnabled = false
     }
 
     private fun mostrarTotales(subtotal: Double) {
@@ -120,35 +111,17 @@ class TuPedidoActivity : AppCompatActivity() {
         presentador.disminuir(articulo)
     }
 
-    fun preguntarEliminar(articulo: dataArticuloCarrito) {
-        AlertDialog.Builder(this)
-            .setTitle("Quitar producto")
-            .setMessage("¿Quitar ${articulo.nombre} de tu pedido?")
-            .setPositiveButton("Quitar") { _, _ -> presentador.eliminar(articulo) }
-            .setNegativeButton("Conservar", null)
-            .show()
-    }
-
-    private fun confirmarCancelacion() {
-        AlertDialog.Builder(this)
-            .setTitle("Cancelar pedido")
-            .setMessage("Se quitarán todos los productos de tu pedido. Todavía no se ha enviado nada a la cafetería.")
-            .setPositiveButton("Sí, cancelar") { _, _ -> presentador.cancelarCarrito() }
-            .setNegativeButton("No", null)
-            .show()
-    }
-
-    private fun seguirComprando() {
-        NavegacionCliente.irAlMenu(this)
-        finish()
-    }
 
     fun irAConfirmar() {
-        mostrarMensaje("Confirmar pedido llega en el commit 2")
+        startActivity(Intent(this, ConfirmarPedidoActivity::class.java))
     }
 
-    fun volverAlMenu() {
-        NavegacionCliente.irAlMenu(this)
+
+    fun irALoginParaPagar() {
+        NavegacionCliente.irALoginParaPagar(this)
+    }
+
+    fun cerrar() {
         finish()
     }
 

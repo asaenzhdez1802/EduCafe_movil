@@ -1,13 +1,26 @@
 package com.example.educafe.Modelo
 
-// Modelo para consultar los pedidos de la app
+
 class clsPedidosModelo {
 
-    // Obtener los pedidos desde la API
-    suspend fun obtenerPedidos(
-        estado: String? = null
-    ): RespuestaApi<List<dataPedidos>> {
+    // Sin token: el interceptor de RetrofitClient pone "Authorization: Bearer ..."
+    // C3 · POST registrar_pedido.php
+    suspend fun registrarPedido(solicitud: dataSolicitudPedido): RespuestaApi<dataPedidoRegistrado> {
+        return RetrofitClient.apiService.registrarPedido(solicitud)
+    }
 
+    // C5 · GET obtener_mis_pedidos.php?grupo=activos
+    suspend fun obtenerPedidosActivos(): RespuestaApi<List<dataPedidoCliente>> {
+        return RetrofitClient.apiService.obtenerMisPedidos("activos")
+    }
+
+    // C6 · GET obtener_historial.php
+    suspend fun obtenerHistorial(): RespuestaApi<List<dataHistorial>> {
+        return RetrofitClient.apiService.obtenerHistorial()
+    }
+    
+    // Consultar pedidos del cajero
+    suspend fun obtenerPedidos(estado: String? = null): RespuestaApi<List<dataPedidos>> {
         return RetrofitClient.apiService.obtenerPedidos(estado)
     }
 }
