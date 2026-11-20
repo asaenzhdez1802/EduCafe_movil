@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Edu Café · Color de íconos y textos de la barra de abajo (itemIconTint e itemTextColor).
+     El estado seleccionado va primero: Android usa el primer item que coincide. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/ic_naranja" android:state_checked="true" />
+    <item android:color="@color/ic_cafe" />
+</selector>

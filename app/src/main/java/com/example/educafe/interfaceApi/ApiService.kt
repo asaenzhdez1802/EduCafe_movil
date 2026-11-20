@@ -4,10 +4,15 @@ import com.example.educafe.Modelo.RespuestaApi
 import com.example.educafe.Modelo.clsLoginSolicitud
 import com.example.educafe.Modelo.clsUsuarioSesion
 import com.example.educafe.Modelo.dataCategorias
+import com.example.educafe.Modelo.dataHistorial
+import com.example.educafe.Modelo.dataPedidoCliente
+import com.example.educafe.Modelo.dataPedidoRegistrado
+import com.example.educafe.Modelo.dataSolicitudPedido
 import kotlinx.serialization.json.JsonObject
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -27,4 +32,17 @@ interface ApiService {
     suspend fun cerrarSesion(
         @Body solicitud: JsonObject
     ): RespuestaApi<JsonObject>
+    //Pedidos del cliente
+    @POST("registrar_pedido.php")
+    suspend fun registrarPedido(
+        @Body solicitud: dataSolicitudPedido
+    ): RespuestaApi<dataPedidoRegistrado>
+
+    @GET("obtener_mis_pedidos.php")
+    suspend fun obtenerMisPedidos(
+        @Query("grupo") grupo: String
+    ): RespuestaApi<List<dataPedidoCliente>>
+
+    @GET("obtener_historial.php")
+    suspend fun obtenerHistorial(): RespuestaApi<List<dataHistorial>>
 }

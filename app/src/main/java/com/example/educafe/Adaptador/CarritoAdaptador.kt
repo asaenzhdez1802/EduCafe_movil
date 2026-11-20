@@ -7,7 +7,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.educafe.Modelo.clsCarrito
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.educafe.Modelo.clsFormato
 import com.example.educafe.Modelo.dataArticuloCarrito
 import com.example.educafe.R
@@ -17,6 +19,11 @@ class CarritoAdaptador(
     private var articulos: List<dataArticuloCarrito>,
     private val activity: TuPedidoActivity
 ) : RecyclerView.Adapter<CarritoAdaptador.ArticuloViewHolder>() {
+
+    companion object {
+
+        private const val URL_IMAGENES = "https://manuelsh.somos4a.org/educafe_api/"
+    }
 
     class ArticuloViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgArticulo: ImageView = itemView.findViewById(R.id.imgArticulo)
@@ -37,19 +44,18 @@ class CarritoAdaptador(
 
         holder.txtNombreArticulo.text = articulo.nombre
         holder.txtCantidad.text = articulo.cantidad.toString()
-        if (articulo.cantidad > 1) {
-            holder.txtPrecioArticulo.text =
-                "${clsFormato.dinero(articulo.precio, false)} c/u · ${clsFormato.dinero(articulo.subtotal())}"
-        } else {
-            holder.txtPrecioArticulo.text = clsFormato.dinero(articulo.precio)
-        }
 
-        holder.imgArticulo.setImageDrawable(null)
+        holder.txtPrecioArticulo.text = clsFormato.dinero(articulo.precio)
 
 
-        val limite = minOf(clsCarrito.MAXIMO_POR_PRODUCTO, articulo.disponibles)
-        val puedeAumentar = articulo.cantidad < limite
-        holder.btnMas.alpha = if (puedeAumentar) 1f else 0.4f
+        val urlImagen = if (articulo.imagen.isNullOrEmpty()) null else URL_IMAGENES + articulo.imagen
+        val radio = (12 * holder.itemView.resources.displayMetrics.density).toInt()
+        Glide.with(holder.itemView.context)
+            .load(urlImagen)
+            .transform(CenterCrop(), RoundedCorners(radio))
+            .placeholder(R.drawable.bg_crema_12)
+            .error(R.drawable.bg_crema_12)
+            .into(holder.imgArticulo)
 
         holder.btnMas.setOnClickListener(
             object : View.OnClickListener {
