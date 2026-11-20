@@ -18,4 +18,9 @@ class clsPedidosModelo {
     suspend fun obtenerHistorial(): RespuestaApi<List<dataHistorial>> {
         return RetrofitClient.apiService.obtenerHistorial()
     }
+    
+    // Consultar pedidos del cajero
+    suspend fun obtenerPedidos(estado: String? = null): RespuestaApi<List<dataPedidos>> {
+        return RetrofitClient.apiService.obtenerPedidos(estado)
+    }
 }

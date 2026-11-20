@@ -8,11 +8,13 @@ import com.example.educafe.Modelo.dataHistorial
 import com.example.educafe.Modelo.dataPedidoCliente
 import com.example.educafe.Modelo.dataPedidoRegistrado
 import com.example.educafe.Modelo.dataSolicitudPedido
+import com.example.educafe.Modelo.dataPedidos
 import kotlinx.serialization.json.JsonObject
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+
 
 interface ApiService {
 
@@ -45,4 +47,9 @@ interface ApiService {
 
     @GET("obtener_historial.php")
     suspend fun obtenerHistorial(): RespuestaApi<List<dataHistorial>>
+  
+    @GET("obtener_pedidos.php")
+    suspend fun obtenerPedidos(
+        @Query("estado") estado: String? = null
+    ): RespuestaApi<List<dataPedidos>>
 }
