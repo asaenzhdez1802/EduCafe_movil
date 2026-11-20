@@ -16,7 +16,6 @@ import com.example.educafe.Modelo.dataPedidoCliente
 import com.example.educafe.Presentador.clsMisPedidosPresentador
 import com.example.educafe.R
 
-
 class MisPedidosActivity : AppCompatActivity() {
 
     private lateinit var btnAtras: FrameLayout
@@ -45,13 +44,14 @@ class MisPedidosActivity : AppCompatActivity() {
         rvPedidos.adapter = adaptador
 
         btnAtras.setOnClickListener { finish() }
-        // Temporal: C6 Historial llega en el commit 5
-        txtChipHistorial.setOnClickListener { mostrarMensaje("Historial llega en el commit 5") }
+        txtChipHistorial.setOnClickListener {
+            startActivity(Intent(this, HistorialActivity::class.java))
+        }
 
         NavegacionCliente.configurarBarra(this, NavegacionCliente.PEDIDOS)
     }
 
-    // Recargar al volver y consultar periódicamente mientras se ve
+
     override fun onResume() {
         super.onResume()
         presentador.iniciar()
@@ -72,7 +72,7 @@ class MisPedidosActivity : AppCompatActivity() {
         adaptador.actualizarPedidos(pedidos)
     }
 
-    // Tarjeta -> C4 con los datos del pedido tocado
+
     fun abrirPedido(pedido: dataPedidoCliente) {
         val intent = Intent(this, PedidoEnviadoActivity::class.java)
         intent.putExtra(PedidoEnviadoActivity.FOLIO, pedido.folio)

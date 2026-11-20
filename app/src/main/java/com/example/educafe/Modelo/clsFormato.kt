@@ -86,13 +86,7 @@ object clsFormato {
         }
     }
 
-    fun motivoCancelacion(motivo: String?): String {
-        return when (motivo) {
-            "vencido" -> "no se pagó a tiempo"
-            "cliente" -> "lo cancelaste"
-            "cajero" -> "cancelado en caja"
-            "venta_cancelada" -> "venta cancelada"
-            else -> "cancelado"
-        }
+    fun motivoCancelacion(motivo: String?): String? {
+        return if (motivo == "vencido") "no se pagó a tiempo" else null
     }
 }

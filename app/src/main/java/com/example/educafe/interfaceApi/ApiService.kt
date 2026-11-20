@@ -4,6 +4,7 @@ import com.example.educafe.Modelo.RespuestaApi
 import com.example.educafe.Modelo.clsLoginSolicitud
 import com.example.educafe.Modelo.clsUsuarioSesion
 import com.example.educafe.Modelo.dataCategorias
+import com.example.educafe.Modelo.dataHistorial
 import com.example.educafe.Modelo.dataPedidoCliente
 import com.example.educafe.Modelo.dataPedidoRegistrado
 import com.example.educafe.Modelo.dataSolicitudPedido
@@ -41,4 +42,7 @@ interface ApiService {
     suspend fun obtenerMisPedidos(
         @Query("grupo") grupo: String
     ): RespuestaApi<List<dataPedidoCliente>>
+
+    @GET("obtener_historial.php")
+    suspend fun obtenerHistorial(): RespuestaApi<List<dataHistorial>>
 }
