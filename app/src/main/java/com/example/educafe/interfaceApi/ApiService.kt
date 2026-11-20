@@ -4,10 +4,13 @@ import com.example.educafe.Modelo.RespuestaApi
 import com.example.educafe.Modelo.clsLoginSolicitud
 import com.example.educafe.Modelo.clsUsuarioSesion
 import com.example.educafe.Modelo.dataCategorias
+import com.example.educafe.Modelo.dataPedidos
+import retrofit2.http.Query
 import kotlinx.serialization.json.JsonObject
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+
 
 interface ApiService {
 
@@ -27,4 +30,10 @@ interface ApiService {
     suspend fun cerrarSesion(
         @Body solicitud: JsonObject
     ): RespuestaApi<JsonObject>
+
+    // 4. Consultar los pedidos del personal
+    @GET("obtener_pedidos.php")
+    suspend fun obtenerPedidos(
+        @Query("estado") estado: String? = null
+    ): RespuestaApi<List<dataPedidos>>
 }
