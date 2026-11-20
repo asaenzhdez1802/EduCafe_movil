@@ -9,7 +9,7 @@
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="cornerRadius">16dp</item>
-        <item name="backgroundTint">@color/boton_primario_fondo</item>
+        <item name="backgroundTint">@color/cafe_naranja</item>
         <item name="android:textColor">@color/cafe_blanco</item>
         <item name="android:textSize">17sp</item>
         <item name="android:textStyle">bold</item>

@@ -52,7 +52,6 @@ class TuPedidoActivity : AppCompatActivity() {
         txtNumProductos = findViewById(R.id.txtNumProductos)
         lblAgregado = findViewById(R.id.lblAgregado)
         rvArticulos = findViewById(R.id.rvArticulos)
-        layoutVacio = findViewById(R.id.layoutVacio)
         btnSeguirComprando = findViewById(R.id.btnSeguirComprando)
         txtSubtotal = findViewById(R.id.txtSubtotal)
         txtServicio = findViewById(R.id.txtServicio)
