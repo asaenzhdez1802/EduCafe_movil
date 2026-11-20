@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    kotlin("plugin.serialization") version "2.2.10"
 }
 
 android {
@@ -37,6 +38,24 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
+
+    // 1. Convertir los datos JSON
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+
+    // 2. Consumir las API con Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-kotlinx-serialization:2.11.0")
+
+    // 3. Peticiones HTTP
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    // 4. Cargar imágenes
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // 5. Listas y tarjetas
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.cardview:cardview:1.0.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
