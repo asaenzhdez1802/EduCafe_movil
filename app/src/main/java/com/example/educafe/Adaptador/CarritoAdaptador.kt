@@ -44,10 +44,10 @@ class CarritoAdaptador(
 
         holder.txtNombreArticulo.text = articulo.nombre
         holder.txtCantidad.text = articulo.cantidad.toString()
-        // Precio unitario, como en el mockup: "$45.00 MXN"
+
         holder.txtPrecioArticulo.text = clsFormato.dinero(articulo.precio)
 
-        // Imagen: URL base + ruta que manda la API (img/productos/capuchino.jpg)
+
         val urlImagen = if (articulo.imagen.isNullOrEmpty()) null else URL_IMAGENES + articulo.imagen
         val radio = (12 * holder.itemView.resources.displayMetrics.density).toInt()
         Glide.with(holder.itemView.context)
