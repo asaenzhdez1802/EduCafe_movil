@@ -1,5 +1,6 @@
 package com.example.educafe.Vista
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.FrameLayout
@@ -74,8 +75,14 @@ class ConfirmarPedidoActivity : AppCompatActivity() {
     }
 
     fun pedidoRegistrado(pedido: dataPedidoRegistrado) {
-        mostrarMensaje("Pedido ${pedido.folio} · código ${pedido.codigoRecogida}")
-        NavegacionCliente.irAlMenu(this)
+        val intent = Intent(this, PedidoEnviadoActivity::class.java)
+        intent.putExtra(PedidoEnviadoActivity.FOLIO, pedido.folio)
+        intent.putExtra(PedidoEnviadoActivity.CODIGO, pedido.codigoRecogida)
+        intent.putExtra(PedidoEnviadoActivity.TOTAL, pedido.total)
+        intent.putExtra(PedidoEnviadoActivity.FECHA_VENCE, pedido.fechaVence)
+        intent.putExtra(PedidoEnviadoActivity.ESTADO, pedido.estado)
+        intent.putExtra(PedidoEnviadoActivity.ESTADO_PAGO, pedido.estadoPago)
+        startActivity(intent)
         finish()
     }
 

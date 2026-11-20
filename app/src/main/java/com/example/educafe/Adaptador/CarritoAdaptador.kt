@@ -7,7 +7,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.educafe.Modelo.RetrofitClient
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.educafe.Modelo.clsFormato
 import com.example.educafe.Modelo.dataArticuloCarrito
 import com.example.educafe.R
@@ -17,6 +19,11 @@ class CarritoAdaptador(
     private var articulos: List<dataArticuloCarrito>,
     private val activity: TuPedidoActivity
 ) : RecyclerView.Adapter<CarritoAdaptador.ArticuloViewHolder>() {
+
+    companion object {
+
+        private const val URL_IMAGENES = "https://manuelsh.somos4a.org/educafe_api/"
+    }
 
     class ArticuloViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgArticulo: ImageView = itemView.findViewById(R.id.imgArticulo)
@@ -41,9 +48,9 @@ class CarritoAdaptador(
         holder.txtPrecioArticulo.text = clsFormato.dinero(articulo.precio)
 
         // Imagen: URL base + ruta que manda la API (img/productos/capuchino.jpg)
-        val urlImagen = if (articulo.imagen.isNullOrEmpty()) null else RetrofitClient.BASE_URL + articulo.imagen
+        val urlImagen = if (articulo.imagen.isNullOrEmpty()) null else URL_IMAGENES + articulo.imagen
         val radio = (12 * holder.itemView.resources.displayMetrics.density).toInt()
-        Glinde.with(holder.itemView.context)
+        Glide.with(holder.itemView.context)
             .load(urlImagen)
             .transform(CenterCrop(), RoundedCorners(radio))
             .placeholder(R.drawable.bg_crema_12)

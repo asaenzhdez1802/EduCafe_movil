@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.educafe.Presentador.NavegacionSesion
 import com.example.educafe.R
 
 object NavegacionCliente {
@@ -20,6 +21,8 @@ object NavegacionCliente {
     const val PANTALLA_LOGIN = PAQUETE + "LoginActivity"
     const val PANTALLA_MI_PANEL = PAQUETE + "MiPanelActivity"
     const val PANTALLA_MIS_PEDIDOS = PAQUETE + "MisPedidosActivity"
+    const val PANTALLA_RESUMEN_CAJERO = PAQUETE + "ResumenCajeroActivity"
+    const val PANTALLA_VENTAS_ADMIN = PAQUETE + "VentasAdminActivity"
 
 
     const val EXTRA_AVISO_PAGO = "AVISO_INICIA_SESION_PARA_PAGAR"
@@ -44,10 +47,29 @@ object NavegacionCliente {
     }
 
 
+    fun abrirDestino(activity: Activity, destino: NavegacionSesion.Destino): Boolean {
+        val pantalla = when (destino) {
+            NavegacionSesion.Destino.LOGIN -> PANTALLA_LOGIN
+            NavegacionSesion.Destino.MENU -> PANTALLA_MENU
+            NavegacionSesion.Destino.RESUMEN_CAJERO -> PANTALLA_RESUMEN_CAJERO
+            NavegacionSesion.Destino.VENTAS_ADMIN -> PANTALLA_VENTAS_ADMIN
+            NavegacionSesion.Destino.PEDIDOS_CLIENTE -> PANTALLA_MIS_PEDIDOS
+            NavegacionSesion.Destino.PANEL_CLIENTE -> PANTALLA_MI_PANEL
+        }
+        return abrir(activity, pantalla)
+    }
+
     fun irAlMenu(activity: Activity): Boolean {
         return abrir(activity, PANTALLA_MENU, Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
     }
 
+
+
+    fun sesionVencida(activity: Activity) {
+        Toast.makeText(activity, "Tu sesión terminó. Inicia sesión nuevamente", Toast.LENGTH_LONG).show()
+        abrir(activity, PANTALLA_LOGIN, Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        activity.finish()
+    }
 
     fun irALoginParaPagar(activity: Activity) {
         abrir(activity, PANTALLA_LOGIN, avisoPago = true)
@@ -94,13 +116,11 @@ object NavegacionCliente {
         }
         activity.findViewById<LinearLayout>(R.id.tabPedidos).setOnClickListener {
             if (activa != PEDIDOS) {
-                if (SesionCliente.token(activity) == null) abrir(activity, PANTALLA_LOGIN)
-                else abrir(activity, PANTALLA_MIS_PEDIDOS)
+                abrirDestino(activity, NavegacionSesion.destinoPedidos())
             }
         }
         activity.findViewById<LinearLayout>(R.id.tabMiPanel).setOnClickListener {
-            if (SesionCliente.token(activity) == null) abrir(activity, PANTALLA_LOGIN)
-            else abrir(activity, PANTALLA_MI_PANEL)
+            abrirDestino(activity, NavegacionSesion.destinoMiPanel())
         }
     }
 }

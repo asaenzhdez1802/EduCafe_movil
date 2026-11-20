@@ -7,22 +7,45 @@ object clsCarrito {
     const val MAXIMO_POR_PRODUCTO = 10
 
     private val articulos = mutableListOf<dataArticuloCarrito>()
-    private var notas: String = ""
 
     private var idSolicitud: String? = null
 
 
-    fun agregar(idProducto: Int, nombre: String, precio: Double, imagen: String?, disponibles: Int): String? {
+
+    fun agregar(idProducto: Int, nombre: String, precio: Double, imagen: String?, disponibles: Int, cantidad: Int = 1): String? {
+        if (cantidad < 1) {
+            return "La cantidad debe ser al menos 1"
+        }
         if (disponibles <= 0) {
             return "$nombre está agotado por ahora"
         }
         val existente = buscar(idProducto)
-        if (existente == null) {
-            articulos.add(dataArticuloCarrito(idProducto, nombre, precio, imagen, disponibles, 1))
-            contenidoCambiado()
+        if (existente != null) {
+            return cambiarCantidad(idProducto, existente.cantidad + cantidad)
+        }
+        val error = validarCantidad(nombre, disponibles, cantidad)
+        if (error != null) {
+            return error
+        }
+        articulos.add(dataArticuloCarrito(idProducto, nombre, precio, imagen, disponibles, cantidad))
+        contenidoCambiado()
+        return null
+    }
+
+    // Contrato: cambiar cantidad. Con 0 o menos se elimina.
+    fun cambiarCantidad(idProducto: Int, cantidad: Int): String? {
+        val articulo = buscar(idProducto) ?: return "Ese producto ya no está en tu pedido"
+        if (cantidad <= 0) {
+            eliminar(idProducto)
             return null
         }
-        return aumentar(idProducto)
+        val error = validarCantidad(articulo.nombre, articulo.disponibles, cantidad)
+        if (error != null) {
+            return error
+        }
+        articulo.cantidad = cantidad
+        contenidoCambiado()
+        return null
     }
 
     fun aumentar(idProducto: Int): String? {
@@ -70,18 +93,6 @@ object clsCarrito {
         return articulos.isEmpty()
     }
 
-    fun obtenerNotas(): String {
-        return notas
-    }
-
-    fun cambiarNotas(nuevasNotas: String) {
-        val limpias = nuevasNotas.trim()
-        if (limpias != notas) {
-            notas = limpias
-            contenidoCambiado()
-        }
-    }
-
     fun obtenerIdSolicitud(): String {
         val actual = idSolicitud ?: UUID.randomUUID().toString()
         idSolicitud = actual
@@ -95,12 +106,21 @@ object clsCarrito {
 
     fun vaciar() {
         articulos.clear()
-        notas = ""
         idSolicitud = null
     }
 
     private fun buscar(idProducto: Int): dataArticuloCarrito? {
         return articulos.find { it.idProducto == idProducto }
+    }
+
+    private fun validarCantidad(nombre: String, disponibles: Int, cantidad: Int): String? {
+        if (cantidad > MAXIMO_POR_PRODUCTO) {
+            return "Máximo $MAXIMO_POR_PRODUCTO piezas de un mismo producto"
+        }
+        if (cantidad > disponibles) {
+            return "Solo hay $disponibles disponibles de $nombre"
+        }
+        return null
     }
 
     private fun contenidoCambiado() {
