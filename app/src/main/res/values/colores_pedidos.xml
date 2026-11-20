@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Colores de los mockups de Figma (variables color/...).
+     Si Manuel ya definió los colores compartidos con otros nombres, usa los suyos
+     y borra los repetidos de este archivo para no duplicar. -->
+<resources>
+    <!-- color/fondo -->
+    <color name="cafe_crema">#FFF8F0</color>
+    <color name="cafe_crema_oscuro">#F6EADD</color>
+    <color name="cafe_blanco">#FFFFFF</color>
+
+    <!-- color/texto -->
+    <color name="cafe_marron">#5C3523</color>
+    <color name="cafe_texto_secundario">#7B6A5F</color>
+    <color name="cafe_texto_gris">#333333</color>
+
+    <!-- color/accion y color/exito -->
+    <color name="cafe_naranja">#D95B0B</color>
+    <color name="cafe_naranja_claro">#FBE5D3</color>
+    <color name="cafe_verde">#5B8C3B</color>
+    <color name="cafe_verde_claro">#E6EFDC</color>
+
+    <!-- color/borde -->
+    <color name="cafe_borde_suave">#EADBCB</color>
+    <color name="cafe_borde_fuerte">#CDB8A4</color>
+
+    <!-- Insignias de pago y cancelado -->
+    <color name="insignia_por_cobrar_fondo">#FDF0C8</color>
+    <color name="insignia_por_cobrar_texto">#8F6200</color>
+    <color name="insignia_pagado_fondo">#DBEFEB</color>
+    <color name="insignia_pagado_texto">#2C7466</color>
+    <color name="insignia_cancelado_fondo">#F8E1DC</color>
+    <color name="insignia_cancelado_texto">#A3341F</color>
+</resources>

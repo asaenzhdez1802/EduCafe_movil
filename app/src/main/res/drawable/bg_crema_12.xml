@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Fondo crema oscuro con radio 12: foto del artículo (mientras carga) y caja del Total -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="@color/cafe_crema_oscuro" />
+    <corners android:radius="12dp" />
+</shape>

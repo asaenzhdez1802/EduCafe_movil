@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Colores de los íconos tomados del Figma -->
+<resources>
+    <color name="ic_cafe">#5C3523</color>        <!-- encabezado, barra sin seleccionar, flechas -->
+    <color name="ic_naranja">#D95B0B</color>     <!-- barra seleccionada, opciones de Mi panel, Información, avisos -->
+    <color name="ic_gris_cafe">#7B6A5F</color>   <!-- íconos dentro de los campos de texto -->
+    <color name="ic_verde">#5B8C3B</color>       <!-- éxito: check, etiquetas de N.º de pedido y turno -->
+    <color name="ic_durazno">#FBE5D3</color>     <!-- fondo suave detrás de íconos naranjas -->
+    <color name="ic_crema">#F6EADD</color>       <!-- fondo del círculo de efectivo -->
+</resources>
