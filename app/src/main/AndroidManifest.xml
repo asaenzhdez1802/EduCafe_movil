@@ -84,7 +84,7 @@
 
         <!-- Pantalla principal -->
         <activity
-            android:name=".Vista.MainActivity"
+            android:name=".Vista.BienvenidaActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
 
