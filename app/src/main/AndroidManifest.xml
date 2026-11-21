@@ -24,6 +24,21 @@
         </activity>
 
         <activity android:name=".Vista.PedidosCajeroActivity" />
+        <activity
+            android:name=".Vista.TuPedidoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.ConfirmarPedidoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.PedidoEnviadoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.MisPedidosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Vista.HistorialActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
