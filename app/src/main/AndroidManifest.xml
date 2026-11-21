@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission
+        android:name="android.permission.INTERNET" />
+
     <application
         android:name=".EduCafeApp"
         android:allowBackup="true"
@@ -12,33 +15,89 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EduCafe">
+
+        <!-- Inicio de sesión -->
+        <activity
+            android:name=".Vista.clsLoginVista"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Registro -->
+        <activity
+            android:name=".Vista.clsRegistroVista"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Cuenta creada -->
+        <activity
+            android:name=".Vista.clsCuentaCreadaVista"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Mi panel -->
+        <activity
+            android:name=".Vista.clsMiPanelVista"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Recompensas -->
+        <activity
+            android:name=".Vista.clsRecompensasVista"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Información -->
+        <activity
+            android:name=".Vista.clsInformacionVista"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Pedidos del cajero -->
+        <activity
+            android:name=".Vista.PedidosCajeroActivity"
+            android:exported="false" />
+
+        <!-- Tu pedido -->
+        <activity
+            android:name=".Vista.TuPedidoActivity"
+            android:exported="false" />
+
+        <!-- Confirmar pedido -->
+        <activity
+            android:name=".Vista.ConfirmarPedidoActivity"
+            android:exported="false" />
+
+        <!-- Pedido enviado -->
+        <activity
+            android:name=".Vista.PedidoEnviadoActivity"
+            android:exported="false" />
+
+        <!-- Mis pedidos -->
+        <activity
+            android:name=".Vista.MisPedidosActivity"
+            android:exported="false" />
+
+        <!-- Historial -->
+        <activity
+            android:name=".Vista.HistorialActivity"
+            android:exported="false" />
+
+        <!-- Pantalla principal -->
         <activity
             android:name=".Vista.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.MAIN" />
+
+                <category
+                    android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
-        <activity android:name=".Vista.PedidosCajeroActivity" />
-        <activity
-            android:name=".Vista.TuPedidoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Vista.ConfirmarPedidoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Vista.PedidoEnviadoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Vista.MisPedidosActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Vista.HistorialActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

@@ -2,7 +2,6 @@ package com.example.educafe.Modelo
 
 import kotlinx.serialization.Serializable
 
-// Datos enviados para registrar un cliente.
 @Serializable
 data class clsRegistroSolicitud(
     val nombre: String,
