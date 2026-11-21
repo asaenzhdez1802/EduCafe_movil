@@ -25,6 +25,9 @@
 
         <activity android:name=".Vista.PedidosCajeroActivity" />
         <activity
+            android:name=".Vista.ResumenCajeroActivity"
+            android:exported="false" />
+        <activity
             android:name=".Vista.TuPedidoActivity"
             android:exported="false" />
         <activity
@@ -39,6 +42,7 @@
         <activity
             android:name=".Vista.HistorialActivity"
             android:exported="false" />
+
     </application>
 
 </manifest>
