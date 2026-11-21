@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_bienvenido">Bienvenido</string>
+    <string name="menu_bienvenida_texto">Consulta el menú, haz tu pedido desde la app y págalo en caja. ¡Gana puntos en cada compra!</string>
+    <string name="menu_ver_menu">Ver menú</string>
+    <string name="menu_titulo">Menú</string>
+    <string name="menu_buscar">Buscar productos…</string>
+    <string name="menu_sin_productos">No hay productos para esta categoría o búsqueda.</string>
+    <string name="menu_reintentar">Reintentar</string>
+    <string name="menu_agotado">Agotado</string>
+    <string name="menu_logo">Edu Café</string>
+    <string name="menu_foto">Café y pan</string>
+</resources>

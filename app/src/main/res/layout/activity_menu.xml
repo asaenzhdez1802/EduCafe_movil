@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/cafe_crema">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="18dp"
+        android:text="@string/menu_titulo"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/cafe_marron" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="18dp"
+        android:background="@drawable/bg_crema_12"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="12dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:importantForAccessibility="no"
+            app:srcCompat="@drawable/ic_menu"
+            app:tint="@color/ic_cafe" />
+
+        <EditText
+            android:id="@+id/edtBuscarProductos"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:background="@null"
+            android:hint="@string/menu_buscar"
+            android:inputType="text"
+            android:maxLines="1"
+            android:imeOptions="actionSearch"
+            android:textSize="16sp"
+            android:textColor="@color/cafe_texto_gris"
+            android:textColorHint="@color/cafe_texto_secundario" />
+
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:scrollbars="none"
+        android:paddingHorizontal="14dp">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipsCategorias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true"
+            app:singleSelection="true"
+            app:selectionRequired="true" />
+
+    </HorizontalScrollView>
+
+    <ProgressBar
+        android:id="@+id/progresoMenu"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_horizontal"
+        android:indeterminateTint="@color/cafe_naranja"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtEstadoMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:gravity="center"
+        android:textColor="@color/cafe_marron"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnReintentarMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/menu_reintentar"
+        app:backgroundTint="@color/cafe_naranja"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProductos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:clipToPadding="false" />
+
+    <include layout="@layout/navegacion_inferior_cliente" />
+
+</LinearLayout>
