@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- C5 · Mis pedidos · Activos (Figma 51:519) -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cafe_crema"
+    android:orientation="vertical">
+
+    <!-- Encabezado con botón atrás -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <FrameLayout
+            android:id="@+id/btnAtras"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_circulo_borde"
+            android:clickable="true"
+            android:contentDescription="@string/atras"
+            android:elevation="2dp"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                app:srcCompat="@drawable/ic_atras"
+                app:tint="@color/ic_cafe" />
+        </FrameLayout>
+
+        <TextView
+            style="@style/EduCafe.TituloPantalla"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Mis pedidos" />
+    </LinearLayout>
+
+    <!-- Filtros -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:id="@+id/txtChipActivos"
+            style="@style/EduCafe.ChipActivo"
+            android:text="Activos" />
+
+        <TextView
+            android:id="@+id/txtChipHistorial"
+            style="@style/EduCafe.ChipInactivo"
+            android:layout_marginStart="8dp"
+            android:text="Historial" />
+    </LinearLayout>
+
+    <!-- Pedidos: tarjetas separadas 16dp (Figma: gap spacing/md) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPedidos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        tools:listitem="@layout/item_pedido_cliente" />
+
+    <include layout="@layout/navegacion_inferior_cliente" />
+
+</LinearLayout>

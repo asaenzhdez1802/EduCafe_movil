@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Edu Café · Barra del cliente: Mi panel · Crear cuenta (P4): campo Nombre completo -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:pathData="M16 7.5a4 4 0 1 1-8 0a4 4 0 1 1 8 0"
+        android:fillColor="#00000000"
+        android:strokeColor="#5C3523"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M4.5 21v-1a6 6 0 0 1 6-6h3a6 6 0 0 1 6 6v1"
+        android:fillColor="#00000000"
+        android:strokeColor="#5C3523"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>

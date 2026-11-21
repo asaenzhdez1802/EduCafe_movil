@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Edu Café · Ícono de la barra que cambia de forma: relleno si está seleccionado, contorno si no.
+     Se usa en menu_cliente.xml con android:icon="@drawable/ic_panel_nav". El color lo pone color_nav. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_panel_seleccionado" android:state_checked="true" />
+    <item android:drawable="@drawable/ic_panel" />
+</selector>

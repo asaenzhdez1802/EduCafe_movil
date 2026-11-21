@@ -16,43 +16,73 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EduCafe">
 
-        <!-- P3: Login -->
+        <!-- Inicio de sesión -->
         <activity
             android:name=".Vista.clsLoginVista"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
-        <!-- P4: Registro -->
+        <!-- Registro -->
         <activity
             android:name=".Vista.clsRegistroVista"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
-        <!-- P5: Cuenta creada -->
+        <!-- Cuenta creada -->
         <activity
             android:name=".Vista.clsCuentaCreadaVista"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
-        <!-- C1: Mi panel -->
+        <!-- Mi panel -->
         <activity
             android:name=".Vista.clsMiPanelVista"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
-        <!-- C7: Mis recompensas -->
+        <!-- Recompensas -->
         <activity
             android:name=".Vista.clsRecompensasVista"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
-        <!-- C8: Información -->
+        <!-- Información -->
         <activity
             android:name=".Vista.clsInformacionVista"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
-        <!-- Pantalla principal de Manuel -->
+        <!-- Pedidos del cajero -->
+        <activity
+            android:name=".Vista.PedidosCajeroActivity"
+            android:exported="false" />
+
+        <!-- Tu pedido -->
+        <activity
+            android:name=".Vista.TuPedidoActivity"
+            android:exported="false" />
+
+        <!-- Confirmar pedido -->
+        <activity
+            android:name=".Vista.ConfirmarPedidoActivity"
+            android:exported="false" />
+
+        <!-- Pedido enviado -->
+        <activity
+            android:name=".Vista.PedidoEnviadoActivity"
+            android:exported="false" />
+
+        <!-- Mis pedidos -->
+        <activity
+            android:name=".Vista.MisPedidosActivity"
+            android:exported="false" />
+
+        <!-- Historial -->
+        <activity
+            android:name=".Vista.HistorialActivity"
+            android:exported="false" />
+
+        <!-- Pantalla principal -->
         <activity
             android:name=".Vista.MainActivity"
             android:exported="true"

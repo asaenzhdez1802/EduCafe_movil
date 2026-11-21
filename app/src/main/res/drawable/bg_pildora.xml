@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Forma de píldora (radio 999 en Figma). Se colorea con backgroundTint:
+     etiqueta Agregado, selector de cantidad, insignias y chip activo. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="@color/cafe_blanco" />
+    <corners android:radius="999dp" />
+</shape>
