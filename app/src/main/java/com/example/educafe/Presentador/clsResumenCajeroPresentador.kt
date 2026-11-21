@@ -6,27 +6,20 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
-// Comunicación del presentador con K1
 interface VistaResumenCajero {
 
     fun mostrarCarga()
-
     fun mostrarPedidos(pedidos: List<dataPedidos>)
-
     fun mostrarError(mensaje: String)
-
     fun solicitarLogin()
 }
 
-// Presentador de K1 - Resumen del cajero
-class clsResumenCajeroPresentador(
-    private val vista: VistaResumenCajero,
-    private val scope: CoroutineScope
-) {
+// Presentador de  Resumen del cajero
+class clsResumenCajeroPresentador(private val vista: VistaResumenCajero, private val scope: CoroutineScope) {
 
     private val modelo = clsResumenCajeroModelo()
 
-    // Solicitar los pedidos para el resumen
+    // Solicita los pedidos para el resumen
     fun cargarResumen() {
 
         vista.mostrarCarga()
@@ -42,9 +35,7 @@ class clsResumenCajeroPresentador(
                     if (pedidos != null) {
                         vista.mostrarPedidos(pedidos)
                     } else {
-                        vista.mostrarError(
-                            "No se recibieron datos de pedidos"
-                        )
+                        vista.mostrarError("No se recibieron datos de pedidos")
                     }
 
                 } else {
@@ -55,21 +46,11 @@ class clsResumenCajeroPresentador(
 
                 when (e.code()) {
                     401 -> vista.solicitarLogin()
-
-                    403 -> vista.mostrarError(
-                        "No tienes permiso para consultar pedidos"
-                    )
-
-                    else -> vista.mostrarError(
-                        "Error del servidor: ${e.code()}"
-                    )
+                    403 -> vista.mostrarError("No tienes permiso para consultar pedidos")
+                    else -> vista.mostrarError("Error del servidor: ${e.code()}")
                 }
-
             } catch (e: Exception) {
-
-                vista.mostrarError(
-                    "No se pudo consultar el resumen"
-                )
+                vista.mostrarError("No se pudo consultar el resumen")
             }
         }
     }
