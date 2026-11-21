@@ -18,8 +18,8 @@ object NavegacionCliente {
 
     const val PANTALLA_BIENVENIDA = PAQUETE + "BienvenidaActivity"
     const val PANTALLA_MENU = PAQUETE + "MenuActivity"
-    const val PANTALLA_LOGIN = PAQUETE + "LoginActivity"
-    const val PANTALLA_MI_PANEL = PAQUETE + "MiPanelActivity"
+    const val PANTALLA_LOGIN = PAQUETE + "clsLoginVista"
+    const val PANTALLA_MI_PANEL = PAQUETE + "clsMiPanelVista"
     const val PANTALLA_MIS_PEDIDOS = PAQUETE + "MisPedidosActivity"
     const val PANTALLA_RESUMEN_CAJERO = PAQUETE + "ResumenCajeroActivity"
     const val PANTALLA_VENTAS_ADMIN = PAQUETE + "VentasAdminActivity"
@@ -98,13 +98,17 @@ object NavegacionCliente {
 
         val naranja = ContextCompat.getColor(activity, R.color.ic_naranja)
         val gris = ContextCompat.getColor(activity, R.color.ic_cafe)
+        val textoInactivo = ContextCompat.getColor(
+            activity,
+            R.color.cafe_texto_gris
+        )
 
         for (i in pestanas.indices) {
             val icono = activity.findViewById<ImageView>(pestanas[i].second)
             val texto = activity.findViewById<TextView>(pestanas[i].third)
             val esActiva = i == activa
             icono.setColorFilter(if (esActiva) naranja else gris)
-            texto.setTextColor(if (esActiva) naranja else gris)
+            texto.setTextColor(if (esActiva) naranja else textoInactivo)
             texto.setTypeface(null, if (esActiva) Typeface.BOLD else Typeface.NORMAL)
         }
 
