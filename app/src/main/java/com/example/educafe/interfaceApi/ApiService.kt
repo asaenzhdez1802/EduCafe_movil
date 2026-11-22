@@ -11,6 +11,11 @@ import com.example.educafe.Modelo.dataPedidoRegistrado
 import com.example.educafe.Modelo.dataSolicitudPedido
 import com.example.educafe.Modelo.dataPedidos
 import kotlinx.serialization.json.JsonObject
+import com.example.educafe.Modelo.clsRegistroSolicitud
+import com.example.educafe.Modelo.clsRegistroRespuesta
+import com.example.educafe.Modelo.clsPerfilModelo
+import com.example.educafe.Modelo.clsRecompensasModelo
+import com.example.educafe.Modelo.clsInformacionModelo
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -60,4 +65,18 @@ interface ApiService {
     suspend fun obtenerProductos(
         @Query("id_categoria") idCategoria: Int = 0
     ): RespuestaApi<List<dataProductos>>
+
+    @POST("registrar_cliente.php")
+    suspend fun registrarCliente(
+        @Body solicitud: clsRegistroSolicitud
+    ): RespuestaApi<clsRegistroRespuesta>
+
+    @GET("obtener_perfil.php")
+    suspend fun obtenerPerfil(): RespuestaApi<clsPerfilModelo>
+
+    @GET("obtener_recompensas.php")
+    suspend fun obtenerRecompensas(): RespuestaApi<clsRecompensasModelo>
+
+    @GET("obtener_informacion.php")
+    suspend fun obtenerInformacion(): RespuestaApi<clsInformacionModelo>
 }
