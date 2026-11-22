@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EduCafe">
         <activity
-            android:name=".Vista.MainActivity"
+            android:name=".Vista.BienvenidaActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -47,7 +47,21 @@
         <activity
             android:name=".Vista.HistorialActivity"
             android:exported="false" />
+        <activity
+            android:name=".Vista.VentasAdminActivity"
+            android:exported="false" />
 
+        <activity
+            android:name=".Vista.MasVendidosActivity"
+            android:exported="false" />
+
+            <!-- Pantallas recuperadas de itzel_sesion -->
+        <activity android:name=".Vista.clsLoginVista" android:exported="false" />
+        <activity android:name=".Vista.clsRegistroVista" android:exported="false" />
+        <activity android:name=".Vista.clsCuentaCreadaVista" android:exported="false" />
+        <activity android:name=".Vista.clsMiPanelVista" android:exported="false" />
+        <activity android:name=".Vista.clsRecompensasVista" android:exported="false" />
+        <activity android:name=".Vista.clsInformacionVista" android:exported="false" />
     </application>
 
 </manifest>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/raizReporteAdmin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cafe_crema"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtTituloAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="18dp"
+        android:text="Ventas generales"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/cafe_marron" />
+
+    <TextView
+        android:id="@+id/txtSaludoAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="18dp"
+        android:text="Hola, Administrador"
+        android:textStyle="bold"
+        android:textColor="@color/cafe_marron" />
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/grupoPeriodoAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginTop="8dp"
+        app:singleSelection="true"
+        app:selectionRequired="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnHoyAdmin"
+            style="@style/EduCafe.FiltroReporte"
+            android:text="Hoy" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSemanaAdmin"
+            style="@style/EduCafe.FiltroReporte"
+            android:text="Semana" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMesAdmin"
+            style="@style/EduCafe.FiltroReporte"
+            android:text="Mes" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <TextView
+        android:id="@+id/txtRangoAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="18dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/cafe_texto_secundario" />
+
+    <LinearLayout
+        android:id="@+id/tarjetaTotalAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_tarjeta"
+        android:padding="14dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ventas del periodo"
+            android:textColor="@color/cafe_texto_secundario" />
+
+        <TextView
+            android:id="@+id/txtTotalAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/cafe_marron" />
+
+        <TextView
+            android:id="@+id/txtCantidadAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/cafe_texto_gris" />
+
+        <TextView
+            android:id="@+id/txtComparacionAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/cafe_texto_secundario" />
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progresoAdmin"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_horizontal"
+        android:indeterminateTint="@color/cafe_naranja"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtEstadoAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="18dp"
+        android:gravity="center"
+        android:textColor="@color/cafe_marron"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnReintentarAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Reintentar"
+        app:backgroundTint="@color/cafe_naranja"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvReporteAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="18dp"
+        android:paddingBottom="12dp"
+        android:clipToPadding="false" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_barra_inferior"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/navVentasAdmin"
+            style="@style/EduCafe.NavReporte"
+            android:text="Ventas"
+            app:icon="@drawable/ic_ventas" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/EduCafe.NavReporte"
+            android:text="Pedidos"
+            android:enabled="false"
+            android:alpha="0.45"
+            app:icon="@drawable/ic_documento" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/navProductosAdmin"
+            style="@style/EduCafe.NavReporte"
+            android:text="Productos"
+            app:icon="@drawable/ic_productos" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/EduCafe.NavReporte"
+            android:text="Stock"
+            android:enabled="false"
+            android:alpha="0.45"
+            app:icon="@drawable/ic_stock" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,5 +1,8 @@
 package com.example.educafe.interfaceApi
 
+import com.example.educafe.Modelo.dataResumenAdmin
+import com.example.educafe.Modelo.dataMasVendidos
+import com.example.educafe.Modelo.dataProductos
 import com.example.educafe.Modelo.RespuestaApi
 import com.example.educafe.Modelo.clsLoginSolicitud
 import com.example.educafe.Modelo.clsUsuarioSesion
@@ -11,10 +14,16 @@ import com.example.educafe.Modelo.dataSolicitudPedido
 import com.example.educafe.Modelo.dataPedidos
 import com.example.educafe.Modelo.dataDetallePedido
 import kotlinx.serialization.json.JsonObject
+import com.example.educafe.Modelo.clsRegistroSolicitud
+import com.example.educafe.Modelo.clsRegistroRespuesta
+import com.example.educafe.Modelo.clsPerfilModelo
+import com.example.educafe.Modelo.clsRecompensasModelo
+import com.example.educafe.Modelo.clsInformacionModelo
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+
 
 
 interface ApiService {
@@ -58,4 +67,36 @@ interface ApiService {
     suspend fun obtenerDetallePedido(
         @Query("id_pedido") idPedido: Int
     ): RespuestaApi<dataDetallePedido>
+    // Consultar productos. Cero significa todas las categorías.
+    @GET("obtener_productos.php")
+    suspend fun obtenerProductos(
+        @Query("id_categoria") idCategoria: Int = 0
+    ): RespuestaApi<List<dataProductos>>
+
+
+    // Ventas generales del administrador.
+    @GET("obtener_resumen_admin.php")
+    suspend fun obtenerResumenAdmin(
+        @Query("periodo") periodo: String
+    ): RespuestaApi<dataResumenAdmin>
+
+    // Productos más vendidos e ingresos por categoría.
+    @GET("obtener_mas_vendidos.php")
+    suspend fun obtenerMasVendidos(
+        @Query("periodo") periodo: String
+    ): RespuestaApi<dataMasVendidos>
+
+    @POST("registrar_cliente.php")
+    suspend fun registrarCliente(
+        @Body solicitud: clsRegistroSolicitud
+    ): RespuestaApi<clsRegistroRespuesta>
+
+    @GET("obtener_perfil.php")
+    suspend fun obtenerPerfil(): RespuestaApi<clsPerfilModelo>
+
+    @GET("obtener_recompensas.php")
+    suspend fun obtenerRecompensas(): RespuestaApi<clsRecompensasModelo>
+
+    @GET("obtener_informacion.php")
+    suspend fun obtenerInformacion(): RespuestaApi<clsInformacionModelo>
 }
