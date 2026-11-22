@@ -32,6 +32,15 @@ class BienvenidaActivity : AppCompatActivity() {
             insets
         }
 
+        // Abrir la pantalla de inicio de sesión.
+        findViewById<MaterialButton>(R.id.btnIniciarSesion)
+            .setOnClickListener {
+                val intent = Intent(
+                    this,
+                    clsLoginVista::class.java
+                )
+                startActivity(intent)
+            }
         // Abrir el menú sin borrar la sesión.
         findViewById<MaterialButton>(R.id.btnVerMenu)
             .setOnClickListener {

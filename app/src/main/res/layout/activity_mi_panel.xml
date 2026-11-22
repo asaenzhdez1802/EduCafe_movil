@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFF8F1">
+
+    <!-- Contenido principal -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <!-- Título -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Mi panel"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#633C2D" />
+
+            <!-- Nombre del cliente -->
+            <TextView
+                android:id="@+id/txtNombrePanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="Nombre del cliente"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:textColor="#633C2D" />
+
+            <!-- Usuario -->
+            <TextView
+                android:id="@+id/txtUsuarioPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="Cliente"
+                android:textSize="14sp"
+                android:textColor="#97877B" />
+
+            <!-- Puntos -->
+            <TextView
+                android:id="@+id/txtPuntosPanel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/fondo_campo_login"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:text="0 puntos"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#588B3B" />
+
+            <!-- Tarjeta de progreso -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/fondo_campo_login"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <TextView
+                    android:id="@+id/txtSiguienteRecompensa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Consultando siguiente recompensa..."
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#633C2D" />
+
+                <ProgressBar
+                    android:id="@+id/progresoRecompensa"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="9dp"
+                    android:layout_marginTop="10dp"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressTint="#E65A00"
+                    android:progressBackgroundTint="#F0E3D7" />
+
+                <TextView
+                    android:id="@+id/txtDetallePuntos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Cargando puntos..."
+                    android:textSize="12sp"
+                    android:textColor="#97877B" />
+
+            </LinearLayout>
+
+            <!-- Hacer pedido -->
+            <TextView
+                android:id="@+id/btnHacerPedido"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/fondo_campo_login"
+                android:gravity="center_vertical"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:text="🛒   Hacer pedido                          ›"
+                android:textColor="#433126"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Mis recompensas -->
+            <TextView
+                android:id="@+id/btnMisRecompensas"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/fondo_campo_login"
+                android:gravity="center_vertical"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:text="Mis recompensas                          ›"
+                android:textColor="#433126"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Mis pedidos -->
+            <TextView
+                android:id="@+id/btnMisPedidos"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/fondo_campo_login"
+                android:gravity="center_vertical"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:text="Mis pedidos                               ›"
+                android:textColor="#433126"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Información -->
+            <TextView
+                android:id="@+id/btnInformacion"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/fondo_campo_login"
+                android:gravity="center_vertical"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:text="Información                               ›"
+                android:textColor="#433126"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Barra inferior -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:id="@+id/navInicio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="⌂\nInicio"
+            android:textColor="#633C2D"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/navMenu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="⌕\nMenú"
+            android:textColor="#633C2D"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/navPedidos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="♧\nPedidos"
+            android:textColor="#633C2D"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/navMiPanel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="●\nMi panel"
+            android:textStyle="bold"
+            android:textColor="#E65A00"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

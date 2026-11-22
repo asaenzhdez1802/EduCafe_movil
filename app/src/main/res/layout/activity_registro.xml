@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF8F1"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <!-- Encabezado -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/btnRegresarRegistro"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:gravity="center"
+                android:text="←"
+                android:textSize="26sp"
+                android:textColor="#633C2D"
+                android:contentDescription="Regresar" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Crear cuenta"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#633C2D" />
+
+        </LinearLayout>
+
+        <!-- Descripción -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Completa tus datos para crear tu cuenta de cliente."
+            android:textColor="#433126"
+            android:textSize="14sp" />
+
+        <!-- Nombre completo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nombre completo"
+            android:textStyle="bold"
+            android:textColor="#633C2D" />
+
+        <EditText
+            android:id="@+id/txtNombreRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/fondo_campo_login"
+            android:backgroundTint="@null"
+            android:hint="Nombre y apellidos"
+            android:inputType="textPersonName"
+            android:singleLine="true"
+            android:padding="14dp"
+            android:textColor="#433126" />
+
+        <!-- Nombre de usuario -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Nombre de usuario"
+            android:textStyle="bold"
+            android:textColor="#633C2D" />
+
+        <EditText
+            android:id="@+id/txtUsuarioRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/fondo_campo_login"
+            android:backgroundTint="@null"
+            android:hint="Ej. juan.perez"
+            android:inputType="text"
+            android:singleLine="true"
+            android:padding="14dp"
+            android:textColor="#433126" />
+
+        <!-- Celular -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Celular"
+            android:textStyle="bold"
+            android:textColor="#633C2D" />
+
+        <EditText
+            android:id="@+id/txtCelularRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/fondo_campo_login"
+            android:backgroundTint="@null"
+            android:hint="10 dígitos (lo dirás en caja)"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:padding="14dp"
+            android:textColor="#433126" />
+
+        <!-- Contraseña -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Crea una contraseña"
+            android:textStyle="bold"
+            android:textColor="#633C2D" />
+
+        <EditText
+            android:id="@+id/txtPasswordRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/fondo_campo_login"
+            android:backgroundTint="@null"
+            android:hint="Mínimo 8 caracteres"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:padding="14dp"
+            android:textColor="#433126" />
+
+        <!-- Confirmar contraseña -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:text="Confirma tu contraseña"
+            android:textStyle="bold"
+            android:textColor="#633C2D" />
+
+        <EditText
+            android:id="@+id/txtConfirmarPassword"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/fondo_campo_login"
+            android:backgroundTint="@null"
+            android:hint="Repite tu contraseña"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:padding="14dp"
+            android:textColor="#433126" />
+
+        <!-- Espacio flexible -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_weight="1" />
+
+        <!-- Botón Crear cuenta -->
+        <Button
+            android:id="@+id/btnCrearCuenta"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginBottom="8dp"
+            android:text="Crear cuenta"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#E65A00" />
+
+    </LinearLayout>
+
+</ScrollView>
