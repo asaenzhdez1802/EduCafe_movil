@@ -1,3 +1,4 @@
+
 package com.example.educafe.interfaceApi
 
 import com.example.educafe.Modelo.dataProductos
@@ -22,11 +23,6 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/main
 interface ApiService {
 
 
@@ -40,7 +36,6 @@ interface ApiService {
         @Body solicitud: clsLoginSolicitud
     ): RespuestaApi<clsUsuarioSesion>
 
-
     @POST("cerrar_sesion.php")
     suspend fun cerrarSesion(
         @Body solicitud: JsonObject
@@ -52,7 +47,6 @@ interface ApiService {
         @Body solicitud: clsRegistroSolicitud
     ): RespuestaApi<clsRegistroRespuesta>
 
-
     @GET("obtener_perfil.php")
     suspend fun obtenerPerfil():
             RespuestaApi<clsPerfilModelo>
@@ -62,7 +56,7 @@ interface ApiService {
     suspend fun obtenerRecompensas():
             RespuestaApi<clsRecompensasModelo>
 
-
+    // 7. Obtener información
     @GET("obtener_informacion.php")
     suspend fun obtenerInformacion():
             RespuestaApi<clsInformacionModelo>
@@ -89,14 +83,10 @@ interface ApiService {
     suspend fun obtenerPedidos(
         @Query("estado") estado: String? = null
     ): RespuestaApi<List<dataPedidos>>
-<<<<<<< HEAD
-}
-=======
 
-    // Consultar productos. Cero significa todas las categorías.
+
     @GET("obtener_productos.php")
     suspend fun obtenerProductos(
         @Query("id_categoria") idCategoria: Int = 0
     ): RespuestaApi<List<dataProductos>>
 }
->>>>>>> origin/main
