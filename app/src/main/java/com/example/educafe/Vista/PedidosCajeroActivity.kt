@@ -1,5 +1,6 @@
 package com.example.educafe.Vista
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -13,8 +14,8 @@ import com.example.educafe.Modelo.dataPedidos
 import com.example.educafe.Presentador.VistaPedidos
 import com.example.educafe.Presentador.clsPedidosPresentador
 
-// Pantalla K2: Pedidos del cajero
-class PedidosCajeroActivity : AppCompatActivity(), VistaPedidos {
+class PedidosCajeroActivity :
+    AppCompatActivity(), VistaPedidos {
 
     private lateinit var adaptador: clsPedidosAdaptador
     private lateinit var presentador: clsPedidosPresentador
@@ -25,57 +26,80 @@ class PedidosCajeroActivity : AppCompatActivity(), VistaPedidos {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Mostrar el diseño XML
+        // Mostrar el diseño XML de K2
         setContentView(R.layout.activity_pedidos_cajero)
-
-        // Preparar la lista de pedidos
         val listaPedidos = findViewById<RecyclerView>(R.id.rvPedidos)
 
         listaPedidos.layoutManager = LinearLayoutManager(this)
 
-        adaptador = clsPedidosAdaptador(emptyList())
+        // Adaptador que detecta el pedido seleccionado
+        adaptador = clsPedidosAdaptador(emptyList()) { idPedido ->
+            abrirDetallePedido(idPedido)
+        }
+
         listaPedidos.adapter = adaptador
 
-        // Preparar los botones
+        // Preparar los botones de filtros
         val btnTodos = findViewById<Button>(R.id.btnTodos)
         val btnPendientes = findViewById<Button>(R.id.btnPendientes)
         val btnListos = findViewById<Button>(R.id.btnListos)
         val btnEntregados = findViewById<Button>(R.id.btnEntregados)
 
-        // Filtrar los pedidos
+        // Filtrar todos los pedidos
         btnTodos.setOnClickListener {
             filtrarPedidos(null)
         }
 
+        // Filtrar pedidos pendientes
         btnPendientes.setOnClickListener {
             filtrarPedidos("pendiente")
         }
 
+        // Filtrar pedidos listos
         btnListos.setOnClickListener {
             filtrarPedidos("listo")
         }
 
+        // Filtrar pedidos entregados
         btnEntregados.setOnClickListener {
             filtrarPedidos("entregado")
         }
 
-        // Crear el Presentador
+        // Crear el Presentador MVP
         presentador = clsPedidosPresentador(this)
 
-        // Consultar los pedidos del servidor
+        // Consultar los pedidos mediante la API real
         presentador.cargarPedidos()
     }
 
-    // Filtrar los pedidos recibidos
+    // Abrir K3 con el identificador del pedido
+    private fun abrirDetallePedido(idPedido: Int) {
+
+        if (idPedido <= 0) {
+            mostrarError("El pedido seleccionado no es válido")
+            return
+        }
+
+        val intent = Intent(this, DetallePedidoActivity::class.java)
+        // Enviar el ID a la pantalla K3
+        intent.putExtra("id_pedido", idPedido)
+
+        startActivity(intent)
+    }
+
+    // Filtrar los pedidos recibidos de la API
     private fun filtrarPedidos(estado: String?) {
 
         filtroActual = estado
 
         if (estado == null) {
+
             adaptador.actualizarPedidos(todosPedidos)
+
         } else {
+
             val pedidosFiltrados = todosPedidos.filter {
-                it.estado == estado
+                it.estado.trim().equals(estado, ignoreCase = true)
             }
 
             adaptador.actualizarPedidos(pedidosFiltrados)
@@ -84,62 +108,42 @@ class PedidosCajeroActivity : AppCompatActivity(), VistaPedidos {
 
     // Mostrar que comienza la consulta
     override fun mostrarCarga() {
-        Toast.makeText(
-            this,
-            "Cargando pedidos...",
-            Toast.LENGTH_SHORT
-        ).show()
+        Toast.makeText(this, "Cargando pedidos...", Toast.LENGTH_SHORT).show()
     }
 
-    // Recibir los pedidos del Presentador
+    // Recibir pedidos del Presentador
     override fun mostrarPedidos(pedidos: List<dataPedidos>) {
 
         todosPedidos = pedidos
 
         // Contar pedidos pendientes
         val pendientes = pedidos.count {
-            it.estado == "pendiente"
+            it.estado.trim().equals("pendiente", ignoreCase = true)
         }
 
         // Contar pedidos listos
         val listos = pedidos.count {
-            it.estado == "listo"
+            it.estado.trim().equals("listo", ignoreCase = true)
         }
 
-        // Contar pedidos entregados
         val entregados = pedidos.count {
-            it.estado == "entregado"
+            it.estado.trim().equals("entregado", ignoreCase = true)
         }
 
-        // Actualizar los contadores
-        findViewById<TextView>(R.id.txtPendientes).text =
-            pendientes.toString()
+        findViewById<TextView>(R.id.txtPendientes).text = pendientes.toString()
+        findViewById<TextView>(R.id.txtListos).text = listos.toString()
+        findViewById<TextView>(R.id.txtEntregados).text = entregados.toString()
 
-        findViewById<TextView>(R.id.txtListos).text =
-            listos.toString()
-
-        findViewById<TextView>(R.id.txtEntregados).text =
-            entregados.toString()
-
-        // Mostrar los pedidos
         filtrarPedidos(filtroActual)
     }
 
-    // Mostrar un error
+    // Mostrar errores de la API
     override fun mostrarError(mensaje: String) {
-        Toast.makeText(
-            this,
-            mensaje,
-            Toast.LENGTH_LONG
-        ).show()
+        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }
 
-    // Avisar cuando se necesita iniciar sesión
+    // Avisar cuando la sesión haya vencido
     override fun solicitarLogin() {
-        Toast.makeText(
-            this,
-            "Debes iniciar sesión nuevamente",
-            Toast.LENGTH_LONG
-        ).show()
+        Toast.makeText(this, "Debes iniciar sesión nuevamente", Toast.LENGTH_LONG).show()
     }
 }
