@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFF8F0">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ENCABEZADO -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Resumen"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="#503627"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- INFORMACION DEL CAJERO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtSaludoCajero"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Hola, cajero"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#503627"/>
+
+                    <TextView
+                        android:id="@+id/txtFechaCaja"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha y caja por consultar"
+                        android:textSize="12sp"
+                        android:textColor="#777777"/>
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnCerrarSesion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salir"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#B94D2D"/>
+
+            </LinearLayout>
+
+            <!-- TITULO DE ESTADISTICAS -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Resumen de hoy"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:textColor="#503627"
+                android:layout_marginBottom="14dp"/>
+
+            <!-- PRIMERA FILA -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <!-- VENTAS -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:padding="14dp"
+                    android:orientation="vertical"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ventas de hoy"
+                        android:textSize="14sp"
+                        android:textColor="#746255"/>
+
+                    <TextView
+                        android:id="@+id/txtVentasHoy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="--"
+                        android:textSize="27sp"
+                        android:textStyle="bold"
+                        android:textColor="#B94D2D"
+                        android:layout_marginTop="14dp"/>
+
+                </LinearLayout>
+
+                <!-- POR PREPARAR -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:padding="14dp"
+                    android:orientation="vertical"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Por preparar"
+                        android:textSize="14sp"
+                        android:textColor="#746255"/>
+
+                    <TextView
+                        android:id="@+id/txtPorPreparar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="--"
+                        android:textSize="27sp"
+                        android:textStyle="bold"
+                        android:textColor="#B94D2D"
+                        android:layout_marginTop="14dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- SEGUNDA FILA -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+
+                <!-- PEDIDOS LISTOS -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    android:padding="14dp"
+                    android:orientation="vertical"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pedidos listos"
+                        android:textSize="14sp"
+                        android:textColor="#746255"/>
+
+                    <TextView
+                        android:id="@+id/txtPedidosListos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="--"
+                        android:textSize="27sp"
+                        android:textStyle="bold"
+                        android:textColor="#B94D2D"
+                        android:layout_marginTop="14dp"/>
+
+                </LinearLayout>
+
+                <!-- TICKET PROMEDIO -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    android:padding="14dp"
+                    android:orientation="vertical"
+                    android:background="#FFFFFF">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ticket promedio"
+                        android:textSize="14sp"
+                        android:textColor="#746255"/>
+
+                    <TextView
+                        android:id="@+id/txtTicketPromedio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="--"
+                        android:textSize="27sp"
+                        android:textStyle="bold"
+                        android:textColor="#B94D2D"
+                        android:layout_marginTop="14dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- PEDIDOS PENDIENTES -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pedidos pendientes"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#503627"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:background="#FFFFFF"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtEstadoPedidos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Los pedidos aparecerán aquí al consultar la API."
+                    android:textSize="14sp"
+                    android:textColor="#777777"
+                    android:gravity="center"
+                    android:padding="18dp"/>
+
+                <Button
+                    android:id="@+id/btnVerPedidos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ver pedidos"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#B94D2D"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- NAVEGACION INFERIOR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:id="@+id/navResumenCajero"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Resumen"
+            android:textStyle="bold"
+            android:textColor="#B94D2D"/>
+
+        <TextView
+            android:id="@+id/navPedidosCajero"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Pedidos"
+            android:textColor="#777777"/>
+
+        <TextView
+            android:id="@+id/navMisVentasCajero"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Mis ventas"
+            android:textColor="#777777"/>
+
+    </LinearLayout>
+
+</LinearLayout>
