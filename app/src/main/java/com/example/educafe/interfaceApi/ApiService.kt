@@ -1,5 +1,7 @@
 package com.example.educafe.interfaceApi
 
+import com.example.educafe.Modelo.dataResumenAdmin
+import com.example.educafe.Modelo.dataMasVendidos
 import com.example.educafe.Modelo.dataProductos
 import com.example.educafe.Modelo.RespuestaApi
 import com.example.educafe.Modelo.clsLoginSolicitud
@@ -60,4 +62,16 @@ interface ApiService {
     suspend fun obtenerProductos(
         @Query("id_categoria") idCategoria: Int = 0
     ): RespuestaApi<List<dataProductos>>
+
+    // Ventas generales del administrador.
+    @GET("obtener_resumen_admin.php")
+    suspend fun obtenerResumenAdmin(
+        @Query("periodo") periodo: String
+    ): RespuestaApi<dataResumenAdmin>
+
+    // Productos más vendidos e ingresos por categoría.
+    @GET("obtener_mas_vendidos.php")
+    suspend fun obtenerMasVendidos(
+        @Query("periodo") periodo: String
+    ): RespuestaApi<dataMasVendidos>
 }

@@ -42,6 +42,13 @@
         <activity
             android:name=".Vista.HistorialActivity"
             android:exported="false" />
+        <activity
+            android:name=".Vista.VentasAdminActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Vista.MasVendidosActivity"
+            android:exported="false" />
 
     </application>
 
