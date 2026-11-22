@@ -9,6 +9,7 @@ import com.example.educafe.Modelo.dataPedidoCliente
 import com.example.educafe.Modelo.dataPedidoRegistrado
 import com.example.educafe.Modelo.dataSolicitudPedido
 import com.example.educafe.Modelo.dataPedidos
+import com.example.educafe.Modelo.dataDetallePedido
 import kotlinx.serialization.json.JsonObject
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -52,4 +53,9 @@ interface ApiService {
     suspend fun obtenerPedidos(
         @Query("estado") estado: String? = null
     ): RespuestaApi<List<dataPedidos>>
+
+    @GET("detalle_pedido.php")
+    suspend fun obtenerDetallePedido(
+        @Query("id_pedido") idPedido: Int
+    ): RespuestaApi<dataDetallePedido>
 }

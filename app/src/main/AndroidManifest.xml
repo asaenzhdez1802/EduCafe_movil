@@ -27,6 +27,11 @@
         <activity
             android:name=".Vista.ResumenCajeroActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".Vista.DetallePedidoActivity"
+            android:exported="false" />
+
         <activity
             android:name=".Vista.TuPedidoActivity"
             android:exported="false" />
