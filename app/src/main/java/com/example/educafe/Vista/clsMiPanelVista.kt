@@ -53,6 +53,10 @@ class clsMiPanelVista : AppCompatActivity(),
         )
 
         presentador.cargarPerfil()
+        CierreSesionCompartido.conectar(
+            this,
+            findViewById(R.id.btnCerrarSesionCompartida)
+        )
     }
 
     // 6. Conectar XML con Kotlin.
@@ -207,7 +211,7 @@ class clsMiPanelVista : AppCompatActivity(),
     private fun configurarBotones() {
 
         btnHacerPedido.setOnClickListener {
-            mostrarPendiente("Hacer pedido")
+            NavegacionCliente.navegarCompartido(this, "Hacer pedido")
         }
 
         // Abrir C7.
@@ -222,7 +226,7 @@ class clsMiPanelVista : AppCompatActivity(),
         }
 
         btnMisPedidos.setOnClickListener {
-            mostrarPendiente("Mis pedidos")
+            NavegacionCliente.navegarCompartido(this, "Mis pedidos")
         }
 
         // Abrir C8.
@@ -237,15 +241,15 @@ class clsMiPanelVista : AppCompatActivity(),
         }
 
         navInicio.setOnClickListener {
-            mostrarPendiente("Inicio")
+            NavegacionCliente.navegarCompartido(this, "Inicio")
         }
 
         navMenu.setOnClickListener {
-            mostrarPendiente("Menú")
+            NavegacionCliente.navegarCompartido(this, "Menú")
         }
 
         navPedidos.setOnClickListener {
-            mostrarPendiente("Pedidos")
+            NavegacionCliente.navegarCompartido(this, "Pedidos")
         }
 
         navMiPanel.setOnClickListener {
@@ -253,13 +257,5 @@ class clsMiPanelVista : AppCompatActivity(),
         }
     }
 
-    // 12. Funciones compartidas pendientes.
-    private fun mostrarPendiente(pantalla: String) {
 
-        Toast.makeText(
-            this,
-            "Pendiente de conectar: $pantalla",
-            Toast.LENGTH_SHORT
-        ).show()
-    }
 }

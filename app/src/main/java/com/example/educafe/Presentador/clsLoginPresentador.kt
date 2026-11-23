@@ -1,5 +1,6 @@
 package com.example.educafe.Presentador
 
+import com.example.educafe.Modelo.clsCarrito
 import com.example.educafe.Modelo.RetrofitClient
 import com.example.educafe.Modelo.SesionUsuario
 import com.example.educafe.Modelo.clsLoginSolicitud
@@ -52,6 +53,13 @@ class clsLoginPresentador(
                     respuesta.data != null
                 ) {
                     // 4. Guardar el token y los datos.
+                    val usuarioAnterior =
+                        SesionUsuario.obtenerSesion()?.id_usuario
+
+                    if (usuarioAnterior != respuesta.data.id_usuario) {
+                        clsCarrito.vaciar()
+                    }
+
                     SesionUsuario.guardarSesion(respuesta.data)
 
                     // 5. Identificar destino según el rol.

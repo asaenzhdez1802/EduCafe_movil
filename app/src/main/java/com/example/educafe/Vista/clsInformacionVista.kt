@@ -180,25 +180,17 @@ class clsInformacionVista : AppCompatActivity(),
         }
 
         navInicioInformacion.setOnClickListener {
-            mostrarPendiente("Inicio")
+            NavegacionCliente.navegarCompartido(this, "Inicio")
         }
 
         navMenuInformacion.setOnClickListener {
-            mostrarPendiente("Menú")
+            NavegacionCliente.navegarCompartido(this, "Menú")
         }
 
         navPedidosInformacion.setOnClickListener {
-            mostrarPendiente("Pedidos")
+            NavegacionCliente.navegarCompartido(this, "Pedidos")
         }
     }
 
-    // 10. Navegación pendiente de otros módulos.
-    private fun mostrarPendiente(pantalla: String) {
 
-        Toast.makeText(
-            this,
-            "Pendiente de conectar: $pantalla",
-            Toast.LENGTH_SHORT
-        ).show()
-    }
 }

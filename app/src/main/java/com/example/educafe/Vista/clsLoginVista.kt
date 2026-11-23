@@ -86,33 +86,30 @@ class clsLoginVista : AppCompatActivity(),
     override fun loginCorrecto(
         destino: NavegacionSesion.Destino
     ) {
-        when (destino) {
+        val pantalla = when (destino) {
+            NavegacionSesion.Destino.MENU ->
+                MenuActivity::class.java
 
-            NavegacionSesion.Destino.MENU -> {
-                mostrarMensajeDestino("Menú del cliente")
-            }
+            NavegacionSesion.Destino.RESUMEN_CAJERO ->
+                ResumenCajeroActivity::class.java
 
-            NavegacionSesion.Destino.RESUMEN_CAJERO -> {
-                mostrarMensajeDestino("Resumen del cajero")
-            }
-
-            NavegacionSesion.Destino.VENTAS_ADMIN -> {
-                mostrarMensajeDestino("Panel del administrador")
-            }
+            NavegacionSesion.Destino.VENTAS_ADMIN ->
+                VentasAdminActivity::class.java
 
             else -> {
-                mostrarError(
-                    "No se pudo determinar el destino"
-                )
+                mostrarError("No se pudo determinar el destino")
+                return
             }
         }
+
+        val ventana = Intent(this, pantalla).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+
+        startActivity(ventana)
+        finish()
     }
 
-    private fun mostrarMensajeDestino(pantalla: String) {
-        Toast.makeText(
-            this,
-            "Acceso correcto: $pantalla",
-            Toast.LENGTH_LONG
-        ).show()
-    }
+
 }

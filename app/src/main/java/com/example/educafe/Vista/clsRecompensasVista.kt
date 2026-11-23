@@ -324,24 +324,17 @@ class clsRecompensasVista : AppCompatActivity(),
         }
 
         navInicioRecompensas.setOnClickListener {
-            mostrarPendiente("Inicio")
+            NavegacionCliente.navegarCompartido(this, "Inicio")
         }
 
         navMenuRecompensas.setOnClickListener {
-            mostrarPendiente("Menú")
+            NavegacionCliente.navegarCompartido(this, "Menú")
         }
 
         navPedidosRecompensas.setOnClickListener {
-            mostrarPendiente("Pedidos")
+            NavegacionCliente.navegarCompartido(this, "Menú")
         }
     }
 
-    private fun mostrarPendiente(pantalla: String) {
 
-        Toast.makeText(
-            this,
-            "Pendiente de conectar: $pantalla",
-            Toast.LENGTH_SHORT
-        ).show()
-    }
 }

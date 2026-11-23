@@ -104,6 +104,11 @@ abstract class ReporteAdminActivity : AppCompatActivity() {
             }
 
         configurarBarra()
+
+        CierreSesionCompartido.conectar(
+            this,
+            findViewById(R.id.btnCerrarSesionCompartida)
+        )
     }
 
     override fun onResume() {
