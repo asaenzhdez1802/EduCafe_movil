@@ -101,7 +101,7 @@ interface ApiService {
         @Body solicitud: clsRegistroSolicitud
     ): RespuestaApi<clsRegistroRespuesta>
 
-    @GET("resumen_cajero.php")
+    @GET("obtener_resumen_cajero.php")
     suspend fun obtenerResumenCajero():
             RespuestaApi<dataResumenCajero>
 
@@ -116,7 +116,7 @@ interface ApiService {
             RespuestaApi<clsRecompensasModelo>
 
     // Consultar información
-    @GET("obtener_informacion.php")
+    @GET("obtener_info.php")
     suspend fun obtenerInformacion():
             RespuestaApi<clsInformacionModelo>
 
