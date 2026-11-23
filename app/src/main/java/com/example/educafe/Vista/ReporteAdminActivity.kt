@@ -109,7 +109,7 @@ abstract class ReporteAdminActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        // El servidor también valida los permisos.
+        // El servidor valida los permisos.
         if (!SesionUsuario.haySesion()) {
             solicitarLogin()
         } else if (SesionUsuario.obtenerRol() != "admin") {
@@ -376,20 +376,37 @@ abstract class ReporteAdminActivity : AppCompatActivity() {
         finish()
     }
 
+    // Navegación compartida del administrador.
+    // Conserva el diseño y los colores originales de Manuel.
     private fun configurarBarra() {
+
+        // A1 - Ventas generales
         val ventas =
             findViewById<MaterialButton>(R.id.navVentasAdmin)
 
+        // A2 - Pedidos del administrador
+        val pedidos =
+            findViewById<MaterialButton>(R.id.navPedidosAdmin)
+
+        // A3 - Productos más vendidos
         val productos =
             findViewById<MaterialButton>(R.id.navProductosAdmin)
 
-        listOf(ventas, productos).forEach { boton ->
-            val activo =
-                if (boton.id == R.id.navVentasAdmin) {
-                    esVentas
-                } else {
-                    !esVentas
-                }
+        // A4 - Stock del administrador
+        val stock =
+            findViewById<MaterialButton>(R.id.navStockAdmin)
+
+        // Conservar los colores del diseño original
+        listOf(ventas, productos, pedidos, stock).forEach { boton ->
+
+            val activo = when (boton.id) {
+
+                R.id.navVentasAdmin -> esVentas
+
+                R.id.navProductosAdmin -> !esVentas
+
+                else -> false
+            }
 
             val color = ContextCompat.getColor(
                 this,
@@ -404,10 +421,15 @@ abstract class ReporteAdminActivity : AppCompatActivity() {
             boton.iconTint = ColorStateList.valueOf(color)
         }
 
+        // A1: Abrir ventas generales
         ventas.setOnClickListener {
+
             if (!esVentas) {
-                val intent =
-                    Intent(this, VentasAdminActivity::class.java)
+
+                val intent = Intent(
+                    this,
+                    VentasAdminActivity::class.java
+                )
 
                 intent.addFlags(
                     Intent.FLAG_ACTIVITY_CLEAR_TOP or
@@ -419,12 +441,40 @@ abstract class ReporteAdminActivity : AppCompatActivity() {
             }
         }
 
+        // A2: Abrir pedidos del administrador
+        pedidos.setOnClickListener {
+
+            val intent = Intent(
+                this,
+                PedidosAdminActivity::class.java
+            )
+
+            startActivity(intent)
+        }
+
+        // A3: Abrir productos más vendidos
         productos.setOnClickListener {
+
             if (esVentas) {
+
                 startActivity(
-                    Intent(this, MasVendidosActivity::class.java)
+                    Intent(
+                        this,
+                        MasVendidosActivity::class.java
+                    )
                 )
             }
+        }
+
+        // A4: Abrir stock del administrador
+        stock.setOnClickListener {
+
+            val intent = Intent(
+                this,
+                StockAdminActivity::class.java
+            )
+
+            startActivity(intent)
         }
     }
 

@@ -33,6 +33,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".Vista.StockAdminActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".Vista.TuPedidoActivity"
             android:exported="false" />
         <activity
@@ -52,7 +56,15 @@
             android:exported="false" />
 
         <activity
+            android:name=".Vista.PedidosAdminActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".Vista.MasVendidosActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".Vista.MisVentasCajeroActivity"
             android:exported="false" />
 
             <!-- Pantallas recuperadas de itzel_sesion -->
