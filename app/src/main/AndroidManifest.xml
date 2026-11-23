@@ -74,6 +74,11 @@
         <activity android:name=".Vista.clsMiPanelVista" android:exported="false" />
         <activity android:name=".Vista.clsRecompensasVista" android:exported="false" />
         <activity android:name=".Vista.clsInformacionVista" android:exported="false" />
+
+        <activity
+            android:name=".Vista.MenuActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

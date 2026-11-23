@@ -98,14 +98,11 @@ class ResumenCajeroActivity :
                 )
             }
 
-        // Cierre de sesión pendiente de integración
-        findViewById<Button>(R.id.btnCerrarSesion)
-            .setOnClickListener {
 
-                mostrarAviso(
-                    "Cierre de sesión pendiente de integración"
-                )
-            }
+        CierreSesionCompartido.conectar(
+            this,
+            findViewById(R.id.btnCerrarSesion)
+        )
     }
 
     // Recargar información al regresar

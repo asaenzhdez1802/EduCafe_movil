@@ -127,4 +127,36 @@ object NavegacionCliente {
             abrirDestino(activity, NavegacionSesion.destinoMiPanel())
         }
     }
+
+    fun navegarCompartido(activity: Activity, opcion: String) {
+        when (opcion) {
+            "Inicio" -> {
+                abrir(
+                    activity,
+                    PANTALLA_BIENVENIDA,
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                            Intent.FLAG_ACTIVITY_SINGLE_TOP
+                )
+            }
+
+            "Menú", "Hacer pedido" -> {
+                irAlMenu(activity)
+            }
+
+            "Pedidos", "Mis pedidos" -> {
+                abrirDestino(
+                    activity,
+                    NavegacionSesion.destinoPedidos()
+                )
+            }
+
+            else -> {
+                Toast.makeText(
+                    activity,
+                    "Destino no reconocido",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
 }

@@ -29,6 +29,14 @@
                 android:textStyle="bold"
                 android:textColor="#633C2D" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCerrarSesionCompartida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="18dp"
+                android:text="Cerrar sesión" />
+
             <!-- Nombre del cliente -->
             <TextView
                 android:id="@+id/txtNombrePanel"
