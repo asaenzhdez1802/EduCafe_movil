@@ -1,40 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFF8F0">
+    android:background="@color/cafe_crema">
 
+    <!-- CONTENIDO PRINCIPAL -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:paddingTop="28dp"
+            android:paddingBottom="24dp">
 
-            <!-- ENCABEZADO -->
+            <!-- TITULO -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
                 android:text="Resumen"
+                android:textColor="@color/cafe_marron"
                 android:textSize="28sp"
-                android:textStyle="bold"
-                android:textColor="#503627"
-                android:layout_marginBottom="20dp"/>
+                android:textStyle="bold" />
 
-            <!-- INFORMACION DEL CAJERO -->
+            <!-- SALUDO Y CIERRE DE SESION -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
+                android:gravity="center_vertical">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -47,249 +53,341 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Hola, cajero"
+                        android:textColor="@color/cafe_marron"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="#503627"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/txtFechaCaja"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Fecha y caja por consultar"
-                        android:textSize="12sp"
-                        android:textColor="#777777"/>
+                        android:layout_marginTop="3dp"
+                        android:text="Consultando fecha..."
+                        android:textColor="@color/cafe_texto_secundario"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCerrarSesion"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Salir"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="8dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Cerrar sesión"
                     android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="#B94D2D"/>
+                    android:textSize="12sp"
+                    android:textColor="@color/cafe_marron"
+                    android:backgroundTint="@color/cafe_blanco"
+                    app:cornerRadius="22dp"
+                    app:strokeColor="#E6DED3"
+                    app:strokeWidth="1dp" />
 
             </LinearLayout>
-
-            <!-- TITULO DE ESTADISTICAS -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Resumen de hoy"
-                android:textSize="21sp"
-                android:textStyle="bold"
-                android:textColor="#503627"
-                android:layout_marginBottom="14dp"/>
 
             <!-- PRIMERA FILA -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
 
-                <!-- VENTAS -->
+                <!-- MIS VENTAS DE HOY -->
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="120dp"
+                    android:layout_height="126dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="6dp"
                     android:padding="14dp"
                     android:orientation="vertical"
-                    android:background="#FFFFFF">
+                    android:background="@drawable/bg_tarjeta"
+                    android:elevation="2dp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Ventas de hoy"
-                        android:textSize="14sp"
-                        android:textColor="#746255"/>
+                        android:text="Mis ventas de hoy"
+                        android:textSize="13sp"
+                        android:textColor="@color/cafe_texto_secundario" />
 
                     <TextView
                         android:id="@+id/txtVentasHoy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
                         android:text="--"
-                        android:textSize="27sp"
+                        android:maxLines="1"
+                        android:autoSizeTextType="uniform"
+                        android:autoSizeMinTextSize="16sp"
+                        android:autoSizeMaxTextSize="25sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
-                        android:textColor="#B94D2D"
-                        android:layout_marginTop="14dp"/>
+                        android:textColor="@color/cafe_marron" />
+
+                    <TextView
+                        android:id="@+id/txtNumeroVentasHoy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="-- ventas registradas"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#648E4B" />
 
                 </LinearLayout>
 
-                <!-- POR PREPARAR -->
+                <!-- PEDIDOS POR PREPARAR -->
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="120dp"
+                    android:layout_height="126dp"
                     android:layout_weight="1"
                     android:layout_marginStart="6dp"
                     android:padding="14dp"
                     android:orientation="vertical"
-                    android:background="#FFFFFF">
+                    android:background="@drawable/bg_tarjeta"
+                    android:elevation="2dp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Por preparar"
-                        android:textSize="14sp"
-                        android:textColor="#746255"/>
+                        android:textSize="13sp"
+                        android:textColor="@color/cafe_texto_secundario" />
 
                     <TextView
                         android:id="@+id/txtPorPreparar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
                         android:text="--"
-                        android:textSize="27sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
-                        android:textColor="#B94D2D"
-                        android:layout_marginTop="14dp"/>
+                        android:textColor="@color/cafe_marron" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Pedidos de la app"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#648E4B" />
 
                 </LinearLayout>
+
             </LinearLayout>
 
             <!-- SEGUNDA FILA -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
                 <!-- PEDIDOS LISTOS -->
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="120dp"
+                    android:layout_height="126dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="6dp"
                     android:padding="14dp"
                     android:orientation="vertical"
-                    android:background="#FFFFFF">
+                    android:background="@drawable/bg_tarjeta"
+                    android:elevation="2dp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Pedidos listos"
-                        android:textSize="14sp"
-                        android:textColor="#746255"/>
+                        android:text="Listos"
+                        android:textSize="13sp"
+                        android:textColor="@color/cafe_texto_secundario" />
 
                     <TextView
                         android:id="@+id/txtPedidosListos"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
                         android:text="--"
-                        android:textSize="27sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
-                        android:textColor="#B94D2D"
-                        android:layout_marginTop="14dp"/>
+                        android:textColor="@color/cafe_marron" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Esperando al cliente"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#648E4B" />
 
                 </LinearLayout>
 
                 <!-- TICKET PROMEDIO -->
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="120dp"
+                    android:layout_height="126dp"
                     android:layout_weight="1"
                     android:layout_marginStart="6dp"
                     android:padding="14dp"
                     android:orientation="vertical"
-                    android:background="#FFFFFF">
+                    android:background="@drawable/bg_tarjeta"
+                    android:elevation="2dp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Ticket promedio"
-                        android:textSize="14sp"
-                        android:textColor="#746255"/>
+                        android:textSize="13sp"
+                        android:textColor="@color/cafe_texto_secundario" />
 
                     <TextView
                         android:id="@+id/txtTicketPromedio"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
                         android:text="--"
-                        android:textSize="27sp"
+                        android:maxLines="1"
+                        android:autoSizeTextType="uniform"
+                        android:autoSizeMinTextSize="16sp"
+                        android:autoSizeMaxTextSize="25sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
-                        android:textColor="#B94D2D"
-                        android:layout_marginTop="14dp"/>
+                        android:textColor="@color/cafe_marron" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="En mis ventas de hoy"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/cafe_naranja" />
 
                 </LinearLayout>
+
             </LinearLayout>
 
-            <!-- PEDIDOS PENDIENTES -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Pedidos pendientes"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#503627"
-                android:layout_marginBottom="10dp"/>
-
+            <!-- TARJETA DE PEDIDOS -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:background="#FFFFFF"
-                android:orientation="vertical">
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:background="@drawable/bg_tarjeta"
+                android:elevation="2dp">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pedidos por preparar"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/cafe_marron" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="Toca un pedido para ver el detalle"
+                    android:textSize="13sp"
+                    android:textColor="@color/cafe_texto_secundario" />
+
+                <!-- MENSAJE DE CARGA -->
                 <TextView
                     android:id="@+id/txtEstadoPedidos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Los pedidos aparecerán aquí al consultar la API."
-                    android:textSize="14sp"
-                    android:textColor="#777777"
+                    android:padding="12dp"
                     android:gravity="center"
-                    android:padding="18dp"/>
+                    android:text="Consultando pedidos..."
+                    android:textSize="13sp"
+                    android:textColor="@color/cafe_texto_secundario" />
 
+                <!-- FILAS DINAMICAS DE PEDIDOS -->
+                <LinearLayout
+                    android:id="@+id/contenedorPedidosResumen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+                <!-- BOTON CONSERVADO PARA KOTLIN -->
                 <Button
                     android:id="@+id/btnVerPedidos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ver pedidos"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="#B94D2D"/>
+                    android:visibility="gone" />
 
             </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
 
-    <!-- NAVEGACION INFERIOR -->
+    <!-- BARRA INFERIOR DEL CAJERO -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="84dp"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="#FFFFFF">
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@drawable/bg_barra_inferior"
+        android:elevation="8dp">
 
+        <!-- K1: RESUMEN ACTIVO -->
         <TextView
             android:id="@+id/navResumenCajero"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:drawableTop="@drawable/ic_resumen"
+            android:drawableTint="@color/cafe_naranja"
+            android:drawablePadding="6dp"
             android:text="Resumen"
+            android:textSize="12sp"
             android:textStyle="bold"
-            android:textColor="#B94D2D"/>
+            android:textColor="@color/cafe_naranja"
+            android:clickable="true"
+            android:focusable="true" />
 
+        <!-- K2: PEDIDOS -->
         <TextView
             android:id="@+id/navPedidosCajero"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:drawableTop="@drawable/ic_lista"
+            android:drawableTint="@color/cafe_marron"
+            android:drawablePadding="6dp"
             android:text="Pedidos"
-            android:textColor="#777777"/>
+            android:textSize="12sp"
+            android:textColor="@color/cafe_marron"
+            android:clickable="true"
+            android:focusable="true" />
 
+        <!-- K4: MIS VENTAS -->
         <TextView
             android:id="@+id/navMisVentasCajero"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:drawableTop="@drawable/ic_ticket"
+            android:drawableTint="@color/cafe_marron"
+            android:drawablePadding="6dp"
             android:text="Mis ventas"
-            android:textColor="#777777"/>
+            android:textSize="12sp"
+            android:textColor="@color/cafe_marron"
+            android:clickable="true"
+            android:focusable="true" />
 
     </LinearLayout>
 

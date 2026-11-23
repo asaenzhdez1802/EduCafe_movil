@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/cafe_crema">
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="24dp">
+
+            <!-- TITULO -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="Mis ventas"
+                android:textColor="@color/cafe_marron"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <!-- TARJETA TOTAL COBRADO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:padding="18dp"
+                android:orientation="vertical"
+                android:background="@drawable/bg_tarjeta"
+                android:elevation="2dp">
+
+                <TextView
+                    android:id="@+id/txtFechaMisVentas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total cobrado hoy"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/cafe_marron" />
+
+                <TextView
+                    android:id="@+id/txtCantidadMisVentas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="--"
+                    android:textSize="13sp"
+                    android:textColor="@color/cafe_texto_secundario" />
+
+                <TextView
+                    android:id="@+id/txtTotalMisVentas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="--"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/cafe_marron"
+                    android:maxLines="1"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="19sp"
+                    android:autoSizeMaxTextSize="30sp" />
+
+                <!-- FILTROS DE FECHA -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="end|center_vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnHoyVentas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:layout_marginEnd="8dp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:text="Hoy"
+                        android:textAllCaps="false"
+                        android:textSize="12sp"
+                        android:textColor="@color/cafe_blanco"
+                        android:backgroundTint="@color/cafe_naranja"
+                        app:cornerRadius="19dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnElegirFechaVentas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:text="Elegir fecha"
+                        android:textAllCaps="false"
+                        android:textSize="12sp"
+                        android:textColor="@color/cafe_marron"
+                        android:backgroundTint="@color/cafe_blanco"
+                        app:cornerRadius="19dp"
+                        app:strokeColor="#E6DED3"
+                        app:strokeWidth="1dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- TARJETA HISTORIAL -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="18dp"
+                android:orientation="vertical"
+                android:background="@drawable/bg_tarjeta"
+                android:elevation="2dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="Mis últimas ventas"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/cafe_marron" />
+
+                <!-- LISTA DE VENTAS REALES -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMisVentas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="70dp"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never" />
+
+                <!-- MENSAJES DE LA API -->
+                <TextView
+                    android:id="@+id/txtEstadoMisVentas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="Consultando ventas..."
+                    android:textSize="12sp"
+                    android:textColor="@color/cafe_texto_secundario" />
+
+            </LinearLayout>
+
+            <!-- BOTON CONSERVADO PARA KOTLIN -->
+            <Button
+                android:id="@+id/btnRegresarMisVentas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Regresar"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- BARRA INFERIOR DEL CAJERO -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@drawable/bg_barra_inferior"
+        android:elevation="8dp">
+
+        <!-- RESUMEN -->
+        <TextView
+            android:id="@+id/navMisVentasResumen"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_resumen"
+            android:drawableTint="@color/cafe_marron"
+            android:drawablePadding="6dp"
+            android:text="Resumen"
+            android:textSize="12sp"
+            android:textColor="@color/cafe_marron"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- PEDIDOS -->
+        <TextView
+            android:id="@+id/navMisVentasPedidos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_lista"
+            android:drawableTint="@color/cafe_marron"
+            android:drawablePadding="6dp"
+            android:text="Pedidos"
+            android:textSize="12sp"
+            android:textColor="@color/cafe_marron"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- MIS VENTAS: ACTIVO -->
+        <TextView
+            android:id="@+id/navMisVentasActual"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_documento"
+            android:drawableTint="@color/cafe_naranja"
+            android:drawablePadding="6dp"
+            android:text="Mis ventas"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/cafe_naranja"
+            android:clickable="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+</LinearLayout>

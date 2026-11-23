@@ -1,5 +1,7 @@
 package com.example.educafe.Adaptador
 
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,82 +9,254 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.educafe.R
 import com.example.educafe.Modelo.dataPedidos
+import java.text.NumberFormat
+import java.util.Locale
 
-// Adaptador para mostrar los pedidos del cajero
-class clsPedidosAdaptador(private var listaPedidos: List<dataPedidos>, private val alSeleccionarPedido: (Int) -> Unit = {}) : RecyclerView.Adapter<clsPedidosAdaptador.VistaPedido>() {
+// Adaptador de pedidos para K2 y A2
+class clsPedidosAdaptador(
+    private var listaPedidos: List<dataPedidos>,
+    private val alSeleccionarPedido: (Int) -> Unit = {}
+) : RecyclerView.Adapter<clsPedidosAdaptador.VistaPedido>() {
 
-    // Elementos visuales de cada pedido
-    class VistaPedido(vista: View) : RecyclerView.ViewHolder(vista) {
+    // Formato de dinero mexicano
+    private val formatoDinero =
+        NumberFormat.getCurrencyInstance(
+            Locale.forLanguageTag("es-MX")
+        )
 
-        val txtFolio: TextView = vista.findViewById(R.id.txtFolio)
-        val txtEstadoPago: TextView = vista.findViewById(R.id.txtEstadoPago)
-        val txtTotal: TextView = vista.findViewById(R.id.txtTotal)
-        val txtInfo: TextView = vista.findViewById(R.id.txtInfo)
+    // Referencias del XML de cada pedido
+    class VistaPedido(vista: View) :
+        RecyclerView.ViewHolder(vista) {
 
-        val txtEstado: TextView = vista.findViewById(R.id.txtEstado)
+        val txtFolio: TextView =
+            vista.findViewById(R.id.txtFolio)
+
+        val txtEstadoPago: TextView =
+            vista.findViewById(R.id.txtEstadoPago)
+
+        val txtTotal: TextView =
+            vista.findViewById(R.id.txtTotal)
+
+        val txtInfo: TextView =
+            vista.findViewById(R.id.txtInfo)
+
+        val txtEstado: TextView =
+            vista.findViewById(R.id.txtEstado)
     }
 
-    // Crear el diseño de cada pedido
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VistaPedido {
-        val vista = LayoutInflater.from(parent.context).inflate(R.layout.item_pedido_personal, parent, false)
+    // Crear cada fila usando el diseño XML
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): VistaPedido {
+
+        val vista = LayoutInflater.from(parent.context)
+            .inflate(
+                R.layout.item_pedido_personal,
+                parent,
+                false
+            )
+
         return VistaPedido(vista)
     }
 
-    // Mostrar la información de cada pedido
-    override fun onBindViewHolder(holder: VistaPedido, position: Int) {
+    // Colocar los datos reales de la API
+    override fun onBindViewHolder(
+        holder: VistaPedido,
+        position: Int
+    ) {
 
-        // Obtener el pedido correspondiente
         val pedido = listaPedidos[position]
 
-        // Mostrar folio del pedido
+        // Folio
         holder.txtFolio.text = pedido.folio
 
-        // Mostrar total del pedido
-        holder.txtTotal.text = String.format(java.util.Locale("es", "MX"),
-            "$%.2f", pedido.total)
+        // Total del pedido
+        holder.txtTotal.text =
+            formatoDinero.format(pedido.total)
 
-        // Obtener la hora, evitando errores si la fecha viene incompleta
-        val hora = if (pedido.fecha.length >= 16) {
-            pedido.fecha.substring(11, 16)
-        } else {
-            pedido.fecha
+        // Obtener la hora de la fecha recibida
+        val hora = Regex(
+            "\\b\\d{2}:\\d{2}\\b"
+        ).find(pedido.fecha)?.value.orEmpty()
+
+        // Código de recogida, cliente y hora
+        val informacion = listOf(
+            pedido.codigo_recogida,
+            pedido.cliente,
+            hora
+        ).filter {
+            it.isNotBlank()
+        }.joinToString(" · ")
+
+        holder.txtInfo.text = informacion
+
+        // ESTADO DEL PAGO
+        when (
+            pedido.estado_pago.trim()
+                .lowercase(Locale.ROOT)
+        ) {
+
+            "por_cobrar" -> {
+
+                holder.txtEstadoPago.text =
+                    "Por cobrar"
+
+                aplicarEtiqueta(
+                    holder.txtEstadoPago,
+                    "#FFF1CB",
+                    "#946E22"
+                )
+            }
+
+            "pagado" -> {
+
+                holder.txtEstadoPago.text =
+                    "Pagado"
+
+                aplicarEtiqueta(
+                    holder.txtEstadoPago,
+                    "#D9F1E9",
+                    "#287260"
+                )
+            }
+
+            "sin_cobro" -> {
+
+                holder.txtEstadoPago.text =
+                    "Sin cobro"
+
+                aplicarEtiqueta(
+                    holder.txtEstadoPago,
+                    "#EFEAE3",
+                    "#75685E"
+                )
+            }
+
+            else -> {
+
+                holder.txtEstadoPago.text =
+                    pedido.estado_pago
+
+                aplicarEtiqueta(
+                    holder.txtEstadoPago,
+                    "#EFEAE3",
+                    "#75685E"
+                )
+            }
         }
 
-        // Mostrar código, cliente y hora
-        holder.txtInfo.text = "${pedido.codigo_recogida} · ${pedido.cliente} · $hora"
+        // ESTADO DEL PEDIDO
+        when (
+            pedido.estado.trim()
+                .lowercase(Locale.ROOT)
+        ) {
 
-        // Mostrar estado del pago
-        holder.txtEstadoPago.text = when (pedido.estado_pago) {
-            "por_cobrar" -> "Por cobrar"
-            "pagado" -> "Pagado"
-            "sin_cobro" -> "Sin cobro"
-            else -> pedido.estado_pago
+            "pendiente" -> {
+
+                holder.txtEstado.text = "Pendiente"
+
+                aplicarEtiqueta(
+                    holder.txtEstado,
+                    "#FFE7D5",
+                    "#C35B11"
+                )
+            }
+
+            "listo" -> {
+
+                holder.txtEstado.text = "Listo"
+
+                aplicarEtiqueta(
+                    holder.txtEstado,
+                    "#E4F2DD",
+                    "#5F8B43"
+                )
+            }
+
+            "entregado" -> {
+
+                holder.txtEstado.text = "Entregado"
+
+                aplicarEtiqueta(
+                    holder.txtEstado,
+                    "#F3EAE1",
+                    "#77675A"
+                )
+            }
+
+            "cancelado" -> {
+
+                holder.txtEstado.text = "Cancelado"
+
+                aplicarEtiqueta(
+                    holder.txtEstado,
+                    "#FBE2DF",
+                    "#B24C43"
+                )
+            }
+
+            else -> {
+
+                holder.txtEstado.text = pedido.estado
+
+                aplicarEtiqueta(
+                    holder.txtEstado,
+                    "#EFEAE3",
+                    "#75685E"
+                )
+            }
         }
 
-        // Mostrar estado del pedido
-        holder.txtEstado.text = when (pedido.estado) {
-            "pendiente" -> "Pendiente"
-            "listo" -> "Listo"
-            "entregado" -> "Entregado"
-            "cancelado" -> "Cancelado"
-            else -> pedido.estado
-        }
-
-        // Detectar cuando el cajero selecciona un pedido
+        // Abrir K3 al tocar el pedido
         holder.itemView.setOnClickListener {
-            // Enviar el ID del pedido seleccionado
-            alSeleccionarPedido(pedido.id_pedido)
+
+            alSeleccionarPedido(
+                pedido.id_pedido
+            )
         }
     }
 
-    // Obtener la cantidad de pedidos
+    // Dar forma redondeada a las etiquetas
+    private fun aplicarEtiqueta(
+        texto: TextView,
+        colorFondo: String,
+        colorTexto: String
+    ) {
+
+        val radio =
+            14f * texto.resources.displayMetrics.density
+
+        val fondo = GradientDrawable().apply {
+
+            shape = GradientDrawable.RECTANGLE
+
+            cornerRadius = radio
+
+            setColor(
+                Color.parseColor(colorFondo)
+            )
+        }
+
+        texto.background = fondo
+
+        texto.setTextColor(
+            Color.parseColor(colorTexto)
+        )
+    }
+
+    // Cantidad de pedidos
     override fun getItemCount(): Int {
         return listaPedidos.size
     }
 
-    // Actualizar la lista cuando llegan pedidos de la API
-    fun actualizarPedidos(nuevosPedidos: List<dataPedidos>) {
+    // Actualizar datos al recibir respuesta de API
+    fun actualizarPedidos(
+        nuevosPedidos: List<dataPedidos>
+    ) {
+
         listaPedidos = nuevosPedidos
+
         notifyDataSetChanged()
     }
 }

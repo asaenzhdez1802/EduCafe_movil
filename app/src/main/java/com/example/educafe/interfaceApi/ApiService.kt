@@ -19,8 +19,10 @@ import com.example.educafe.Modelo.clsRegistroSolicitud
 import com.example.educafe.Modelo.clsRegistroRespuesta
 import com.example.educafe.Modelo.clsPerfilModelo
 import com.example.educafe.Modelo.clsRecompensasModelo
+import com.example.educafe.Modelo.dataResumenCajero
 import com.example.educafe.Modelo.clsInformacionModelo
-
+import com.example.educafe.Modelo.dataMisVentasCajero
+import com.example.educafe.Modelo.dataStockAdmin
 import kotlinx.serialization.json.JsonObject
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -99,6 +101,10 @@ interface ApiService {
         @Body solicitud: clsRegistroSolicitud
     ): RespuestaApi<clsRegistroRespuesta>
 
+    @GET("resumen_cajero.php")
+    suspend fun obtenerResumenCajero():
+            RespuestaApi<dataResumenCajero>
+
     // Consultar perfil
     @GET("obtener_perfil.php")
     suspend fun obtenerPerfil():
@@ -114,10 +120,17 @@ interface ApiService {
     suspend fun obtenerInformacion():
             RespuestaApi<clsInformacionModelo>
 
-    // K3: Actualizar estado del pedido
-    // Permite marcar como listo o entregado
     @POST("actualizar_pedido.php")
     suspend fun actualizarPedido(
         @Body solicitud: dataActualizarPedido
     ): RespuestaApi<dataPedidoActualizado>
+
+    @GET("obtener_stock.php")
+    suspend fun obtenerStock():
+            RespuestaApi<List<dataStockAdmin>>
+
+    @GET("obtener_mis_ventas.php")
+    suspend fun obtenerMisVentas(
+        @Query("fecha") fecha: String? = null
+    ): RespuestaApi<dataMisVentasCajero>
 }

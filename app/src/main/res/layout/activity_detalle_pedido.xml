@@ -1,237 +1,352 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFF8F0">
+    android:background="@color/cafe_crema">
 
+    <!-- CONTENIDO PRINCIPAL -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="28dp">
 
             <!-- ENCABEZADO -->
-            <Button
-                android:id="@+id/btnVolverDetalle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Volver"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#746255"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Detalle del pedido"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="#503627"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="16dp"/>
-
-            <!-- INFORMACION GENERAL -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:background="#FFFFFF"
-                android:layout_marginBottom="14dp">
+                android:layout_marginBottom="18dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
+                <!-- BOTON REGRESAR -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnVolverDetalle"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="10dp"
+                    android:text=""
+                    android:backgroundTint="@color/cafe_blanco"
+                    app:icon="@drawable/ic_atras"
+                    app:iconTint="@color/cafe_marron"
+                    app:iconPadding="0dp"
+                    app:cornerRadius="24dp"
+                    app:strokeColor="#E6DED3"
+                    app:strokeWidth="1dp" />
+
+                <!-- FOLIO REAL DEL PEDIDO -->
                 <TextView
                     android:id="@+id/txtFolioDetalle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="14dp"
+                    android:text="Pedido"
+                    android:textColor="@color/cafe_marron"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
+
+            </LinearLayout>
+
+            <!-- ESTADO DEL PEDIDO -->
+            <TextView
+                android:id="@+id/txtEstadoDetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="22dp"
+                android:gravity="center"
+                android:text="Consultando pedido..."
+                android:textColor="@color/cafe_naranja"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <!-- AVISO NARANJA -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="22dp"
+                android:padding="15dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_aviso_naranja">
+
+                <!-- ICONO CORREGIDO -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="12dp"
+                    app:srcCompat="@drawable/ic_alerta"
+                    app:tint="@color/cafe_naranja"
+                    android:contentDescription="Aviso importante" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Prepara el pedido y márcalo como listo. El cobro se realiza en el punto de venta web utilizando el código de recogida."
+                    android:textColor="@color/cafe_marron"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- TARJETA CODIGO DE RECOGIDA -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="26dp"
+                android:paddingBottom="26dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_tarjeta"
+                android:elevation="2dp">
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Folio: --"
-                    android:textSize="19sp"
-                    android:textStyle="bold"
-                    android:textColor="#503627"/>
+                    android:gravity="center"
+                    android:text="Código de recogida del cliente"
+                    android:textColor="@color/cafe_texto_secundario"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/txtCodigoRecogidaDetalle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Código de recogida: --"
-                    android:textSize="16sp"
-                    android:textColor="#B94D2D"
-                    android:layout_marginTop="12dp"/>
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="---"
+                    android:textColor="@color/cafe_marron"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.10"
+                    android:maxLines="1"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="19sp"
+                    android:autoSizeMaxTextSize="32sp" />
+
+            </LinearLayout>
+
+            <!-- INFORMACION DEL CLIENTE -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:padding="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_etiqueta_verde">
+
+                <TextView
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:text="●"
+                    android:textColor="#668F49"
+                    android:textSize="18sp"
+                    android:gravity="center" />
 
                 <TextView
                     android:id="@+id/txtClienteDetalle"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Cliente: --"
-                    android:textSize="15sp"
-                    android:textColor="#503627"
-                    android:layout_marginTop="10dp"/>
+                    android:textColor="@color/cafe_marron"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <!-- PRODUCTOS DEL PEDIDO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:background="@drawable/bg_etiqueta_verde">
 
                 <TextView
-                    android:id="@+id/txtFechaDetalle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Fecha: --"
-                    android:textSize="14sp"
-                    android:textColor="#777777"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_marginBottom="6dp"
+                    android:text="Productos del pedido"
+                    android:textColor="#668F49"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txtEstadoDetalle"
+                <LinearLayout
+                    android:id="@+id/contenedorProductos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Estado: --"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#B94D2D"
-                    android:layout_marginTop="12dp"/>
+                    android:orientation="vertical" />
+
+            </LinearLayout>
+
+            <!-- INFORMACION DEL COBRO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:background="@drawable/bg_etiqueta_verde">
 
                 <TextView
                     android:id="@+id/txtEstadoPagoDetalle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Estado del pago: --"
-                    android:textSize="15sp"
-                    android:textColor="#503627"
-                    android:layout_marginTop="8dp"/>
-
-            </LinearLayout>
-
-            <!-- PRODUCTOS DEL PEDIDO -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Productos del pedido"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#503627"
-                android:layout_marginBottom="10dp"/>
-
-            <LinearLayout
-                android:id="@+id/contenedorProductos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp"
-                android:background="#FFFFFF"
-                android:layout_marginBottom="14dp">
+                    android:textColor="@color/cafe_marron"
+                    android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/txtSinProductos"
+                    android:id="@+id/txtTotalDetalle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Consultando productos..."
-                    android:textSize="14sp"
-                    android:textColor="#777777"
-                    android:gravity="center"
-                    android:padding="12dp"/>
+                    android:layout_marginTop="7dp"
+                    android:text="--"
+                    android:textColor="@color/cafe_marron"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
-            <!-- NOTAS -->
+            <!-- FECHA DEL PEDIDO -->
             <TextView
+                android:id="@+id/txtFechaDetalle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Notas del pedido"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#503627"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="5dp"
+                android:text="Fecha: --"
+                android:textColor="@color/cafe_texto_secundario"
+                android:textSize="12sp" />
 
+            <!-- NOTAS DEL PEDIDO -->
             <TextView
                 android:id="@+id/txtNotasDetalle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:text="Sin observaciones"
-                android:textSize="14sp"
-                android:textColor="#746255"
-                android:padding="16dp"
-                android:background="#FFFFFF"
-                android:layout_marginBottom="14dp"/>
+                android:textColor="@color/cafe_texto_secundario"
+                android:textSize="12sp" />
 
-            <!-- TOTAL -->
-            <LinearLayout
+            <!-- BOTON PEDIDO LISTO -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMarcarListo"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:text="Pedido listo"
+                android:textAllCaps="false"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="@color/cafe_blanco"
+                android:backgroundTint="@color/cafe_naranja"
+                app:cornerRadius="16dp" />
+
+            <!-- BOTON OCULTO CONSERVADO PARA KOTLIN -->
+            <Button
+                android:id="@+id/btnEntregarPedido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="16dp"
-                android:background="#FFFFFF"
-                android:layout_marginBottom="16dp">
+                android:text="Entregar pedido"
+                android:visibility="gone" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Total del pedido"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="#503627"/>
-
-                <TextView
-                    android:id="@+id/txtTotalDetalle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$ --"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:textColor="#B94D2D"/>
-
-            </LinearLayout>
-
-            <!-- MENSAJES DEL SERVIDOR -->
+            <!-- MENSAJES DE LA API -->
             <TextView
                 android:id="@+id/txtMensajeDetalle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Esperando información del pedido..."
-                android:textSize="13sp"
-                android:textColor="#777777"
+                android:layout_marginTop="12dp"
                 android:gravity="center"
-                android:layout_marginBottom="12dp"/>
+                android:text="Consultando pedido..."
+                android:textColor="@color/cafe_texto_secundario"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
     </ScrollView>
 
-    <!-- ACCIONES DEL CAJERO -->
+    <!-- BARRA INFERIOR DEL CAJERO -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="84dp"
         android:orientation="horizontal"
-        android:padding="12dp"
-        android:background="#FFFFFF">
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@drawable/bg_barra_inferior"
+        android:elevation="8dp">
 
-        <Button
-            android:id="@+id/btnMarcarListo"
+        <!-- RESUMEN -->
+        <TextView
+            android:id="@+id/navDetalleResumen"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginEnd="6dp"
-            android:text="Marcar listo"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#746255"
-            android:enabled="false"/>
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_resumen"
+            android:drawableTint="@color/cafe_marron"
+            android:drawablePadding="6dp"
+            android:text="Resumen"
+            android:textColor="@color/cafe_marron"
+            android:textSize="12sp"
+            android:clickable="true"
+            android:focusable="true" />
 
-        <Button
-            android:id="@+id/btnEntregarPedido"
+        <!-- PEDIDOS SELECCIONADO -->
+        <TextView
+            android:id="@+id/navDetallePedidos"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginStart="6dp"
-            android:text="Entregar"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#B94D2D"
-            android:enabled="false"/>
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_lista"
+            android:drawableTint="@color/cafe_naranja"
+            android:drawablePadding="6dp"
+            android:text="Pedidos"
+            android:textColor="@color/cafe_naranja"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!-- MIS VENTAS -->
+        <TextView
+            android:id="@+id/navDetalleMisVentas"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:drawableTop="@drawable/ic_documento"
+            android:drawableTint="@color/cafe_marron"
+            android:drawablePadding="6dp"
+            android:text="Mis ventas"
+            android:textColor="@color/cafe_marron"
+            android:textSize="12sp"
+            android:clickable="true"
+            android:focusable="true" />
 
     </LinearLayout>
 

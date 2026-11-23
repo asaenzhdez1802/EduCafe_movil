@@ -147,10 +147,9 @@
             app:icon="@drawable/ic_ventas" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/navPedidosAdmin"
             style="@style/EduCafe.NavReporte"
             android:text="Pedidos"
-            android:enabled="false"
-            android:alpha="0.45"
             app:icon="@drawable/ic_documento" />
 
         <com.google.android.material.button.MaterialButton
@@ -160,10 +159,9 @@
             app:icon="@drawable/ic_productos" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/navStockAdmin"
             style="@style/EduCafe.NavReporte"
             android:text="Stock"
-            android:enabled="false"
-            android:alpha="0.45"
             app:icon="@drawable/ic_stock" />
 
     </LinearLayout>
