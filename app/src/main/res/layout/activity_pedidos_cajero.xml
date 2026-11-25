@@ -323,15 +323,15 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:drawableTop="@drawable/ic_ticket"
-            android:drawableTint="@color/cafe_marron"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_documento"
             android:drawablePadding="6dp"
+            android:drawableTint="@color/cafe_marron"
+            android:focusable="true"
+            android:gravity="center"
             android:text="Mis ventas"
             android:textColor="@color/cafe_marron"
-            android:textSize="12sp"
-            android:clickable="true"
-            android:focusable="true" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 

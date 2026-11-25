@@ -36,33 +36,19 @@ class MisVentasCajeroActivity :
 
     private var fechaSeleccionada: String? = null
 
-    private val formatoDinero =
-        NumberFormat.getCurrencyInstance(
-            Locale.forLanguageTag("es-MX")
-        )
-
+    private val formatoDinero = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("es-MX"))
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // Validar sesión de cajero
-        if (!SesionUsuario.haySesion() ||
-            SesionUsuario.obtenerRol()
-                ?.equals("cajero", ignoreCase = true) != true
-        ) {
-            Toast.makeText(
-                this,
-                "Acceso exclusivo para cajeros",
-                Toast.LENGTH_LONG
-            ).show()
-
+        if (!SesionUsuario.haySesion() || SesionUsuario.obtenerRol()?.equals("cajero", ignoreCase = true) != true) {
+            Toast.makeText(this, "Acceso exclusivo para cajeros", Toast.LENGTH_LONG).show()
             finish()
             return
         }
 
         setContentView(R.layout.activity_mis_ventas_cajero)
 
-        fechaSeleccionada =
-            savedInstanceState?.getString("fecha_seleccionada")
+        fechaSeleccionada = savedInstanceState?.getString("fecha_seleccionada")
 
         // Elementos del XML
         txtEstado = findViewById(R.id.txtEstadoMisVentas)
@@ -71,11 +57,8 @@ class MisVentasCajeroActivity :
         txtFecha = findViewById(R.id.txtFechaMisVentas)
 
         actualizarTituloFecha()
-
         // Configurar historial
-        val recycler =
-            findViewById<RecyclerView>(R.id.rvMisVentas)
-
+        val recycler = findViewById<RecyclerView>(R.id.rvMisVentas)
         recycler.layoutManager = LinearLayoutManager(this)
 
         adaptador = clsMisVentasCajeroAdaptador { venta ->
@@ -85,31 +68,23 @@ class MisVentasCajeroActivity :
         recycler.adapter = adaptador
 
         // Presentador MVP
-        presentador = clsMisVentasCajeroPresentador(
-            this,
-            lifecycleScope
-        )
-
+        presentador = clsMisVentasCajeroPresentador(this, lifecycleScope)
         // Consultar ventas de hoy
-        findViewById<Button>(R.id.btnHoyVentas)
-            .setOnClickListener {
-
+        findViewById<Button>(R.id.btnHoyVentas).setOnClickListener {
                 fechaSeleccionada = null
                 actualizarTituloFecha()
                 presentador.cargarVentas()
             }
 
         // Filtrar por fecha
-        findViewById<Button>(R.id.btnElegirFechaVentas)
-            .setOnClickListener {
-                elegirFecha()
-            }
+        findViewById<Button>(R.id.btnElegirFechaVentas).setOnClickListener {
+            elegirFecha()
+        }
 
         // Botón de regresar conservado
-        findViewById<Button>(R.id.btnRegresarMisVentas)
-            .setOnClickListener {
+        findViewById<Button>(R.id.btnRegresarMisVentas).setOnClickListener {
                 finish()
-            }
+        }
 
         configurarNavegacion()
     }
@@ -125,55 +100,32 @@ class MisVentasCajeroActivity :
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-
-        outState.putString(
-            "fecha_seleccionada",
-            fechaSeleccionada
-        )
+        outState.putString("fecha_seleccionada", fechaSeleccionada)
     }
 
     // Barra inferior con íconos originales
     private fun configurarNavegacion() {
 
         // K1 - Resumen
-        findViewById<TextView>(
-            R.id.navMisVentasResumen
-        ).setOnClickListener {
-
-            abrirPantalla(
-                ResumenCajeroActivity::class.java
-            )
+        findViewById<TextView>(R.id.navMisVentasResumen).setOnClickListener {
+            abrirPantalla(ResumenCajeroActivity::class.java)
         }
 
         // K2 - Pedidos
-        findViewById<TextView>(
-            R.id.navMisVentasPedidos
-        ).setOnClickListener {
-
-            abrirPantalla(
-                PedidosCajeroActivity::class.java
-            )
+        findViewById<TextView>(R.id.navMisVentasPedidos).setOnClickListener {
+            abrirPantalla(PedidosCajeroActivity::class.java)
         }
 
         // K4 - Actualizar Mis ventas
-        findViewById<TextView>(
-            R.id.navMisVentasActual
-        ).setOnClickListener {
-
-            presentador.cargarVentas(
-                fechaSeleccionada
-            )
+        findViewById<TextView>(R.id.navMisVentasActual).setOnClickListener {
+            presentador.cargarVentas(fechaSeleccionada)
         }
     }
 
     private fun abrirPantalla(destino: Class<*>) {
 
         val intent = Intent(this, destino).apply {
-
-            addFlags(
-                Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                        Intent.FLAG_ACTIVITY_SINGLE_TOP
-            )
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         }
 
         startActivity(intent)
@@ -201,35 +153,19 @@ class MisVentasCajeroActivity :
 
                 val partes = fecha.split("-")
 
-                calendario.set(
-                    partes[0].toInt(),
-                    partes[1].toInt() - 1,
-                    partes[2].toInt()
-                )
+                calendario.set(partes[0].toInt(), partes[1].toInt() - 1, partes[2].toInt())
 
             } catch (_: Exception) {
-                calendario.timeInMillis =
-                    System.currentTimeMillis()
+                calendario.timeInMillis = System.currentTimeMillis()
             }
         }
 
-        DatePickerDialog(
-            this,
-            { _, anio, mes, dia ->
-
-                fechaSeleccionada = String.format(
-                    Locale.US,
-                    "%04d-%02d-%02d",
-                    anio,
-                    mes + 1,
-                    dia
-                )
+        DatePickerDialog(this, { _, anio, mes, dia ->
+                fechaSeleccionada = String.format(Locale.US, "%04d-%02d-%02d", anio, mes + 1, dia)
 
                 actualizarTituloFecha()
 
-                presentador.cargarVentas(
-                    fechaSeleccionada
-                )
+                presentador.cargarVentas(fechaSeleccionada)
             },
             calendario.get(Calendar.YEAR),
             calendario.get(Calendar.MONTH),
@@ -253,8 +189,7 @@ class MisVentasCajeroActivity :
             "${datos.ventas.size} ventas registradas"
 
         // Total recibido de la API
-        txtTotal.text =
-            "${formatoDinero.format(datos.total_cobrado)} MXN"
+        txtTotal.text = "${formatoDinero.format(datos.total_cobrado)} MXN"
 
         txtEstado.text =
             if (datos.ventas.isEmpty()) {
@@ -271,36 +206,20 @@ class MisVentasCajeroActivity :
 
         txtCantidad.text = "0 ventas registradas"
 
-        txtTotal.text =
-            "${formatoDinero.format(0.0)} MXN"
+        txtTotal.text = "${formatoDinero.format(0.0)} MXN"
 
         txtEstado.text = mensaje
 
-        Toast.makeText(
-            this,
-            mensaje,
-            Toast.LENGTH_LONG
-        ).show()
+        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }
 
     // Sesión vencida
     override fun solicitarLogin() {
 
-        Toast.makeText(
-            this,
-            "Tu sesión venció. Inicia sesión nuevamente",
-            Toast.LENGTH_LONG
-        ).show()
+        Toast.makeText(this, "Tu sesión venció. Inicia sesión nuevamente", Toast.LENGTH_LONG).show()
 
-        val intent = Intent(
-            this,
-            clsLoginVista::class.java
-        ).apply {
-
-            addFlags(
-                Intent.FLAG_ACTIVITY_NEW_TASK or
-                        Intent.FLAG_ACTIVITY_CLEAR_TASK
-            )
+        val intent = Intent(this, clsLoginVista::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
 
         startActivity(intent)
@@ -312,18 +231,11 @@ class MisVentasCajeroActivity :
         venta: dataVentaCajero
     ) {
 
-        val cliente =
-            venta.cliente?.takeIf {
-                it.isNotBlank()
-            } ?: "Sin cuenta"
+        val cliente = venta.cliente?.takeIf { it.isNotBlank() } ?: "Sin cuenta"
 
-        val folioPedido =
-            venta.folio_pedido?.takeIf {
-                it.isNotBlank()
-            } ?: "Sin pedido asociado"
+        val folioPedido = venta.folio_pedido?.takeIf { it.isNotBlank() } ?: "Sin pedido asociado"
 
         val mensaje = buildString {
-
             appendLine("Folio: ${venta.folio}")
             appendLine("Fecha: ${venta.fecha}")
             appendLine("Cliente: $cliente")
@@ -331,14 +243,8 @@ class MisVentasCajeroActivity :
             appendLine("Pedido: $folioPedido")
             appendLine("Estado: ${venta.estado}")
             appendLine()
-
-            appendLine(
-                "Total: ${formatoDinero.format(venta.total)}"
-            )
-
-            appendLine(
-                "Puntos ganados: ${venta.puntos_ganados}"
-            )
+            appendLine("Total: ${formatoDinero.format(venta.total)}")
+            appendLine("Puntos ganados: ${venta.puntos_ganados}")
         }
 
         AlertDialog.Builder(this)
