@@ -17,7 +17,6 @@ import com.example.educafe.Presentador.clsDetallePedidoPresentador
 import java.text.NumberFormat
 import java.util.Locale
 
-// K3 - Detalle del pedido del cajero
 class DetallePedidoActivity :
     AppCompatActivity(), VistaDetallePedido {
 
@@ -30,25 +29,15 @@ class DetallePedidoActivity :
     private var idPedido = -1
     private var estadoActual = ""
 
-    private val formatoDinero =
-        NumberFormat.getCurrencyInstance(
-            Locale.forLanguageTag("es-MX")
-        )
+    private val formatoDinero = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("es-MX"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Comprobar sesión
-        if (!SesionUsuario.haySesion() ||
-            SesionUsuario.obtenerRol()
-                ?.equals("cajero", ignoreCase = true) != true
-        ) {
-            Toast.makeText(
-                this,
-                "Acceso exclusivo para cajeros",
-                Toast.LENGTH_LONG
-            ).show()
-
+        if (!SesionUsuario.haySesion() || SesionUsuario.obtenerRol()
+            ?.equals("cajero", ignoreCase = true) != true) {
+            Toast.makeText(this, "Acceso exclusivo para cajeros", Toast.LENGTH_LONG).show()
             finish()
             return
         }
@@ -59,34 +48,19 @@ class DetallePedidoActivity :
         idPedido = intent.getIntExtra("id_pedido", -1)
 
         // Conectar elementos XML
-        txtMensajeDetalle =
-            findViewById(R.id.txtMensajeDetalle)
+        txtMensajeDetalle = findViewById(R.id.txtMensajeDetalle)
 
-        contenedorProductos =
-            findViewById(R.id.contenedorProductos)
+        contenedorProductos = findViewById(R.id.contenedorProductos)
 
-        btnMarcarListo =
-            findViewById(R.id.btnMarcarListo)
+        btnMarcarListo = findViewById(R.id.btnMarcarListo)
 
         // No permitir actualizar antes de consultar
         btnMarcarListo.isEnabled = false
 
-        // El pago y la entrega se administran
-        // según las reglas del sistema
-        findViewById<Button>(
-            R.id.btnEntregarPedido
-        ).visibility = android.view.View.GONE
-
-        // Crear presentador MVP
-        presentador = clsDetallePedidoPresentador(
-            this,
-            lifecycleScope
-        )
-
+        findViewById<Button>(R.id.btnEntregarPedido).visibility = android.view.View.GONE
+        presentador = clsDetallePedidoPresentador(this, lifecycleScope)
         // Botón regresar
-        findViewById<Button>(
-            R.id.btnVolverDetalle
-        ).setOnClickListener {
+        findViewById<Button>(R.id.btnVolverDetalle).setOnClickListener {
             finish()
         }
 
@@ -101,33 +75,18 @@ class DetallePedidoActivity :
         // NAVEGACIÓN INFERIOR
 
         // K1 - Resumen
-        findViewById<TextView>(
-            R.id.navDetalleResumen
-        ).setOnClickListener {
-
-            abrirPantalla(
-                ResumenCajeroActivity::class.java
-            )
+        findViewById<TextView>(R.id.navDetalleResumen).setOnClickListener {
+            abrirPantalla(ResumenCajeroActivity::class.java)
         }
 
         // K2 - Pedidos
-        findViewById<TextView>(
-            R.id.navDetallePedidos
-        ).setOnClickListener {
-
-            abrirPantalla(
-                PedidosCajeroActivity::class.java
-            )
+        findViewById<TextView>(R.id.navDetallePedidos).setOnClickListener {
+            abrirPantalla(PedidosCajeroActivity::class.java)
         }
 
         // K4 - Mis ventas
-        findViewById<TextView>(
-            R.id.navDetalleMisVentas
-        ).setOnClickListener {
-
-            abrirPantalla(
-                MisVentasCajeroActivity::class.java
-            )
+        findViewById<TextView>(R.id.navDetalleMisVentas).setOnClickListener {
+            abrirPantalla(MisVentasCajeroActivity::class.java)
         }
 
         // Consultar datos reales del pedido
@@ -139,16 +98,9 @@ class DetallePedidoActivity :
     }
 
     // Navegar sin acumular pantallas duplicadas
-    private fun abrirPantalla(
-        destino: Class<*>
-    ) {
-
+    private fun abrirPantalla(destino: Class<*>) {
         val intent = Intent(this, destino).apply {
-
-            addFlags(
-                Intent.FLAG_ACTIVITY_CLEAR_TOP or
-                        Intent.FLAG_ACTIVITY_SINGLE_TOP
-            )
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         }
 
         startActivity(intent)
@@ -158,23 +110,15 @@ class DetallePedidoActivity :
     // Mostrar consulta en curso
     override fun mostrarCarga() {
 
-        txtMensajeDetalle.text =
-            "Consultando el detalle del pedido..."
+        txtMensajeDetalle.text = "Consultando el detalle del pedido..."
     }
 
     // Mostrar información recibida de la API
-    override fun mostrarDetallePedido(
-        pedido: dataDetallePedido
-    ) {
-
-        estadoActual =
-            pedido.estado.trim().lowercase(Locale.ROOT)
+    override fun mostrarDetallePedido(pedido: dataDetallePedido) {
+        estadoActual = pedido.estado.trim().lowercase(Locale.ROOT)
 
         // Título como en el mockup
-        findViewById<TextView>(
-            R.id.txtFolioDetalle
-        ).text = "Pedido ${pedido.folio}"
-
+        findViewById<TextView>(R.id.txtFolioDetalle).text = "Pedido ${pedido.folio}"
         // Estado principal
         val tituloEstado = when (estadoActual) {
             "pendiente" -> "Pedido pendiente"
@@ -184,81 +128,49 @@ class DetallePedidoActivity :
             else -> "Pedido ${pedido.estado}"
         }
 
-        findViewById<TextView>(
-            R.id.txtEstadoDetalle
-        ).text = tituloEstado
+        findViewById<TextView>(R.id.txtEstadoDetalle).text = tituloEstado
 
         // Código grande, sin repetir la etiqueta del XML
-        findViewById<TextView>(
-            R.id.txtCodigoRecogidaDetalle
-        ).text = pedido.codigo_recogida
+        findViewById<TextView>(R.id.txtCodigoRecogidaDetalle).text = pedido.codigo_recogida
 
         // Cliente
-        findViewById<TextView>(
-            R.id.txtClienteDetalle
-        ).text = "Cliente: ${pedido.cliente}"
-
+        findViewById<TextView>(R.id.txtClienteDetalle).text = "Cliente: ${pedido.cliente}"
         // Fecha
-        findViewById<TextView>(
-            R.id.txtFechaDetalle
-        ).text = "Fecha: ${pedido.fecha}"
-
+        findViewById<TextView>(R.id.txtFechaDetalle).text = "Fecha: ${pedido.fecha}"
         // Estado del pago
-        val estadoPago = when (
-            pedido.estado_pago.trim().lowercase(Locale.ROOT)
-        ) {
+        val estadoPago = when (pedido.estado_pago.trim().lowercase(Locale.ROOT)) {
             "por_cobrar" -> "Por cobrar"
             "pagado" -> "Pagado"
             "sin_cobro" -> "Sin cobro"
             else -> pedido.estado_pago
         }
 
-        findViewById<TextView>(
-            R.id.txtEstadoPagoDetalle
-        ).text = "Estado del pago: $estadoPago"
-
+        findViewById<TextView>(R.id.txtEstadoPagoDetalle).text = "Estado del pago: $estadoPago"
         // Total real
-        findViewById<TextView>(
-            R.id.txtTotalDetalle
-        ).text = "Total: ${formatoDinero.format(pedido.total)}"
+        findViewById<TextView>(R.id.txtTotalDetalle).text = "Total: ${formatoDinero.format(pedido.total)}"
 
         // Observaciones
-        findViewById<TextView>(
-            R.id.txtNotasDetalle
-        ).text = pedido.notas
+        findViewById<TextView>(R.id.txtNotasDetalle).text = pedido.notas
             ?.takeIf { it.isNotBlank() }
             ?: "Sin observaciones"
-
         // Productos
         mostrarProductos(pedido)
-
         // Solo habilitar si está pendiente
-        btnMarcarListo.isEnabled =
-            estadoActual == "pendiente"
+        btnMarcarListo.isEnabled = estadoActual == "pendiente"
 
-        txtMensajeDetalle.text =
-            "Detalle del pedido cargado correctamente"
+        txtMensajeDetalle.text = "Detalle del pedido cargado correctamente"
     }
 
     // Mostrar lista de productos
-    private fun mostrarProductos(
-        pedido: dataDetallePedido
-    ) {
-
+    private fun mostrarProductos(pedido: dataDetallePedido) {
         contenedorProductos.removeAllViews()
-
         if (pedido.productos.isEmpty()) {
 
             val mensaje = TextView(this).apply {
                 text = "No hay productos registrados"
                 textSize = 14f
 
-                setTextColor(
-                    ContextCompat.getColor(
-                        this@DetallePedidoActivity,
-                        R.color.cafe_texto_secundario
-                    )
-                )
+                setTextColor(ContextCompat.getColor(this@DetallePedidoActivity, R.color.cafe_texto_secundario))
             }
 
             contenedorProductos.addView(mensaje)
@@ -270,36 +182,23 @@ class DetallePedidoActivity :
             // Nombre y cantidad
             val nombre = TextView(this).apply {
 
-                text =
-                    "${producto.cantidad} x ${producto.nombre}"
+                text = "${producto.cantidad} x ${producto.nombre}"
 
                 textSize = 16f
 
-                setTextColor(
-                    ContextCompat.getColor(
-                        this@DetallePedidoActivity,
-                        R.color.cafe_marron
-                    )
-                )
+                setTextColor(ContextCompat.getColor(this@DetallePedidoActivity, R.color.cafe_marron))
 
                 setPadding(0, 12, 0, 4)
             }
 
             // Precio y subtotal
             val precio = TextView(this).apply {
-
-                text =
-                    "Precio: ${formatoDinero.format(producto.precio_unitario)}" +
+                text = "Precio: ${formatoDinero.format(producto.precio_unitario)}" +
                             "  |  Subtotal: ${formatoDinero.format(producto.subtotal)}"
 
                 textSize = 13f
 
-                setTextColor(
-                    ContextCompat.getColor(
-                        this@DetallePedidoActivity,
-                        R.color.cafe_texto_secundario
-                    )
-                )
+                setTextColor(ContextCompat.getColor(this@DetallePedidoActivity, R.color.cafe_texto_secundario))
 
                 setPadding(0, 0, 0, 12)
             }
@@ -314,8 +213,7 @@ class DetallePedidoActivity :
 
         btnMarcarListo.isEnabled = false
 
-        txtMensajeDetalle.text =
-            "Marcando pedido como listo..."
+        txtMensajeDetalle.text = "Marcando pedido como listo..."
     }
 
     // Respuesta correcta del servidor
@@ -325,19 +223,10 @@ class DetallePedidoActivity :
 
         estadoActual = "listo"
 
-        findViewById<TextView>(
-            R.id.txtEstadoDetalle
-        ).text = "Pedido listo"
-
+        findViewById<TextView>(R.id.txtEstadoDetalle).text = "Pedido listo"
         btnMarcarListo.isEnabled = false
-
         txtMensajeDetalle.text = mensaje
-
-        Toast.makeText(
-            this,
-            mensaje,
-            Toast.LENGTH_SHORT
-        ).show()
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
     }
 
     // Habilitar solo pedidos pendientes
@@ -345,8 +234,7 @@ class DetallePedidoActivity :
 
         if (!isFinishing && !isDestroyed) {
 
-            btnMarcarListo.isEnabled =
-                estadoActual == "pendiente"
+            btnMarcarListo.isEnabled = estadoActual == "pendiente"
         }
     }
 
@@ -355,31 +243,15 @@ class DetallePedidoActivity :
 
         txtMensajeDetalle.text = mensaje
 
-        Toast.makeText(
-            this,
-            mensaje,
-            Toast.LENGTH_LONG
-        ).show()
+        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
     }
 
     // Regresar al login cuando expire la sesión
     override fun solicitarLogin() {
 
-        Toast.makeText(
-            this,
-            "Tu sesión venció. Inicia sesión nuevamente",
-            Toast.LENGTH_LONG
-        ).show()
-
-        val intent = Intent(
-            this,
-            clsLoginVista::class.java
-        ).apply {
-
-            addFlags(
-                Intent.FLAG_ACTIVITY_NEW_TASK or
-                        Intent.FLAG_ACTIVITY_CLEAR_TASK
-            )
+        Toast.makeText(this, "Tu sesión venció. Inicia sesión nuevamente", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, clsLoginVista::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
 
         startActivity(intent)
