@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.educafe.Adaptador.clsPedidosAdaptador
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.educafe.R
@@ -21,6 +24,8 @@ class ResumenCajeroActivity :
     AppCompatActivity(), VistaResumenCajero {
 
     private lateinit var presentador: clsResumenCajeroPresentador
+    private lateinit var adaptadorPedidos: clsPedidosAdaptador
+    private lateinit var rvPedidosResumen: RecyclerView
 
     private lateinit var txtEstadoPedidos: TextView
     private lateinit var txtVentasHoy: TextView
@@ -52,6 +57,16 @@ class ResumenCajeroActivity :
 
         // Cargar el diseño
         setContentView(R.layout.activity_resumen_cajero)
+
+        // Configurar la lista de pedidos activos del resumen.
+        rvPedidosResumen = findViewById(R.id.rvPedidosResumen)
+        rvPedidosResumen.layoutManager = LinearLayoutManager(this)
+        rvPedidosResumen.isNestedScrollingEnabled = false
+
+        adaptadorPedidos = clsPedidosAdaptador(emptyList()) { idPedido ->
+            abrirDetallePedido(idPedido)
+        }
+        rvPedidosResumen.adapter = adaptadorPedidos
 
         // Conectar controles con XML
         txtEstadoPedidos =
@@ -125,6 +140,18 @@ class ResumenCajeroActivity :
         )
     }
 
+    // Abrir el detalle del pedido seleccionado desde Resumen.
+    private fun abrirDetallePedido(idPedido: Int) {
+        if (idPedido <= 0) {
+            mostrarAviso("El pedido seleccionado no es válido")
+            return
+        }
+
+        val intent = Intent(this, DetallePedidoActivity::class.java)
+        intent.putExtra("id_pedido", idPedido)
+        startActivity(intent)
+    }
+
     // Avisar que se está consultando el servidor
     override fun mostrarCarga() {
 
@@ -132,35 +159,34 @@ class ResumenCajeroActivity :
             "Consultando información..."
     }
 
-    // Mostrar pedidos generales
+    // Mostrar únicamente pedidos activos: pendientes y listos.
+    // Se excluyen entregados y cancelados.
     override fun mostrarPedidos(
         pedidos: List<dataPedidos>
     ) {
-
-        val pendientes = pedidos.count {
-            it.estado.trim().equals(
-                "pendiente",
-                ignoreCase = true
-            )
+        val pedidosActivos = pedidos.filter { pedido ->
+            val estado = pedido.estado.trim().lowercase(Locale.ROOT)
+            estado == "pendiente" || estado == "listo"
         }
 
-        val listos = pedidos.count {
-            it.estado.trim().equals(
-                "listo",
-                ignoreCase = true
-            )
+        val pendientes = pedidosActivos.count {
+            it.estado.trim().equals("pendiente", ignoreCase = true)
+        }
+
+        val listos = pedidosActivos.count {
+            it.estado.trim().equals("listo", ignoreCase = true)
         }
 
         txtPorPreparar.text = pendientes.toString()
-
         txtPedidosListos.text = listos.toString()
 
-        txtEstadoPedidos.text =
-            if (pedidos.isEmpty()) {
-                "No hay pedidos registrados"
-            } else {
-                "Se encontraron ${pedidos.size} pedidos"
-            }
+        adaptadorPedidos.actualizarPedidos(pedidosActivos)
+
+        txtEstadoPedidos.text = if (pedidosActivos.isEmpty()) {
+            "No hay pedidos activos"
+        } else {
+            "Mostrando ${pedidosActivos.size} pedidos activos"
+        }
     }
 
     // Mostrar estadísticas reales de la API
@@ -187,9 +213,8 @@ class ResumenCajeroActivity :
 
     // Mostrar errores
     override fun mostrarError(mensaje: String) {
-
+        adaptadorPedidos.actualizarPedidos(emptyList())
         txtEstadoPedidos.text = mensaje
-
         mostrarAviso(mensaje)
     }
 

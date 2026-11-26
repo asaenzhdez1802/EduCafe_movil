@@ -12,251 +12,101 @@ import com.example.educafe.Modelo.dataPedidos
 import java.text.NumberFormat
 import java.util.Locale
 
-// Adaptador de pedidos para K2 y A2
+// Adaptador compartido por los módulos de Cajero y Administrador.
 class clsPedidosAdaptador(
     private var listaPedidos: List<dataPedidos>,
     private val alSeleccionarPedido: (Int) -> Unit = {}
 ) : RecyclerView.Adapter<clsPedidosAdaptador.VistaPedido>() {
 
-    // Formato de dinero mexicano
-    private val formatoDinero =
-        NumberFormat.getCurrencyInstance(
-            Locale.forLanguageTag("es-MX")
-        )
+    private val formatoDinero = NumberFormat.getCurrencyInstance(Locale.forLanguageTag("es-MX"))
 
-    // Referencias del XML de cada pedido
-    class VistaPedido(vista: View) :
-        RecyclerView.ViewHolder(vista) {
-
-        val txtFolio: TextView =
-            vista.findViewById(R.id.txtFolio)
-
-        val txtEstadoPago: TextView =
-            vista.findViewById(R.id.txtEstadoPago)
-
-        val txtTotal: TextView =
-            vista.findViewById(R.id.txtTotal)
-
-        val txtInfo: TextView =
-            vista.findViewById(R.id.txtInfo)
-
-        val txtEstado: TextView =
-            vista.findViewById(R.id.txtEstado)
+    // Estilo visual de cada etiqueta.
+    private data class EstiloEtiqueta(val texto: String, val colorFondo: String, val colorTexto: String)
+    // Referencias del XML de cada pedido.
+    class VistaPedido(vista: View) : RecyclerView.ViewHolder(vista) {
+        val txtFolio: TextView = vista.findViewById(R.id.txtFolio)
+        val txtEstadoPago: TextView = vista.findViewById(R.id.txtEstadoPago)
+        val txtTotal: TextView = vista.findViewById(R.id.txtTotal)
+        val txtInfo: TextView = vista.findViewById(R.id.txtInfo)
+        val txtEstado: TextView = vista.findViewById(R.id.txtEstado)
     }
 
-    // Crear cada fila usando el diseño XML
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): VistaPedido {
-
-        val vista = LayoutInflater.from(parent.context)
-            .inflate(
-                R.layout.item_pedido_personal,
-                parent,
-                false
-            )
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VistaPedido {
+        val vista = LayoutInflater.from(parent.context).inflate(R.layout.item_pedido_personal, parent, false)
         return VistaPedido(vista)
     }
 
-    // Colocar los datos reales de la API
-    override fun onBindViewHolder(
-        holder: VistaPedido,
-        position: Int
-    ) {
-
+    override fun onBindViewHolder(holder: VistaPedido, position: Int) {
         val pedido = listaPedidos[position]
 
-        // Folio
         holder.txtFolio.text = pedido.folio
+        holder.txtTotal.text = formatoDinero.format(pedido.total)
 
-        // Total del pedido
-        holder.txtTotal.text =
-            formatoDinero.format(pedido.total)
+        val hora = Regex("\\b\\d{2}:\\d{2}\\b").find(pedido.fecha)?.value.orEmpty()
 
-        // Obtener la hora de la fecha recibida
-        val hora = Regex(
-            "\\b\\d{2}:\\d{2}\\b"
-        ).find(pedido.fecha)?.value.orEmpty()
+        holder.txtInfo.text = listOf(pedido.codigo_recogida, pedido.cliente, hora).filter { it.isNotBlank() }.joinToString(" · ")
 
-        // Código de recogida, cliente y hora
-        val informacion = listOf(
-            pedido.codigo_recogida,
-            pedido.cliente,
-            hora
-        ).filter {
-            it.isNotBlank()
-        }.joinToString(" · ")
+        // ETIQUETA SUPERIOR: clasificación de pago según el estado real
+        // y, cuando está cancelado, según el motivo de cancelación.
+        val estiloPago = obtenerEstiloPago(pedido)
+        aplicarEtiqueta(holder.txtEstadoPago, estiloPago.colorFondo, estiloPago.colorTexto)
+        holder.txtEstadoPago.text = estiloPago.texto
 
-        holder.txtInfo.text = informacion
+        // ETIQUETA INFERIOR: conserva el estado real del pedido.
+        val estiloEstado = obtenerEstiloEstado(pedido.estado)
+        aplicarEtiqueta(holder.txtEstado, estiloEstado.colorFondo, estiloEstado.colorTexto)
+        holder.txtEstado.text = estiloEstado.texto
 
-        // ESTADO DEL PAGO
-        when (
-            pedido.estado_pago.trim()
-                .lowercase(Locale.ROOT)
-        ) {
+        holder.itemView.setOnClickListener { alSeleccionarPedido(pedido.id_pedido) }
+    }
 
-            "por_cobrar" -> {
+    private fun obtenerEstiloPago(pedido: dataPedidos): EstiloEtiqueta {
+        val estado = pedido.estado.trim().lowercase(Locale.ROOT)
+        val motivo = pedido.motivo_cancelacion
+            ?.trim()
+            ?.lowercase(Locale.ROOT)
+        val estadoPago = pedido.estado_pago
+            .trim()
+            .lowercase(Locale.ROOT)
+            .replace(' ', '_')
 
-                holder.txtEstadoPago.text =
-                    "Por cobrar"
-
-                aplicarEtiqueta(
-                    holder.txtEstadoPago,
-                    "#FFF1CB",
-                    "#946E22"
-                )
-            }
-
-            "pagado" -> {
-
-                holder.txtEstadoPago.text =
-                    "Pagado"
-
-                aplicarEtiqueta(
-                    holder.txtEstadoPago,
-                    "#D9F1E9",
-                    "#287260"
-                )
-            }
-
-            "sin_cobro" -> {
-
-                holder.txtEstadoPago.text =
-                    "Sin cobro"
-
-                aplicarEtiqueta(
-                    holder.txtEstadoPago,
-                    "#EFEAE3",
-                    "#75685E"
-                )
-            }
-
-            else -> {
-
-                holder.txtEstadoPago.text =
-                    pedido.estado_pago
-
-                aplicarEtiqueta(
-                    holder.txtEstadoPago,
-                    "#EFEAE3",
-                    "#75685E"
-                )
-            }
-        }
-
-        // ESTADO DEL PEDIDO
-        when (
-            pedido.estado.trim()
-                .lowercase(Locale.ROOT)
-        ) {
-
-            "pendiente" -> {
-
-                holder.txtEstado.text = "Pendiente"
-
-                aplicarEtiqueta(
-                    holder.txtEstado,
-                    "#FFE7D5",
-                    "#C35B11"
-                )
-            }
-
-            "listo" -> {
-
-                holder.txtEstado.text = "Listo"
-
-                aplicarEtiqueta(
-                    holder.txtEstado,
-                    "#E4F2DD",
-                    "#5F8B43"
-                )
-            }
-
-            "entregado" -> {
-
-                holder.txtEstado.text = "Entregado"
-
-                aplicarEtiqueta(
-                    holder.txtEstado,
-                    "#F3EAE1",
-                    "#77675A"
-                )
-            }
-
-            "cancelado" -> {
-
-                holder.txtEstado.text = "Cancelado"
-
-                aplicarEtiqueta(
-                    holder.txtEstado,
-                    "#FBE2DF",
-                    "#B24C43"
-                )
-            }
-
-            else -> {
-
-                holder.txtEstado.text = pedido.estado
-
-                aplicarEtiqueta(
-                    holder.txtEstado,
-                    "#EFEAE3",
-                    "#75685E"
-                )
-            }
-        }
-
-        // Abrir K3 al tocar el pedido
-        holder.itemView.setOnClickListener {
-
-            alSeleccionarPedido(
-                pedido.id_pedido
-            )
+        return when {
+            estado == "pendiente" -> EstiloEtiqueta("No listo", "#FFE7D5", "#C35B11")
+            estado == "listo" -> EstiloEtiqueta("Por cobrar", "#FFF1CB", "#946E22")
+            estado == "entregado" -> EstiloEtiqueta("Pagado", "#D9F1E9", "#287260")
+            estado == "cancelado" && motivo == "vencido" -> EstiloEtiqueta("Sin cobro", "#EFEAE3", "#75685E")
+            estadoPago == "sin_cobro" -> EstiloEtiqueta("Sin cobro", "#EFEAE3", "#75685E")
+            estadoPago == "por_cobrar" -> EstiloEtiqueta("Por cobrar", "#FFF1CB", "#946E22")
+            estadoPago == "pagado" -> EstiloEtiqueta("Pagado", "#D9F1E9", "#287260")
+            else -> EstiloEtiqueta(pedido.estado_pago.ifBlank { "Sin dato" }, "#EFEAE3", "#75685E")
         }
     }
 
-    // Dar forma redondeada a las etiquetas
-    private fun aplicarEtiqueta(
-        texto: TextView,
-        colorFondo: String,
-        colorTexto: String
-    ) {
+    private fun obtenerEstiloEstado(estadoOriginal: String): EstiloEtiqueta {
+        return when (estadoOriginal.trim().lowercase(Locale.ROOT)) {
+            "pendiente" -> EstiloEtiqueta("Pendiente", "#FFE7D5", "#C35B11")
+            "listo" -> EstiloEtiqueta("Listo", "#E4F2DD", "#5F8B43")
+            "entregado" -> EstiloEtiqueta("Entregado", "#F3EAE1", "#77675A")
+            "cancelado" -> EstiloEtiqueta("Cancelado", "#FBE2DF", "#B24C43")
+            else -> EstiloEtiqueta(estadoOriginal, "#EFEAE3", "#75685E")
+        }
+    }
 
-        val radio =
-            14f * texto.resources.displayMetrics.density
-
+    private fun aplicarEtiqueta(texto: TextView, colorFondo: String, colorTexto: String) {
+        val radio = 14f * texto.resources.displayMetrics.density
         val fondo = GradientDrawable().apply {
-
             shape = GradientDrawable.RECTANGLE
-
             cornerRadius = radio
-
-            setColor(
-                Color.parseColor(colorFondo)
-            )
+            setColor(Color.parseColor(colorFondo))
         }
-
         texto.background = fondo
-
-        texto.setTextColor(
-            Color.parseColor(colorTexto)
-        )
+        texto.setTextColor(Color.parseColor(colorTexto))
     }
 
-    // Cantidad de pedidos
-    override fun getItemCount(): Int {
-        return listaPedidos.size
-    }
+    override fun getItemCount(): Int = listaPedidos.size
 
-    // Actualizar datos al recibir respuesta de API
-    fun actualizarPedidos(
-        nuevosPedidos: List<dataPedidos>
-    ) {
-
+    fun actualizarPedidos(nuevosPedidos: List<dataPedidos>) {
         listaPedidos = nuevosPedidos
-
         notifyDataSetChanged()
     }
 }
