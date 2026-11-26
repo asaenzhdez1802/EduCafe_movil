@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -17,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="18dp">
 
             <!-- Encabezado -->
             <LinearLayout
@@ -25,28 +26,40 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="20dp">
 
-                <TextView
-                    android:id="@+id/btnRegresarInformacion"
+                <FrameLayout
                     android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:gravity="center"
-                    android:text="←"
-                    android:textSize="26sp"
-                    android:textColor="#6F4A35"
-                    android:background="@drawable/fondo_campo_login"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="Regresar" />
+                    android:layout_height="48dp">
+
+                    <TextView
+                        android:id="@+id/btnRegresarInformacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/bg_circulo_borde"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="Regresar" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_atras"
+                        app:tint="#633C2D"
+                        android:importantForAccessibility="no"
+                        android:contentDescription="@null" />
+
+                </FrameLayout>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="14dp"
                     android:text="Información"
                     android:textColor="#4E2F1F"
-                    android:textSize="23sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -55,45 +68,47 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="14dp"
                 android:orientation="vertical"
                 android:background="@drawable/fondo_campo_login"
-                android:padding="16dp">
+                android:padding="18dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Misión"
                     android:textColor="#E65A00"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtMisionInformacion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="8dp"
                     android:text="Consultando misión..."
                     android:textColor="#433126"
-                    android:textSize="14sp" />
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="3dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="18dp"
                     android:text="Visión"
                     android:textColor="#E65A00"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtVisionInformacion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="8dp"
                     android:text="Consultando visión..."
                     android:textColor="#433126"
-                    android:textSize="14sp" />
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="3dp" />
 
             </LinearLayout>
 
@@ -101,21 +116,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="80dp"
                 android:layout_marginBottom="12dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:background="@drawable/fondo_campo_login"
-                android:padding="14dp">
+                android:padding="16dp">
 
-                <TextView
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:gravity="center"
-                    android:text="◷"
-                    android:textColor="#E65A00"
-                    android:textSize="25sp"
-                    android:background="#FFE6D5"
-                    android:importantForAccessibility="no" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_icono_suave"
+                    android:backgroundTint="#FFE6D5"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_reloj"
+                    app:tint="#E65A00"
+                    android:importantForAccessibility="no"
+                    android:contentDescription="@null" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -130,7 +148,7 @@
                         android:text="Horario"
                         android:textColor="#4E2F1F"
                         android:textStyle="bold"
-                        android:textSize="15sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txtHorarioInformacion"
@@ -139,7 +157,7 @@
                         android:layout_marginTop="5dp"
                         android:text="Consultando horario..."
                         android:textColor="#8C786B"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -149,21 +167,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="80dp"
                 android:layout_marginBottom="12dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:background="@drawable/fondo_campo_login"
-                android:padding="14dp">
+                android:padding="16dp">
 
-                <TextView
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:gravity="center"
-                    android:text="⌖"
-                    android:textColor="#E65A00"
-                    android:textSize="28sp"
-                    android:background="#FFE6D5"
-                    android:importantForAccessibility="no" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_icono_suave"
+                    android:backgroundTint="#FFE6D5"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_ubicacion"
+                    app:tint="#E65A00"
+                    android:importantForAccessibility="no"
+                    android:contentDescription="@null" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -178,7 +199,7 @@
                         android:text="Ubicación"
                         android:textColor="#4E2F1F"
                         android:textStyle="bold"
-                        android:textSize="15sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txtUbicacionInformacion"
@@ -187,7 +208,7 @@
                         android:layout_marginTop="5dp"
                         android:text="Consultando ubicación..."
                         android:textColor="#8C786B"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -197,21 +218,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="80dp"
                 android:layout_marginBottom="12dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:background="@drawable/fondo_campo_login"
-                android:padding="14dp">
+                android:padding="16dp">
 
-                <TextView
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:gravity="center"
-                    android:text="☎"
-                    android:textColor="#E65A00"
-                    android:textSize="25sp"
-                    android:background="#FFE6D5"
-                    android:importantForAccessibility="no" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_icono_suave"
+                    android:backgroundTint="#FFE6D5"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_telefono"
+                    app:tint="#E65A00"
+                    android:importantForAccessibility="no"
+                    android:contentDescription="@null" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -226,7 +250,7 @@
                         android:text="Contacto"
                         android:textColor="#4E2F1F"
                         android:textStyle="bold"
-                        android:textSize="15sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txtContactoInformacion"
@@ -235,7 +259,7 @@
                         android:layout_marginTop="5dp"
                         android:text="Consultando teléfono..."
                         android:textColor="#8C786B"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -245,21 +269,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="80dp"
                 android:layout_marginBottom="12dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:background="@drawable/fondo_campo_login"
-                android:padding="14dp">
+                android:padding="16dp">
 
-                <TextView
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:gravity="center"
-                    android:text="✉"
-                    android:textColor="#E65A00"
-                    android:textSize="25sp"
-                    android:background="#FFE6D5"
-                    android:importantForAccessibility="no" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_icono_suave"
+                    android:backgroundTint="#FFE6D5"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_correo"
+                    app:tint="#E65A00"
+                    android:importantForAccessibility="no"
+                    android:contentDescription="@null" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -274,7 +301,7 @@
                         android:text="Correo"
                         android:textColor="#4E2F1F"
                         android:textStyle="bold"
-                        android:textSize="15sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txtCorreoInformacion"
@@ -283,7 +310,7 @@
                         android:layout_marginTop="5dp"
                         android:text="Consultando correo..."
                         android:textColor="#8C786B"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -297,7 +324,7 @@
                 android:layout_marginTop="4dp"
                 android:text=""
                 android:textColor="#8C786B"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:visibility="gone" />
 
         </LinearLayout>
@@ -307,64 +334,132 @@
     <!-- Navegación inferior -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="76dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:background="#FFFFFF"
-        android:padding="6dp">
+        android:elevation="6dp">
 
-        <TextView
-            android:id="@+id/navInicioInformacion"
+        <!-- Inicio -->
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="⌂&#10;Inicio"
-            android:textColor="#6F4A35"
-            android:textSize="13sp"
-            android:clickable="true"
-            android:focusable="true"
-            android:contentDescription="Ir a inicio" />
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/navMenuInformacion"
+            <TextView
+                android:id="@+id/navInicioInformacion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center_horizontal"
+                android:paddingBottom="12dp"
+                android:text="Inicio"
+                android:textColor="#633C2D"
+                android:textSize="12sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="Ir a inicio" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_inicio_nav"
+                app:tint="#633C2D"
+                android:contentDescription="@null" />
+
+        </FrameLayout>
+
+        <!-- Menú -->
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="⌕&#10;Menú"
-            android:textColor="#6F4A35"
-            android:textSize="13sp"
-            android:clickable="true"
-            android:focusable="true"
-            android:contentDescription="Ir al menú" />
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/navPedidosInformacion"
+            <TextView
+                android:id="@+id/navMenuInformacion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center_horizontal"
+                android:paddingBottom="12dp"
+                android:text="Menú"
+                android:textColor="#633C2D"
+                android:textSize="12sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="Ir al menú" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_menu"
+                app:tint="#633C2D"
+                android:contentDescription="@null" />
+
+        </FrameLayout>
+
+        <!-- Pedidos -->
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="♧&#10;Pedidos"
-            android:textColor="#6F4A35"
-            android:textSize="13sp"
-            android:clickable="true"
-            android:focusable="true"
-            android:contentDescription="Ir a pedidos" />
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/navMiPanelInformacion"
+            <TextView
+                android:id="@+id/navPedidosInformacion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center_horizontal"
+                android:paddingBottom="12dp"
+                android:text="Pedidos"
+                android:textColor="#633C2D"
+                android:textSize="12sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="Ir a pedidos" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_pedidos"
+                app:tint="#633C2D"
+                android:contentDescription="@null" />
+
+        </FrameLayout>
+
+        <!-- Mi panel seleccionado -->
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="●&#10;Mi panel"
-            android:textColor="#E65A00"
-            android:textStyle="bold"
-            android:textSize="13sp"
-            android:clickable="true"
-            android:focusable="true"
-            android:contentDescription="Ir a mi panel" />
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/navMiPanelInformacion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center_horizontal"
+                android:paddingBottom="12dp"
+                android:text="Mi panel"
+                android:textColor="#E65A00"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="Ir a mi panel" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_panel_seleccionado"
+                app:tint="#E65A00"
+                android:contentDescription="@null" />
+
+        </FrameLayout>
 
     </LinearLayout>
 

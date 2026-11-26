@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF8F1"
@@ -8,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="18dp">
 
@@ -19,54 +20,77 @@
             android:layout_marginTop="20dp"
             android:text="Crear cuenta"
             android:textColor="#633C2D"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
-        <!-- Símbolo de confirmación -->
-        <TextView
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+        <!-- Círculo exterior de confirmación -->
+        <FrameLayout
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="35dp"
-            android:gravity="center"
-            android:text="✓"
-            android:textColor="#588B3B"
-            android:textSize="72sp"
-            android:contentDescription="Cuenta creada correctamente" />
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_circulo"
+            android:backgroundTint="#E2EDD9">
+
+            <!-- Círculo interior verde -->
+            <FrameLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_circulo"
+                android:backgroundTint="#588B3B">
+
+                <!-- Icono original de confirmación -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_check"
+                    app:tint="#FFFFFF"
+                    android:contentDescription="Cuenta creada correctamente" />
+
+            </FrameLayout>
+
+        </FrameLayout>
 
         <!-- Mensaje de éxito -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="24dp"
             android:gravity="center"
             android:text="¡Cuenta creada correctamente!"
             android:textColor="#588B3B"
-            android:textSize="22sp"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
+        <!-- Mensaje secundario -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="18dp"
             android:gravity="center"
             android:text="Ya puedes iniciar sesión."
             android:textColor="#433126"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <!-- Información del cliente -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/fondo_campo_login"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_tarjeta"
+            android:backgroundTint="#FFFFFF"
+            android:elevation="3dp"
             android:orientation="vertical"
-            android:padding="18dp">
+            android:padding="22dp">
 
             <!-- Nombre -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -86,13 +110,15 @@
                     android:textColor="#633C2D"
                     android:textSize="14sp"
                     android:textStyle="bold" />
+
             </LinearLayout>
 
             <!-- Usuario -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -112,13 +138,15 @@
                     android:textColor="#633C2D"
                     android:textSize="14sp"
                     android:textStyle="bold" />
+
             </LinearLayout>
 
             <!-- Celular -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -138,6 +166,7 @@
                     android:textColor="#633C2D"
                     android:textSize="14sp"
                     android:textStyle="bold" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -148,16 +177,18 @@
             android:layout_height="24dp"
             android:layout_weight="1" />
 
-        <!-- Volver al Login -->
+        <!-- Botón iniciar sesión -->
         <Button
             android:id="@+id/btnIrLogin"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:backgroundTint="#E65A00"
             android:text="Iniciar sesión"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
     </LinearLayout>

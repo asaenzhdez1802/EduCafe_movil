@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="12dp"
     android:orientation="vertical"
     android:background="@drawable/fondo_campo_login"
-    android:padding="14dp">
+    android:padding="18dp">
 
     <!-- Nombre e indicadores de recompensa -->
     <LinearLayout
@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:text="Nombre de recompensa"
             android:textColor="#4E2F1F"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <!-- Indicador amarillo -->
@@ -31,12 +31,16 @@
             android:id="@+id/txtEstadoCobro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/fondo_recompensa_cobro"
-            android:padding="6dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
             android:text="Por cobrar"
             android:textColor="#8A5A00"
-            android:textSize="10sp"
+            android:textSize="12sp"
+            android:textStyle="bold"
             android:visibility="gone" />
 
         <!-- Indicador verde -->
@@ -44,12 +48,16 @@
             android:id="@+id/txtDisponibleRecompensa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/fondo_recompensa_disponible"
-            android:padding="6dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
             android:text="Puedes canjearla"
             android:textColor="#477A30"
-            android:textSize="10sp"
+            android:textSize="12sp"
+            android:textStyle="bold"
             android:visibility="gone" />
 
     </LinearLayout>
@@ -59,19 +67,19 @@
         android:id="@+id/txtPuntosNecesarios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="8dp"
         android:text="0 puntos"
         android:textColor="#8C786B"
-        android:textSize="12sp" />
+        android:textSize="14sp" />
 
     <!-- Descripción de la recompensa -->
     <TextView
         android:id="@+id/txtDescripcionRecompensa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="6dp"
         android:text="Pídela en caja al pagar"
         android:textColor="#433126"
-        android:textSize="13sp" />
+        android:textSize="14sp" />
 
 </LinearLayout>
