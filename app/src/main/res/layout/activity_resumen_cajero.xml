@@ -71,7 +71,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCerrarSesion"
                     android:layout_width="wrap_content"
-                    android:layout_height="42dp"
+                    android:layout_height="48dp"
                     android:layout_marginStart="8dp"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
@@ -308,12 +308,14 @@
                     android:textSize="13sp"
                     android:textColor="@color/cafe_texto_secundario" />
 
-                <!-- FILAS DINAMICAS DE PEDIDOS -->
-                <LinearLayout
-                    android:id="@+id/contenedorPedidosResumen"
+                <!-- LISTA DINÁMICA DE PEDIDOS ACTIVOS -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPedidosResumen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" />
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    android:clipToPadding="false" />
 
                 <!-- BOTON CONSERVADO PARA KOTLIN -->
                 <Button
