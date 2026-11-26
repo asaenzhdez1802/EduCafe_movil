@@ -61,7 +61,7 @@ class ProductosAdaptador(
         // Aceptar una ruta relativa o una URL completa de imagen.
         val url = producto.imagen?.takeIf { it.isNotBlank() }?.let {
             runCatching {
-                URI("https://manuelsh.somos4a.org/educafe_api/")
+                URI("https://manuelsh.somos4a.org/educafe_web/educafe_api/")
                     .resolve(it)
                     .toString()
             }.getOrNull()

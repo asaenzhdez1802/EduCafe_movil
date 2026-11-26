@@ -11,7 +11,7 @@ object RetrofitClient {
 
     // 1. Dirección de las API en el hosting.
     private const val BASE_URL =
-        "https://manuelsh.somos4a.org/educafe_api/"
+        "https://manuelsh.somos4a.org/educafe_web/educafe_api/"
 
     // 2. Configuración para leer las respuestas JSON.
     private val json = Json {
