@@ -78,7 +78,7 @@ class ReportesAdminAdaptador :
         if (fila.mostrarImagen) {
             val url = fila.imagen?.takeIf { it.isNotBlank() }?.let {
                 runCatching {
-                    URI("https://manuelsh.somos4a.org/educafe_api/")
+                    URI("https://manuelsh.somos4a.org/educafe_web/educafe_api/")
                         .resolve(it)
                         .toString()
                 }.getOrNull()

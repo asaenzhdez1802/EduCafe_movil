@@ -22,7 +22,7 @@ class CarritoAdaptador(
 
     companion object {
 
-        private const val URL_IMAGENES = "https://manuelsh.somos4a.org/educafe_api/"
+        private const val URL_IMAGENES = "https://manuelsh.somos4a.org/educafe_web/educafe_api/"
     }
 
     class ArticuloViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
