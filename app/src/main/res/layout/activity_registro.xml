@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF8F1"
@@ -8,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="18dp">
 
@@ -19,22 +20,25 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/btnRegresarRegistro"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_circulo_borde"
+                app:drawableStartCompat="@drawable/ic_atras"
+                app:drawableTint="#633C2D"
+                android:padding="12dp"
                 android:gravity="center"
-                android:text="←"
-                android:textSize="26sp"
-                android:textColor="#633C2D"
+                android:clickable="true"
+                android:focusable="true"
                 android:contentDescription="Regresar" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="14dp"
                 android:text="Crear cuenta"
-                android:textSize="22sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#633C2D" />
 
@@ -47,7 +51,7 @@
             android:layout_marginTop="18dp"
             android:text="Completa tus datos para crear tu cuenta de cliente."
             android:textColor="#433126"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <!-- Nombre completo -->
         <TextView
@@ -55,21 +59,43 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Nombre completo"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#633C2D" />
 
-        <EditText
-            android:id="@+id/txtNombreRegistro"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="54dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/fondo_campo_login"
-            android:backgroundTint="@null"
-            android:hint="Nombre y apellidos"
-            android:inputType="textPersonName"
-            android:singleLine="true"
-            android:padding="14dp"
-            android:textColor="#433126" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:srcCompat="@drawable/ic_panel"
+                app:tint="#97877B"
+                android:contentDescription="@null" />
+
+            <EditText
+                android:id="@+id/txtNombreRegistro"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:background="@null"
+                android:hint="Nombre y apellidos"
+                android:inputType="textPersonName"
+                android:singleLine="true"
+                android:padding="0dp"
+                android:textSize="16sp"
+                android:textColor="#433126"
+                android:textColorHint="#97877B" />
+
+        </LinearLayout>
 
         <!-- Nombre de usuario -->
         <TextView
@@ -77,21 +103,43 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:text="Nombre de usuario"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#633C2D" />
 
-        <EditText
-            android:id="@+id/txtUsuarioRegistro"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="54dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/fondo_campo_login"
-            android:backgroundTint="@null"
-            android:hint="Ej. juan.perez"
-            android:inputType="text"
-            android:singleLine="true"
-            android:padding="14dp"
-            android:textColor="#433126" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:srcCompat="@drawable/ic_arroba"
+                app:tint="#97877B"
+                android:contentDescription="@null" />
+
+            <EditText
+                android:id="@+id/txtUsuarioRegistro"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:background="@null"
+                android:hint="Ej. juan.perez"
+                android:inputType="text"
+                android:singleLine="true"
+                android:padding="0dp"
+                android:textSize="16sp"
+                android:textColor="#433126"
+                android:textColorHint="#97877B" />
+
+        </LinearLayout>
 
         <!-- Celular -->
         <TextView
@@ -99,22 +147,44 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:text="Celular"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#633C2D" />
 
-        <EditText
-            android:id="@+id/txtCelularRegistro"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="54dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/fondo_campo_login"
-            android:backgroundTint="@null"
-            android:hint="10 dígitos (lo dirás en caja)"
-            android:inputType="phone"
-            android:maxLength="10"
-            android:singleLine="true"
-            android:padding="14dp"
-            android:textColor="#433126" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:srcCompat="@drawable/ic_celular"
+                app:tint="#97877B"
+                android:contentDescription="@null" />
+
+            <EditText
+                android:id="@+id/txtCelularRegistro"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:background="@null"
+                android:hint="10 dígitos (lo dirás en caja)"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:singleLine="true"
+                android:padding="0dp"
+                android:textSize="16sp"
+                android:textColor="#433126"
+                android:textColorHint="#97877B" />
+
+        </LinearLayout>
 
         <!-- Contraseña -->
         <TextView
@@ -122,21 +192,54 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:text="Crea una contraseña"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#633C2D" />
 
-        <EditText
-            android:id="@+id/txtPasswordRegistro"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="54dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/fondo_campo_login"
-            android:backgroundTint="@null"
-            android:hint="Mínimo 8 caracteres"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:padding="14dp"
-            android:textColor="#433126" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="14dp"
+            android:paddingEnd="6dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:srcCompat="@drawable/ic_candado"
+                app:tint="#97877B"
+                android:contentDescription="@null" />
+
+            <EditText
+                android:id="@+id/txtPasswordRegistro"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:background="@null"
+                android:hint="Mínimo 8 caracteres"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:padding="0dp"
+                android:textSize="16sp"
+                android:textColor="#433126"
+                android:textColorHint="#97877B" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btnVerPasswordRegistro"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_ojo"
+                app:tint="#97877B"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="Mostrar contraseña" />
+
+        </LinearLayout>
 
         <!-- Confirmar contraseña -->
         <TextView
@@ -144,21 +247,54 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:text="Confirma tu contraseña"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#633C2D" />
 
-        <EditText
-            android:id="@+id/txtConfirmarPassword"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="54dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/fondo_campo_login"
-            android:backgroundTint="@null"
-            android:hint="Repite tu contraseña"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:padding="14dp"
-            android:textColor="#433126" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="14dp"
+            android:paddingEnd="6dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:srcCompat="@drawable/ic_candado"
+                app:tint="#97877B"
+                android:contentDescription="@null" />
+
+            <EditText
+                android:id="@+id/txtConfirmarPassword"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:background="@null"
+                android:hint="Repite tu contraseña"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:padding="0dp"
+                android:textSize="16sp"
+                android:textColor="#433126"
+                android:textColorHint="#97877B" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btnVerConfirmarPassword"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_ojo"
+                app:tint="#97877B"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="Mostrar confirmación de contraseña" />
+
+        </LinearLayout>
 
         <!-- Espacio flexible -->
         <Space
@@ -170,10 +306,12 @@
         <Button
             android:id="@+id/btnCrearCuenta"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="Crear cuenta"
             android:textAllCaps="false"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
             android:backgroundTint="#E65A00" />

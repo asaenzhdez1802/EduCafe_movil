@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF8F1"
@@ -13,23 +14,28 @@
         android:padding="18dp">
 
         <!-- Botón regresar -->
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/btnRegresar"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_circulo_borde"
+            app:drawableStartCompat="@drawable/ic_atras"
+            app:drawableTint="#633C2D"
+            android:padding="12dp"
             android:gravity="center"
-            android:text="←"
-            android:textSize="26sp"
-            android:textColor="#633C2D"
+            android:clickable="true"
+            android:focusable="true"
             android:contentDescription="Regresar" />
 
-        <!-- Logotipo pendiente -->
+        <!-- Logotipo Edu Café -->
         <ImageView
             android:id="@+id/imgLogo"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="18dp"
+            android:src="@drawable/logo_educafe"
+            android:scaleType="fitCenter"
             android:contentDescription="Logotipo de Edu Café" />
 
         <!-- Nombre de usuario -->
@@ -42,20 +48,39 @@
             android:textStyle="bold"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/txtUsuario"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="54dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/fondo_campo_login"
-            android:backgroundTint="@null"
-            android:hint="juan.perez"
-            android:inputType="text"
-            android:singleLine="true"
-            android:textColor="#433126"
-            android:textColorHint="#97877B"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:paddingStart="14dp"
-            android:paddingEnd="14dp" />
+            android:paddingEnd="14dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:srcCompat="@drawable/ic_correo"
+                app:tint="#97877B"
+                android:contentDescription="@null" />
+
+            <EditText
+                android:id="@+id/txtUsuario"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:background="@null"
+                android:hint="juan.perez"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="16sp"
+                android:textColor="#433126"
+                android:textColorHint="#97877B"
+                android:padding="0dp" />
+
+        </LinearLayout>
 
         <!-- Contraseña -->
         <TextView
@@ -67,29 +92,61 @@
             android:textStyle="bold"
             android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/txtPassword"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="54dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/fondo_campo_login"
-            android:backgroundTint="@null"
-            android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:textColor="#433126"
-            android:textColorHint="#97877B"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:paddingStart="14dp"
-            android:paddingEnd="14dp" />
+            android:paddingEnd="6dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:srcCompat="@drawable/ic_candado"
+                app:tint="#97877B"
+                android:contentDescription="@null" />
+
+            <EditText
+                android:id="@+id/txtPassword"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:background="@null"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="16sp"
+                android:textColor="#433126"
+                android:textColorHint="#97877B"
+                android:padding="0dp" />
+
+            <!-- Mostrar u ocultar contraseña -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btnVerPassword"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_ojo"
+                app:tint="#97877B"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="Mostrar contraseña" />
+
+        </LinearLayout>
 
         <!-- Botón iniciar sesión -->
         <Button
             android:id="@+id/btnIniciarSesion"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="54dp"
             android:layout_marginTop="20dp"
             android:text="Iniciar Sesión"
             android:textAllCaps="false"
+            android:textSize="16sp"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:backgroundTint="#E65A00" />
@@ -102,7 +159,7 @@
             android:layout_marginTop="6dp"
             android:text="Registrarse"
             android:textAllCaps="false"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#633C2D"
             android:background="@drawable/fondo_boton_registro"

@@ -2,8 +2,10 @@ package com.example.educafe.Vista
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +27,8 @@ class clsRegistroVista : AppCompatActivity(),
     // 2. Botones.
     private lateinit var btnCrearCuenta: Button
     private lateinit var btnRegresarRegistro: TextView
+    private lateinit var btnVerPasswordRegistro: ImageView
+    private lateinit var btnVerConfirmarPassword: ImageView
 
     // 3. Presentador.
     private lateinit var presentador: clsRegistroPresentador
@@ -44,6 +48,12 @@ class clsRegistroVista : AppCompatActivity(),
         btnCrearCuenta = findViewById(R.id.btnCrearCuenta)
         btnRegresarRegistro = findViewById(R.id.btnRegresarRegistro)
 
+        btnVerPasswordRegistro =
+            findViewById(R.id.btnVerPasswordRegistro)
+
+        btnVerConfirmarPassword =
+            findViewById(R.id.btnVerConfirmarPassword)
+
         // 5. Inicializar Presentador.
         presentador = clsRegistroPresentador(
             this,
@@ -62,6 +72,7 @@ class clsRegistroVista : AppCompatActivity(),
             val usuario = txtUsuarioRegistro.text.toString()
             val celular = txtCelularRegistro.text.toString()
             val password = txtPasswordRegistro.text.toString()
+
             val confirmarPassword =
                 txtConfirmarPassword.text.toString()
 
@@ -73,9 +84,74 @@ class clsRegistroVista : AppCompatActivity(),
                 confirmarPassword
             )
         }
+
+        // 8. Mostrar u ocultar contraseña.
+        btnVerPasswordRegistro.setOnClickListener {
+
+            cambiarVisibilidadPassword(
+                txtPasswordRegistro,
+                btnVerPasswordRegistro
+            )
+        }
+
+        // 9. Mostrar u ocultar confirmación.
+        btnVerConfirmarPassword.setOnClickListener {
+
+            cambiarVisibilidadPassword(
+                txtConfirmarPassword,
+                btnVerConfirmarPassword
+            )
+        }
     }
 
-    // 8. Controlar el estado de carga.
+    // 10. Función reutilizable para ambos campos.
+    private fun cambiarVisibilidadPassword(
+        campo: EditText,
+        icono: ImageView
+    ) {
+
+        val posicionInicio = campo.selectionStart
+        val posicionFin = campo.selectionEnd
+
+        val passwordOculta =
+            campo.transformationMethod is PasswordTransformationMethod
+
+        if (passwordOculta) {
+
+            // Mostrar contraseña.
+            campo.transformationMethod = null
+
+            icono.setImageResource(
+                R.drawable.ic_ojo_cerrado
+            )
+
+            icono.contentDescription =
+                "Ocultar contraseña"
+
+        } else {
+
+            // Ocultar contraseña.
+            campo.transformationMethod =
+                PasswordTransformationMethod.getInstance()
+
+            icono.setImageResource(
+                R.drawable.ic_ojo
+            )
+
+            icono.contentDescription =
+                "Mostrar contraseña"
+        }
+
+        // Conservar la posición del cursor.
+        val longitud = campo.text.length
+
+        campo.setSelection(
+            posicionInicio.coerceIn(0, longitud),
+            posicionFin.coerceIn(0, longitud)
+        )
+    }
+
+    // 11. Controlar el estado de carga.
     override fun mostrarCarga(cargando: Boolean) {
 
         btnCrearCuenta.isEnabled = !cargando
@@ -87,7 +163,7 @@ class clsRegistroVista : AppCompatActivity(),
         }
     }
 
-    // 9. Mostrar errores.
+    // 12. Mostrar errores.
     override fun mostrarError(mensaje: String) {
 
         Toast.makeText(
@@ -97,7 +173,7 @@ class clsRegistroVista : AppCompatActivity(),
         ).show()
     }
 
-    // 10. Registro confirmado por el servidor.
+    // 13. Registro confirmado por el servidor.
     override fun registroCorrecto(datos: clsRegistroRespuesta) {
 
         // Abrir P5 con los datos reales.

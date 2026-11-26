@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -25,27 +26,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Mi panel"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textStyle="bold"
                 android:textColor="#633C2D" />
 
+            <!-- Cerrar sesión -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCerrarSesionCompartida"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_gravity="end"
-                android:layout_marginEnd="18dp"
-                android:text="Cerrar sesión" />
+                android:text="Cerrar sesión"
+                android:textAllCaps="false"
+                android:textColor="#633C2D"
+                app:backgroundTint="#F5E5D8"
+                app:cornerRadius="12dp" />
 
             <!-- Nombre del cliente -->
             <TextView
                 android:id="@+id/txtNombrePanel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="18dp"
                 android:gravity="center"
                 android:text="Nombre del cliente"
-                android:textSize="21sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#633C2D" />
 
@@ -66,14 +71,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/fondo_campo_login"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
+                android:backgroundTint="#E5EEDC"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
                 android:text="0 puntos"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#588B3B" />
 
@@ -84,14 +90,14 @@
                 android:layout_marginTop="22dp"
                 android:background="@drawable/fondo_campo_login"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="18dp">
 
                 <TextView
                     android:id="@+id/txtSiguienteRecompensa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Consultando siguiente recompensa..."
-                    android:textSize="14sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:textColor="#633C2D" />
 
@@ -99,8 +105,8 @@
                     android:id="@+id/progresoRecompensa"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="9dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="12dp"
                     android:max="100"
                     android:progress="0"
                     android:progressTint="#E65A00"
@@ -110,76 +116,173 @@
                     android:id="@+id/txtDetallePuntos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="10dp"
                     android:text="Cargando puntos..."
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:textColor="#97877B" />
 
             </LinearLayout>
 
             <!-- Hacer pedido -->
-            <TextView
-                android:id="@+id/btnHacerPedido"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/fondo_campo_login"
-                android:gravity="center_vertical"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:text="🛒   Hacer pedido                          ›"
-                android:textColor="#433126"
-                android:textSize="14sp"
-                android:clickable="true"
-                android:focusable="true" />
+                android:layout_height="64dp"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/btnHacerPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/fondo_campo_login"
+                    android:gravity="center_vertical"
+                    android:paddingStart="62dp"
+                    android:paddingEnd="48dp"
+                    android:text="Hacer pedido"
+                    android:textColor="#433126"
+                    android:textSize="16sp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginStart="18dp"
+                    app:srcCompat="@drawable/ic_pedidos"
+                    app:tint="#E65A00"
+                    android:contentDescription="@null" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="18dp"
+                    app:srcCompat="@drawable/ic_flecha_derecha"
+                    app:tint="#633C2D"
+                    android:contentDescription="@null" />
+
+            </FrameLayout>
 
             <!-- Mis recompensas -->
-            <TextView
-                android:id="@+id/btnMisRecompensas"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/fondo_campo_login"
-                android:gravity="center_vertical"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:text="Mis recompensas                          ›"
-                android:textColor="#433126"
-                android:textSize="14sp"
-                android:clickable="true"
-                android:focusable="true" />
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/btnMisRecompensas"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/fondo_campo_login"
+                    android:gravity="center_vertical"
+                    android:paddingStart="62dp"
+                    android:paddingEnd="48dp"
+                    android:text="Mis recompensas"
+                    android:textColor="#433126"
+                    android:textSize="16sp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginStart="18dp"
+                    app:srcCompat="@drawable/ic_regalo"
+                    app:tint="#E65A00"
+                    android:contentDescription="@null" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="18dp"
+                    app:srcCompat="@drawable/ic_flecha_derecha"
+                    app:tint="#633C2D"
+                    android:contentDescription="@null" />
+
+            </FrameLayout>
 
             <!-- Mis pedidos -->
-            <TextView
-                android:id="@+id/btnMisPedidos"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/fondo_campo_login"
-                android:gravity="center_vertical"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:text="Mis pedidos                               ›"
-                android:textColor="#433126"
-                android:textSize="14sp"
-                android:clickable="true"
-                android:focusable="true" />
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/btnMisPedidos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/fondo_campo_login"
+                    android:gravity="center_vertical"
+                    android:paddingStart="62dp"
+                    android:paddingEnd="48dp"
+                    android:text="Mis pedidos"
+                    android:textColor="#433126"
+                    android:textSize="16sp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginStart="18dp"
+                    app:srcCompat="@drawable/ic_documento"
+                    app:tint="#E65A00"
+                    android:contentDescription="@null" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="18dp"
+                    app:srcCompat="@drawable/ic_flecha_derecha"
+                    app:tint="#633C2D"
+                    android:contentDescription="@null" />
+
+            </FrameLayout>
 
             <!-- Información -->
-            <TextView
-                android:id="@+id/btnInformacion"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="64dp"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/fondo_campo_login"
-                android:gravity="center_vertical"
-                android:paddingStart="18dp"
-                android:paddingEnd="18dp"
-                android:text="Información                               ›"
-                android:textColor="#433126"
-                android:textSize="14sp"
-                android:clickable="true"
-                android:focusable="true" />
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:id="@+id/btnInformacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/fondo_campo_login"
+                    android:gravity="center_vertical"
+                    android:paddingStart="62dp"
+                    android:paddingEnd="48dp"
+                    android:text="Información"
+                    android:textColor="#433126"
+                    android:textSize="16sp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginStart="18dp"
+                    app:srcCompat="@drawable/ic_info"
+                    app:tint="#E65A00"
+                    android:contentDescription="@null" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="18dp"
+                    app:srcCompat="@drawable/ic_flecha_derecha"
+                    app:tint="#633C2D"
+                    android:contentDescription="@null" />
+
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -188,51 +291,128 @@
     <!-- Barra inferior -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="76dp"
         android:orientation="horizontal"
         android:gravity="center"
-        android:background="#FFFFFF">
+        android:background="#FFFFFF"
+        android:elevation="6dp">
 
-        <TextView
-            android:id="@+id/navInicio"
+        <!-- Inicio -->
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="⌂\nInicio"
-            android:textColor="#633C2D"
-            android:textSize="12sp" />
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/navMenu"
+            <TextView
+                android:id="@+id/navInicio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center_horizontal"
+                android:paddingBottom="12dp"
+                android:text="Inicio"
+                android:textColor="#633C2D"
+                android:textSize="12sp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_inicio_nav"
+                app:tint="#633C2D"
+                android:contentDescription="@null" />
+
+        </FrameLayout>
+
+        <!-- Menú -->
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="⌕\nMenú"
-            android:textColor="#633C2D"
-            android:textSize="12sp" />
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/navPedidos"
+            <TextView
+                android:id="@+id/navMenu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center_horizontal"
+                android:paddingBottom="12dp"
+                android:text="Menú"
+                android:textColor="#633C2D"
+                android:textSize="12sp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_menu"
+                app:tint="#633C2D"
+                android:contentDescription="@null" />
+
+        </FrameLayout>
+
+        <!-- Pedidos -->
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="♧\nPedidos"
-            android:textColor="#633C2D"
-            android:textSize="12sp" />
+            android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/navMiPanel"
+            <TextView
+                android:id="@+id/navPedidos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center_horizontal"
+                android:paddingBottom="12dp"
+                android:text="Pedidos"
+                android:textColor="#633C2D"
+                android:textSize="12sp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_pedidos"
+                app:tint="#633C2D"
+                android:contentDescription="@null" />
+
+        </FrameLayout>
+
+        <!-- Mi panel seleccionado -->
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="●\nMi panel"
-            android:textStyle="bold"
-            android:textColor="#E65A00"
-            android:textSize="12sp" />
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/navMiPanel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom|center_horizontal"
+                android:paddingBottom="12dp"
+                android:text="Mi panel"
+                android:textStyle="bold"
+                android:textColor="#E65A00"
+                android:textSize="12sp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_panel_seleccionado"
+                app:tint="#E65A00"
+                android:contentDescription="@null" />
+
+        </FrameLayout>
 
     </LinearLayout>
 
