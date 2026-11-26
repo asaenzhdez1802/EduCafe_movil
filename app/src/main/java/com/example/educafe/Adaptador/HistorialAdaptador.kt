@@ -9,8 +9,7 @@ import com.example.educafe.Modelo.clsFormato
 import com.example.educafe.Modelo.dataHistorial
 import com.example.educafe.R
 
-// Tarjetas del historial (C6). Reutiliza item_pedido_cliente.xml.
-// Según Figma: ocultar la insignia de pago en compras de caja y en cancelados.
+
 class HistorialAdaptador(
     private var historial: List<dataHistorial>
 ) : RecyclerView.Adapter<HistorialAdaptador.HistorialViewHolder>() {
@@ -37,12 +36,12 @@ class HistorialAdaptador(
 
         when {
             esCaja -> {
-                holder.txtInsigniaPago.visibility = View.GONE
-                clsInsignias.enCaja(holder.txtInsigniaEstado)
+                clsInsignias.pago(holder.txtInsigniaPago, "pagado")
+                clsInsignias.estado(holder.txtInsigniaEstado, "entregado")
             }
             cancelado -> {
-                holder.txtInsigniaPago.visibility = View.GONE
-                clsInsignias.estado(holder.txtInsigniaEstado, item.estado)
+                clsInsignias.estado(holder.txtInsigniaEstado, "cancelado")
+                clsInsignias.pago(holder.txtInsigniaPago, "sin_cobro")
             }
             else -> {
                 clsInsignias.pago(holder.txtInsigniaPago, item.estadoPago)
@@ -50,7 +49,6 @@ class HistorialAdaptador(
             }
         }
 
-        // "Ayer · 1:10 p. m. · +11 puntos"  /  "Vie 13 nov · no se pagó a tiempo"
         var fecha = clsFormato.dia(item.fecha)
         if (clsFormato.esReciente(item.fecha)) {
             fecha = clsFormato.diaYHora(item.fecha)

@@ -33,11 +33,18 @@ class PedidosAdaptador(
         val pedido = pedidos[position]
 
         holder.txtTituloPedido.text = "Pedido ${pedido.folio ?: pedido.idPedido}"
-        clsInsignias.pago(holder.txtInsigniaPago, pedido.estadoPago)
-        clsInsignias.estado(holder.txtInsigniaEstado, pedido.estado)
+
+        if (pedido.estado == "pendiente") {
+            // El cajero aún no lo marca: [Pendiente] [No listo]
+            clsInsignias.estado(holder.txtInsigniaEstado, "pendiente")
+            clsInsignias.noListo(holder.txtInsigniaPago)
+        } else {
+            // El cajero ya lo marcó: [Listo] [Por cobrar] o [Listo] [Pagado]
+            clsInsignias.estado(holder.txtInsigniaEstado, pedido.estado)
+            clsInsignias.pago(holder.txtInsigniaPago, pedido.estadoPago)
+        }
 
         holder.txtLineaFecha.text = "${clsFormato.diaYHora(pedido.fecha)} · Código ${pedido.codigoRecogida ?: "-"}"
-
 
         val total = "Total: ${clsFormato.dinero(pedido.total, false)}"
         if (pedido.estadoPago == "por_cobrar") {
