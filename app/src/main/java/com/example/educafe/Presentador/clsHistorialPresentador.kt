@@ -20,15 +20,14 @@ class clsHistorialPresentador(private val vista: HistorialActivity) {
     private val alcance = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
     fun cargar() {
-        // Contrato: haySesion() solo dice si hay credenciales locales;
-        // el servidor valida el token (si venció responde 401)
+
         if (!SesionUsuario.haySesion()) {
             sesionTerminada()
             return
         }
         alcance.launch {
             try {
-                val respuesta = modelo.obtenerHistorial()
+                val respuesta = modelo.obtenerHistorialConPagados()
                 if (respuesta.status == "success") {
                     vista.mostrarHistorial(respuesta.data ?: emptyList())
                 } else {
@@ -46,7 +45,6 @@ class clsHistorialPresentador(private val vista: HistorialActivity) {
         alcance.cancel()
     }
 
-    // Contrato: sin sesión o 401 se vacía el carrito y la vista pide Login
     private fun sesionTerminada() {
         clsCarrito.vaciar()
         vista.sesionVencida()

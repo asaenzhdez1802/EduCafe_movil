@@ -1,25 +1,53 @@
 package com.example.educafe.Modelo
-
+import kotlinx.coroutines.CancellationException
 
 class clsPedidosModelo {
 
-    // Sin token: el interceptor de RetrofitClient pone "Authorization: Bearer ..."
-    // C3 · POST registrar_pedido.php
+
     suspend fun registrarPedido(solicitud: dataSolicitudPedido): RespuestaApi<dataPedidoRegistrado> {
         return RetrofitClient.apiService.registrarPedido(solicitud)
     }
 
-    // C5 · GET obtener_mis_pedidos.php?grupo=activos
+
     suspend fun obtenerPedidosActivos(): RespuestaApi<List<dataPedidoCliente>> {
         return RetrofitClient.apiService.obtenerMisPedidos("activos")
     }
 
-    // C6 · GET obtener_historial.php
+    suspend fun obtenerHistorialConPagados(): RespuestaApi<List<dataHistorial>> {
+        val historial = obtenerHistorial()
+        if (historial.status != "success") return historial
+
+        val pagados = try {
+            obtenerPedidosActivos().data.orEmpty()
+                .filter { it.estadoPago == "pagado" }
+                .map {
+                    dataHistorial(
+                        idPedido = it.idPedido,
+                        folio = it.folio,
+                        codigoRecogida = it.codigoRecogida,
+                        fecha = it.fecha,
+                        total = it.total,
+                        estado = "entregado",
+                        folioVenta = it.folioVenta,
+                        origen = "app",
+                        estadoPago = "pagado"
+                    )
+                }
+        } catch (e: Exception) {
+            if (e is CancellationException) throw e
+            emptyList()
+        }
+
+        val todo = (pagados + historial.data.orEmpty()).sortedByDescending { it.fecha }
+        return historial.copy(data = todo)
+    }
+
+
     suspend fun obtenerHistorial(): RespuestaApi<List<dataHistorial>> {
         return RetrofitClient.apiService.obtenerHistorial()
     }
     
-    // Consultar pedidos del cajero
+
     suspend fun obtenerPedidos(estado: String? = null): RespuestaApi<List<dataPedidos>> {
         return RetrofitClient.apiService.obtenerPedidos(estado)
     }

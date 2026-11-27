@@ -28,7 +28,6 @@ class clsMisPedidosPresentador(private val vista: MisPedidosActivity) {
     private val alcance = CoroutineScope(Dispatchers.Main + SupervisorJob())
     private var actualizacion: Job? = null
 
-    // onResume: carga inmediata y después cada 30 segundos
     fun iniciar() {
         actualizacion?.cancel()
         actualizacion = alcance.launch {
@@ -47,11 +46,8 @@ class clsMisPedidosPresentador(private val vista: MisPedidosActivity) {
         actualizacion?.cancel()
     }
 
-    // Devuelve false si ya no tiene sentido seguir consultando (sesión vencida o sin permiso).
-    // Los errores se avisan solo en la primera carga, para no repetirlos cada 30 s.
     private suspend fun cargarPedidos(avisarError: Boolean): Boolean {
-        // Contrato: haySesion() solo dice si hay credenciales locales;
-        // el servidor valida el token (si venció responde 401)
+
         if (!SesionUsuario.haySesion()) {
             sesionTerminada()
             return false
@@ -59,7 +55,8 @@ class clsMisPedidosPresentador(private val vista: MisPedidosActivity) {
         try {
             val respuesta = modelo.obtenerPedidosActivos()
             if (respuesta.status == "success") {
-                vista.mostrarPedidos(respuesta.data ?: emptyList())
+                val activos = (respuesta.data ?: emptyList()).filter { it.estadoPago != "pagado" }
+                vista.mostrarPedidos(activos)
             } else if (avisarError) {
                 vista.mostrarMensaje(respuesta.message)
             }
@@ -80,7 +77,6 @@ class clsMisPedidosPresentador(private val vista: MisPedidosActivity) {
         alcance.cancel()
     }
 
-    // Contrato: sin sesión o 401 se vacía el carrito y la vista pide Login
     private fun sesionTerminada() {
         clsCarrito.vaciar()
         vista.sesionVencida()
