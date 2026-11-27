@@ -190,25 +190,9 @@ class ResumenCajeroActivity :
     }
 
     // Mostrar estadísticas reales de la API
-    override fun mostrarEstadisticas(
-        datos: dataResumenCajero
-    ) {
-
-        // Total cobrado hoy
-        txtVentasHoy.text =
-            formatoDinero.format(datos.total_vendido_hoy)
-
-        // Ticket promedio
-        txtTicketPromedio.text =
-            formatoDinero.format(datos.ticket_promedio)
-
-        // Pedidos pendientes
-        txtPorPreparar.text =
-            datos.pedidos_por_preparar.toString()
-
-        // Pedidos listos
-        txtPedidosListos.text =
-            datos.pedidos_listos.toString()
+    override fun mostrarEstadisticas(datos: dataResumenCajero) {
+        txtVentasHoy.text = formatoDinero.format(datos.total_vendido_hoy)
+        txtTicketPromedio.text = formatoDinero.format(datos.ticket_promedio)
     }
 
     // Mostrar errores

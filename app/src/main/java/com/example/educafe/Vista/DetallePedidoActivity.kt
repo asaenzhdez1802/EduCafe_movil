@@ -113,7 +113,6 @@ class DetallePedidoActivity :
         txtMensajeDetalle.text = "Consultando el detalle del pedido..."
     }
 
-    // Mostrar información recibida de la API
     override fun mostrarDetallePedido(pedido: dataDetallePedido) {
         estadoActual = pedido.estado.trim().lowercase(Locale.ROOT)
 
@@ -155,7 +154,21 @@ class DetallePedidoActivity :
             ?: "Sin observaciones"
         // Productos
         mostrarProductos(pedido)
-        // Solo habilitar si está pendiente
+
+        btnMarcarListo.text = when (estadoActual) {
+
+            "pendiente" -> "Pedido listo"
+
+            "listo" -> "Pedido listo"
+
+            "cancelado" -> "Pedido cancelado"
+
+            "entregado" -> "Pedido entregado"
+
+            else -> "Pedido no disponible"
+        }
+
+
         btnMarcarListo.isEnabled = estadoActual == "pendiente"
 
         txtMensajeDetalle.text = "Detalle del pedido cargado correctamente"
@@ -194,7 +207,7 @@ class DetallePedidoActivity :
             // Precio y subtotal
             val precio = TextView(this).apply {
                 text = "Precio: ${formatoDinero.format(producto.precio_unitario)}" +
-                            "  |  Subtotal: ${formatoDinero.format(producto.subtotal)}"
+                        "  |  Subtotal: ${formatoDinero.format(producto.subtotal)}"
 
                 textSize = 13f
 
@@ -217,13 +230,11 @@ class DetallePedidoActivity :
     }
 
     // Respuesta correcta del servidor
-    override fun mostrarActualizacionCorrecta(
-        mensaje: String
-    ) {
-
+    override fun mostrarActualizacionCorrecta(mensaje: String) {
         estadoActual = "listo"
 
         findViewById<TextView>(R.id.txtEstadoDetalle).text = "Pedido listo"
+        txtMensajeDetalle.text = "pedido listo"
         btnMarcarListo.isEnabled = false
         txtMensajeDetalle.text = mensaje
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
